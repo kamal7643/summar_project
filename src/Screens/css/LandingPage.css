@@ -4,7 +4,7 @@
     position:absolute;
     top:0%;
     left:0%;
-    background-color: skyblue;
+    background-color: rgb(3, 57, 78);
 }
 
 .header-links{
@@ -13,10 +13,11 @@
 }
 
 .header-path {
+    display: inline-block;
     text-decoration: none;
     color:black;
+    width:6.66%;
     margin-left: 5%;
     margin-right: 5%;
     font-size: 20px;
-    margin-top:20%
 }

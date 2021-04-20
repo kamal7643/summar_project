@@ -1,15 +1,93 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import './css/ranks.css';
+import logo from './imgs/ranks-bg.jpg';
 
-function Ranks(){
-    const history = useHistory();
-    function rd(){
-        history.push("/");
-    }
-    return(
-        <div>
-            Ranks page
-            <button onClick={rd}>home</button>
+
+function compare(a, b) {
+    return parseInt(b.points)-parseInt(a.points);
+}
+
+
+function Ranks() {
+    const [users, setusers] = useState([]);
+    const [loaded, setloaded] = useState(false);
+    
+    useEffect(() => {
+        setTimeout(() => {
+            fetch("http://localhost:3000/Users")
+            .then((response) => { return response.json() })
+            .then((resp) => {
+                setloaded(true);
+                setusers(resp);
+            });
+        }, 200);
+        
+    });
+
+    return (
+        <div className="ranks-body">
+            {(() => {
+                if (loaded) {
+                    return <div>
+                        <img className="ranks-bg" src={logo} alt="log"/>
+                        <table className="table-ranks">
+                            <thead className="thead-ranks">
+                                <tr className="tr-ranks" >
+                                    <th className="th-ranks">
+                                        Rank
+                                    </th>
+                                    <th className="th-ranks">
+                                        Name
+                                    </th>
+                                    <th className="th-ranks">
+                                        Matchs
+                                    </th>
+                                    <th className="th-ranks">
+                                        Win
+                                    </th>
+                                    <th className="th-ranks">
+                                        Loss
+                                    </th>
+                                    <th className="th-ranks">
+                                        Kills
+                                    </th>
+                                    <th className="th-ranks">
+                                        Deaths
+                                    </th>
+                                    <th className="th-ranks">
+                                        KD
+                                    </th>
+                                    <th className="th-ranks">
+                                        Points
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                users.sort(compare).map((user,i)=>(
+                                    <tr className="tr-ranks" key={i}>
+                                        <td className="td-ranks">{i+1}</td>
+                                        <td className="td-ranks">
+                                            <a className="profile" href={"/paritipants/"+user.username}>{user.name}</a>
+                                        </td>
+                                        <td className="td-ranks">{user.matches}</td>
+                                        <td className="td-ranks">{user.win}</td>
+                                        <td className="td-ranks">{user.loss}</td>
+                                        <td className="td-ranks">{user.kills}</td>
+                                        <td className="td-ranks">{user.deaths}</td>
+                                        <td className="td-ranks">{user.kd}</td>
+                                        <td className="td-ranks">{user.points}</td>
+                                    </tr>
+                                ))
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                } else {
+                    return <div className="loading">loading...</div>
+                }
+            }
+            )()}
         </div>
     );
 }

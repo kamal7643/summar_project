@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 // screens 
-import {About, LandingPage, Ranks, Participate, Performance, Support, Admin} from './Screens';
+import {About, LandingPage, Ranks, Participate, Performance, Support, Admin,AdminLogin} from './Screens';
 import ExtraLandingPage from './Screens/extralandingpage';
 
 
@@ -20,6 +20,7 @@ ReactDOM.render(
           <Route path="/support" exact component={Support}></Route>
           <Route path="/about" exact component={About}></Route>
           <Route path="/admin" exact component={Admin}></Route>
+          <Route path="/admin-login" exact component={AdminLogin}></Route>
       </Router>
   </React.StrictMode>,
   document.getElementById('root')

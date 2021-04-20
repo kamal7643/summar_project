@@ -6,3 +6,4 @@ export {default as Participate} from './participate';
 export {default as Performance} from './performance';
 export {default as Support} from './support';
 export {default as ExtraLandingPage} from './extralandingpage';
+export {default as AdminLogin} from './adminLogin';
