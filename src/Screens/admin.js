@@ -1,15 +1,24 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import './css/admin.css';
 
-function Admin(){
-    const history = useHistory();
-    function rd(){
-        history.push("/");
-    }
+function Admin(props){
+    const access = (props.history.action==='PUSH');
+    
+    
+
     return(
-        <div>
-            Admin page
-            <button onClick={rd}>home</button>
+        <div className="admin-body">
+            {(
+                ()=>{
+                    if(access){
+                        return <div>handle</div>
+                    }else{
+                        return <div>something went wrong...
+                            <a href="/admin-login">login first</a>
+                        </div>
+                    }
+                }
+            )()}
         </div>
     );
 }

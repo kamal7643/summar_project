@@ -7,3 +7,6 @@ export {default as Performance} from './performance';
 export {default as Support} from './support';
 export {default as ExtraLandingPage} from './extralandingpage';
 export {default as AdminLogin} from './adminLogin';
+export {default as Participants} from './participants';
+export {default as Login} from './login';
+export {default as Signup} from './signup';

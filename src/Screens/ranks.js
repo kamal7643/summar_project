@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {useHistory} from 'react-router-dom';
 import './css/ranks.css';
 import logo from './imgs/ranks-bg.jpg';
 
@@ -9,8 +10,13 @@ function compare(a, b) {
 
 
 function Ranks() {
+    const history = useHistory();
     const [users, setusers] = useState([]);
     const [loaded, setloaded] = useState(false);
+
+    function gotoprofile(e){
+        history.push({pathname:'/participants',state:{e}});
+    }
     
     useEffect(() => {
         setTimeout(() => {
@@ -62,13 +68,13 @@ function Ranks() {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            
                             {
                                 users.sort(compare).map((user,i)=>(
                                     <tr className="tr-ranks" key={i}>
                                         <td className="td-ranks">{i+1}</td>
                                         <td className="td-ranks">
-                                            <a className="profile" href={"/paritipants/"+user.username}>{user.name}</a>
+                                            <label onClick={()=>gotoprofile(user)}>{user.playname}</label>
                                         </td>
                                         <td className="td-ranks">{user.matches}</td>
                                         <td className="td-ranks">{user.win}</td>
@@ -80,7 +86,7 @@ function Ranks() {
                                     </tr>
                                 ))
                             }
-                            </tbody>
+                            
                         </table>
                     </div>
                 } else {
