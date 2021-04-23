@@ -6,8 +6,8 @@ import logo from './imgs/admin.jpg';
 function AdminLogin() {
     const history = useHistory();
     const [admins, setadmins] = useState([]);
-    const [username, setusername] = useState();
-    const [password, setpassword] = useState();
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
 
 
     useEffect(() => {
@@ -19,19 +19,25 @@ function AdminLogin() {
     })
 
     function handleLogin(){
-        admins.map((admin,i)=>{
-            if(admin.username===username && admin.password===password){
-                console.log("logged in");
-                history.push('/admin')
-            }
-            return<div></div>
-        })
+        if(admins){
+            admins.map((admin, i) => {
+                if (admin.username === username && admin.password === password) {
+                    console.log("logged in");
+                    history.push('/admin')
+                }
+                return <div></div>
+            })
+        }
+        else{
+            alert("Failed to fetch from server")
+        }
     }
 
     return (
         <div className="admin-login">
             <img className="admin-login-bg" src={logo} alt="logo" />
             <form className="login">
+                <label className="hint">Admin Login</label>
                 <input className="logininput" type="text" placeholder="Username" value={username} onChange={e=>{setusername(e.target.value)}}/>
                 <br />
                 <input className="logininput" type="password" placeholder="Password" value={password} onChange={e=>{setpassword(e.target.value)}}/>

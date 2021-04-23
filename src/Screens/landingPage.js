@@ -2,7 +2,6 @@ import React from 'react';
 import './css/LandingPage.css';
 
 function LandingPage() {
-
     return (
         <div className="header">
             <div className="header-links">
