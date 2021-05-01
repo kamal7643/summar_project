@@ -6,14 +6,14 @@ import reportWebVitals from './reportWebVitals';
 
 
 // screens 
-import {LandingPage} from './screens';
+import LandingPage from './screens/LandingPage';
 
 
 ReactDOM.render(
   <React.StrictMode>
       <Router>
         <Switch>
-          <Route path="/" exact={true} component={LandingPage}/>
+          <Route path="/home" exact={true} component={LandingPage}/>
         </Switch>
       </Router>
   </React.StrictMode>,
