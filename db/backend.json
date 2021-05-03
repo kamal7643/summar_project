@@ -1,49 +1,100 @@
 {
-    "players": [
-        {
-            "id": 1234567890,
-            "name": "Kamal Swami",
-            "email":"kswami848@gmail.com",
-            "username": "kamal7643",
-            "password": "123",
-            "playname":"kamal7643",
-            "matches":0,
-            "win":0,
-            "loss":0,
-            "kills":0,
-            "deaths":0,
-            "KD":0.00,
-            "points":0
-        },
-        {
-            "id": 1234567891,
-            "name": "TEST01",
-            "email": "TEST01@gmail.com",
-            "username": "TEST01",
-            "password": "TEST01",
-            "playname": "TEST01",
-            "matches": 0,
-            "win": 0,
-            "loss": 0,
-            "kills": 0,
-            "deaths": 0,
-            "KD": 0.00,
-            "points": 0
-        },
-        {
-            "id": 1234567892,
-            "name": "TEST02",
-            "email": "TEST02@gmail.com",
-            "username": "TEST02",
-            "password": "TEST02",
-            "playname": "TEST02",
-            "matches": 0,
-            "win": 0,
-            "loss": 0,
-            "kills": 0,
-            "deaths": 0,
-            "KD": 0.00,
-            "points": 10
-        }
-    ]
+  "players": [
+    {
+      "id": 1234567890,
+      "name": "Kamal Swami",
+      "email": "kswami848@gmail.com",
+      "username": "kamal7643",
+      "password": "123",
+      "playname": "kamal7643",
+      "matches": 0,
+      "win": 0,
+      "loss": 0,
+      "kills": 0,
+      "deaths": 0,
+      "KD": 0,
+      "points": 0
+    },
+    {
+      "id": 1234567891,
+      "name": "TEST01",
+      "email": "TEST01@gmail.com",
+      "username": "TEST01",
+      "password": "TEST01",
+      "playname": "TEST01",
+      "matches": 0,
+      "win": 0,
+      "loss": 0,
+      "kills": 0,
+      "deaths": 0,
+      "KD": 0,
+      "points": 0
+    },
+    {
+      "id": 1234567892,
+      "name": "TEST02",
+      "email": "TEST02@gmail.com",
+      "username": "TEST02",
+      "password": "TEST02",
+      "playname": "TEST02",
+      "matches": 0,
+      "win": 0,
+      "loss": 0,
+      "kills": 0,
+      "deaths": 0,
+      "KD": 0,
+      "points": 10
+    }
+  ],
+  "videos": [
+    {
+      "id": 9988776655,
+      "name": "first video",
+      "link": "https://www.youtube.com/embed/qA0asxmaN7o",
+      "desciption": "something"
+    },
+    {
+      "id": 9988776656,
+      "name": "second video",
+      "link": "https://www.youtube.com/embed/XumojP2HIkw",
+      "desciption": "something"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": 1,
+      "title": "test01",
+      "content": "test01"
+    },
+    {
+      "id": 2,
+      "title": "test02",
+      "content": "test02"
+    },
+    {
+      "id": 3,
+      "title": "test03",
+      "content": "test03"
+    },
+    {
+      "id": 4,
+      "title": "test04",
+      "content": "test04"
+    },
+    {
+      "id": 5,
+      "title": "test05",
+      "content": "test05"
+    },
+    {
+      "id": 6,
+      "title": "test06",
+      "content": "test06"
+    },
+    {
+      "id": 7,
+      "title": "last",
+      "content": "sb sahi h bro"
+    }
+  ]
 }

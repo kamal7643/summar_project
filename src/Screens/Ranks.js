@@ -5,10 +5,12 @@ import Spinner from 'react-bootstrap/Spinner';
 import styles from '../css/ranks.module.css';
 import staticUrls from '../config/urls';
 import Table from 'react-bootstrap/Table'
+import {useHistory} from 'react-router-dom';
 
 
 function Ranks(props) {
 
+    const history = useHistory();
     const [players, setplayers] = useState([]);
     const [loading, setloading] = useState(false);
     const [vari, setvari] = useState("primary");
@@ -30,6 +32,9 @@ function Ranks(props) {
         
         
     },[setloading, players, vari, setplayers])
+    if(localStorage.getItem('start')===false){
+        history.push('/')
+    }
     return (
         <div>
             <Header/>
@@ -57,7 +62,10 @@ function Ranks(props) {
                                                     if(i<100){
                                                         return(
                                                             <tr key={i}>
-                                                                <td>{player.playname}</td>
+                                                                <td onClick={() =>{history.push({
+                                                                    pathname:'/profileWall',
+                                                                    data: player
+                                                                })}}>{player.playname}</td>
                                                                 <td>{player.points}</td>
                                                                 <td>{player.matches}</td>
                                                                 <td>{player.win}</td>
@@ -66,6 +74,7 @@ function Ranks(props) {
                                                             </tr>
                                                         );
                                                     }
+                                                    return <div></div>
                                                     })
                                         }
                                 </tbody>
