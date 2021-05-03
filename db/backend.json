@@ -1,0 +1,49 @@
+{
+    "players": [
+        {
+            "id": 1234567890,
+            "name": "Kamal Swami",
+            "email":"kswami848@gmail.com",
+            "username": "kamal7643",
+            "password": "123",
+            "playname":"kamal7643",
+            "matches":0,
+            "win":0,
+            "loss":0,
+            "kills":0,
+            "deaths":0,
+            "KD":0.00,
+            "points":0
+        },
+        {
+            "id": 1234567891,
+            "name": "TEST01",
+            "email": "TEST01@gmail.com",
+            "username": "TEST01",
+            "password": "TEST01",
+            "playname": "TEST01",
+            "matches": 0,
+            "win": 0,
+            "loss": 0,
+            "kills": 0,
+            "deaths": 0,
+            "KD": 0.00,
+            "points": 0
+        },
+        {
+            "id": 1234567892,
+            "name": "TEST02",
+            "email": "TEST02@gmail.com",
+            "username": "TEST02",
+            "password": "TEST02",
+            "playname": "TEST02",
+            "matches": 0,
+            "win": 0,
+            "loss": 0,
+            "kills": 0,
+            "deaths": 0,
+            "KD": 0.00,
+            "points": 10
+        }
+    ]
+}

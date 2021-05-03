@@ -2,6 +2,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 
+
 async function findListings(client, resultsLimit) {
     const cursor = client
         .db('api')
