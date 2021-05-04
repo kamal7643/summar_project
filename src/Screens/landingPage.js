@@ -7,6 +7,22 @@ import {useHistory} from 'react-router-dom';
 function LandingPage(props) {
     const history = useHistory();
 
+    // settings localStorage for current session
+    localStorage.setItem('name','Kamal Swami');
+    localStorage.setItem('isAdmin','false');
+    localStorage.setItem('id',1234567890);
+    localStorage.setItem('email','kswami848@gmail.com');
+    localStorage.setItem('username','kamal7643');
+    localStorage.setItem('password','123');
+    localStorage.setItem('playname','kamal7643');
+    localStorage.setItem('matches',0);
+    localStorage.setItem('win',0);
+    localStorage.setItem('loss',0);
+    localStorage.setItem('kills',0);
+    localStorage.setItem('deaths',0);
+    localStorage.setItem('KD',0);
+    localStorage.setItem('points',0);
+
     function gotowatch(){
         history.push("/watch");
     }
@@ -34,6 +50,7 @@ function LandingPage(props) {
         <div>
             <label style={{ textShadow: ' 2px 2px 20px black', fontSize: '20px', width: '100%', textAlign: 'center', marginTop: '5%', marginBottom: '5%', backgroundColor: 'blue', padding: '5%' }} onClick={gotosuggetion}>Suggest here</label>
         </div>
+        
     </div>
 }
 

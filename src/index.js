@@ -8,12 +8,18 @@ import reportWebVitals from './reportWebVitals';
 // screens 
 import LandingPage from './screens/LandingPage';
 import Ranks from './screens/Ranks';
-import Events from './screens/Events';
+import NotFound from './screens/NotFound';
+
 
 // player side
 import Watch from './playerSide/Watch';
 import Suggestion from './playerSide/Suggestion';
 import ProfileWall from './playerSide/ProfileWall';
+import Events from './playerSide/Events';
+
+
+// admin side
+import AdminEvents from './adminSide/Event';
 
 
 ReactDOM.render(
@@ -25,7 +31,14 @@ ReactDOM.render(
       <Route path="/watch" exact={true} component={Watch} />
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
-    </Switch>
+    
+    
+      {
+        //godmode
+      }
+      <Route path="/admin/events" exact={true} component={AdminEvents}/>
+      <Route path="/404" exact={true} component={NotFound} />
+      </Switch>
   </Router>,
   document.getElementById('root')
 );

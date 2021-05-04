@@ -37,6 +37,7 @@ function Ranks(props) {
     }
     return (
         <div>
+            {localStorage.getItem('name')}
             <Header/>
             {(
                 ()=>{
