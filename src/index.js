@@ -16,10 +16,13 @@ import Watch from './playerSide/Watch';
 import Suggestion from './playerSide/Suggestion';
 import ProfileWall from './playerSide/ProfileWall';
 import Events from './playerSide/Events';
+import Login from './playerSide/login';
 
 
 // admin side
 import AdminEvents from './adminSide/Event';
+import Admin from './adminSide/Admin';
+import adminSuggestion from './adminSide/Suggestion';
 
 
 ReactDOM.render(
@@ -32,10 +35,13 @@ ReactDOM.render(
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
     
+      <Route path="/login" exact={true} component={Login}/>
     
       {
         //godmode
       }
+      <Route path="/admin" exact={true} component={Admin}/>
+      <Route path="/admin/suggestion" exact={true} component={adminSuggestion}/>
       <Route path="/admin/events" exact={true} component={AdminEvents}/>
       <Route path="/404" exact={true} component={NotFound} />
       </Switch>

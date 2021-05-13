@@ -14,17 +14,6 @@ function Watch(props) {
     const [desciption, setdesciption] = useState(staticUrls.videos[0].desciption);
     const [fetched, setfetched] = useState(false);
 
-    function showerror() {
-        confirmAlert({
-            title: 'Backend Error',
-            message: 'You are not allowed to watch all!',
-            buttons: [
-                {
-                    label: 'continue'
-                }
-            ]
-        });
-    }
 
     function fetchbackend() {
         try {

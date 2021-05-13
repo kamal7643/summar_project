@@ -37,7 +37,6 @@ function Ranks(props) {
     }
     return (
         <div>
-            {localStorage.getItem('name')}
             <Header/>
             {(
                 ()=>{
@@ -64,9 +63,10 @@ function Ranks(props) {
                                                         return(
                                                             <tr key={i}>
                                                                 <td onClick={() =>{history.push({
-                                                                    pathname:'/profileWall',
+                                                                    pathname:'/profileWall?user='+player.playname,
                                                                     data: player
-                                                                })}}>{player.playname}</td>
+                                                                })
+                                                                }} style={{ textDecoration: 'underline' }}>{player.playname}</td>
                                                                 <td>{player.points}</td>
                                                                 <td>{player.matches}</td>
                                                                 <td>{player.win}</td>

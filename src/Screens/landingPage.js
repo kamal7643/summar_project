@@ -39,6 +39,7 @@ function LandingPage(props) {
         <Slides/>
         <div>
             extra 
+            <div onClick={()=>{history.push("/login");}} style={{textDecoration:'underline'}}>login or signup</div>
             <br />
             <label style={{ textShadow:' 2px 2px 20px black', fontSize:'20px', width:'100%', textAlign:'center', marginTop:'5%', marginBottom:'5%' , backgroundColor:'blue', padding:'5%'}} onClick={gotowatch}>watch here</label>
         </div>
