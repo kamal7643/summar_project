@@ -22,7 +22,7 @@ import Login from './playerSide/login';
 // admin side
 import AdminEvents from './adminSide/Event';
 import Admin from './adminSide/Admin';
-import adminSuggestion from './adminSide/Suggestion';
+import AdminSuggestion from './adminSide/Suggestion';
 
 
 ReactDOM.render(
@@ -41,7 +41,7 @@ ReactDOM.render(
         //godmode
       }
       <Route path="/admin" exact={true} component={Admin}/>
-      <Route path="/admin/suggestion" exact={true} component={adminSuggestion}/>
+      <Route path="/admin/suggestion" exact={true} component={AdminSuggestion}/>
       <Route path="/admin/events" exact={true} component={AdminEvents}/>
       <Route path="/404" exact={true} component={NotFound} />
       </Switch>

@@ -1,50 +1,45 @@
 import React,{ useState, useEffect } from 'react';
 import Header from '../components/Header';
 import staticUrls from '../config/urls';
-import 'bootstrap/dist/css/bootstrap.css';
-import Spinner from 'react-bootstrap/Spinner';
-import styles from '../css/profileWall.module.css';
-import { confirmAlert } from 'react-confirm-alert';
-import {useHistory} from 'react-router-dom';
-
+// import styles from '../css/profileWall.module.css';
+import Loading from '../components/Loading';
+// import { confirmAlert } from 'react-confirm-alert';
+// import {useHistory} from 'react-router-dom';
+ 
 function ProfileWall(props){
-    const userName = new URLSearchParams(props.location.search).get('user');
+    const ID = new URLSearchParams(props.location.search).get('userid');
     const [user, setuser] = useState();
     const [loading, setloading] = useState(true);
     const [fetched, setfetched] = useState(false);
-    const history = useHistory();
+    // const history = useHistory();
 
 
-    function showerror(e) {
-        confirmAlert({
-            title: 'Error',
-            message: e,
-            buttons: [
-                {
-                    label: 'continue',
-                    onClick: () => history.push("/ranks")
-                }
-            ],
-            closeOnClickOutside: false
-        });
-    }
+    // function showerror(e) {
+    //     confirmAlert({
+    //         title: 'Error',
+    //         message: e,
+    //         buttons: [
+    //             {
+    //                 label: 'continue',
+    //                 onClick: () => history.push("/ranks")
+    //             }
+    //         ],
+    //         closeOnClickOutside: false
+    //     });
+    // }
 
 
     useEffect(() => {
         if(!fetched){
-            fetch(staticUrls.url + '/players')
+            fetch(staticUrls.url + '/players/'+ID)
             .then((response) => { return response.json()})
             .then((response) => {
-            for(let i =0; i < response.length; i++){
-                if(response[i].playname === userName){
-                    setuser(response[i]);
-                }
-            }
+                setuser(response);
             })
             setloading(false);
             setfetched(true);
         }
-    },[ fetched, userName, setfetched, setloading])
+    },[ fetched, ID, setfetched, setloading])
 
     return(
         <div>
@@ -54,10 +49,10 @@ function ProfileWall(props){
                 (
                     ()=>{
                         if(loading){
-                            return (<Spinner className={styles.loader} animation="border" variant="primary" />);
+                            return (<Loading />);
                         }else{
                             if(user){
-                                return(<div>hello user</div>);
+                                return(<div>hello {user.name}</div>);
                             }else if(fetched){
                                     return (<div>
                                         {(

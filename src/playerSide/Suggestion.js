@@ -5,11 +5,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import SingleSuggest from '../components/Suggestion';
+import Loading from '../components/Loading';
 
 
 function Suggestion(props) {
     const [suggestion, setsuggestion] = useState([]);
-    const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(true);
     const [head, sethead] = useState("");
     const [body, setbody] = useState("");
 
@@ -77,7 +78,7 @@ function Suggestion(props) {
             fetch(staticUrls.url + '/suggestions')
                 .then((response) => { return response.json() })
                 .then((response) => { setsuggestion(response);  })
-            setloading(true);
+            setloading(false);
         }, 1000)
     })
 
@@ -97,15 +98,26 @@ function Suggestion(props) {
             <div style={{textAlign: 'center',padding:'5px'}}>Privious suggestions</div>
             <div>
                 {
-                    suggestion.sort((a,b)=>b.id-a.id).map((s, i) => {
-                        return (<div key={i}>
-                            <SingleSuggest 
-                            id={s.id}
-                            title={s.title}
-                            content={s.content}
-                            />
-                        </div>);
-                    })
+                    (
+                        () =>{
+                            if(loading){
+                                return (<Loading />);
+                            }
+                            else{
+                                return suggestion.sort((a, b) => b.id - a.id).map((s, i) => {
+                                    return (<div key={i}>
+                                        <SingleSuggest
+                                            id={s.id}
+                                            title={s.title}
+                                            content={s.content}
+                                        />
+                                    </div>);
+                                }
+                                )
+                            }
+                            
+                        }
+                    )()
                 }
             </div>
         </div>

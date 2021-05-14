@@ -1,7 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import Header from '../components/Header';
-import 'bootstrap/dist/css/bootstrap.css';
-import Spinner from 'react-bootstrap/Spinner';
+import Loading from '../components/Loading';
 import styles from '../css/ranks.module.css';
 import staticUrls from '../config/urls';
 import Table from 'react-bootstrap/Table'
@@ -13,15 +12,12 @@ function Ranks(props) {
     const history = useHistory();
     const [players, setplayers] = useState([]);
     const [loading, setloading] = useState(false);
-    const [vari, setvari] = useState("primary");
 
 
     
 
     useEffect(() => {
         setTimeout(() => {
-            if (vari === "primary") setvari("warning");
-            else setvari("primary");
             if (players.length === 0) {
                 fetch(staticUrls.url + "/players")
                     .then((response) => { return response.json() })
@@ -31,7 +27,7 @@ function Ranks(props) {
         },1000);
         
         
-    },[setloading, players, vari, setplayers])
+    },[setloading, players, setplayers])
     if(localStorage.getItem('start')===false){
         history.push('/')
     }
@@ -63,7 +59,7 @@ function Ranks(props) {
                                                         return(
                                                             <tr key={i}>
                                                                 <td onClick={() =>{history.push({
-                                                                    pathname:'/profileWall?user='+player.playname,
+                                                                    pathname:'/profileWall?userid='+player.id,
                                                                     data: player
                                                                 })
                                                                 }} style={{ textDecoration: 'underline' }}>{player.playname}</td>
@@ -83,7 +79,7 @@ function Ranks(props) {
                         </div>
                     }else{
                         return<div  className={styles.loading}>
-                            <Spinner animation="border" variant={vari} />
+                            <Loading />
                         </div>
                     }
                 }

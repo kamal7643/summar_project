@@ -1,0 +1,7 @@
+.defaultButton{
+    border:.5px solid black;
+    border-radius:10px;
+    color:rgb(12, 78, 95);
+    box-shadow: 0px 0px 5px #5a5959;
+    background-color: rgb(197, 235, 208);
+}

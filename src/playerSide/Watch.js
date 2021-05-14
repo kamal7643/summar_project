@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import staticUrls from '../config/urls';
 import styles from '../css/watch.module.css';
-import { confirmAlert } from 'react-confirm-alert'; // Import
+// import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 

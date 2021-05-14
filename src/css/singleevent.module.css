@@ -1,0 +1,14 @@
+.card{
+    width:95%;
+    margin-top:5%;
+    margin-left: 2.5%;
+    height:100px;
+    border:1px solid #ccc;
+    background-color:rgb(245, 233, 124);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(37, 37, 37);
+}
+
+.element{
+    font-size:15px;
+}
