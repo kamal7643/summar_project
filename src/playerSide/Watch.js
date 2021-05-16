@@ -4,6 +4,8 @@ import staticUrls from '../config/urls';
 import styles from '../css/watch.module.css';
 // import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import firebase from '../util/Firebase';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Watch(props) {
@@ -17,9 +19,18 @@ function Watch(props) {
 
     function fetchbackend() {
         try {
-            fetch(staticUrls.url + '/videos')
-                .then((response) => { return response.json(); })
-                .then((response) => { setvideos(response); })
+            const todoref = firebase.database().ref('videos');
+            todoref.on('value', (snapshot) => {
+                if(snapshot.exists()){
+                    let vds = [];
+                    snapshot.forEach((element) =>{
+                        vds.push(element.val());
+                    })
+                    setvideos(vds);
+                }else{
+                    console.log("videos not found");
+                }
+            })
         } catch (e) {
             console.log(e);
         }
@@ -34,7 +45,9 @@ function Watch(props) {
         setpos(e);
         videos.map((vid, i) => {
             if (i === e) {
-                setlink(vid.link);
+                if(link!==vid.link){
+                    setlink(vid.link);
+                }
                 setdesciption(vid.desciption);
             }
             return <div></div>
@@ -55,12 +68,14 @@ function Watch(props) {
             </div>
             <div className={styles.watchlist}>
                 <label style={{ textShadow: ' 2px 2px 5px red', width: '100%', textAlign: 'center', backgroundColor: 'blue', padding: '1%' }} >All Videos</label>
+                <ul className="list-group">
                 {
-                    videos.map((video, i) => <div className={styles.watchlistcontainer} onClick={() => { changeIndex(i) }} key={i}>
+                    videos.map((video, i) => <li className="list-group-item" onClick={() => { changeIndex(i) }} key={i}>
                         <div className={styles.watchlistcontainerhead}>{video.name}</div>
                         <div className={styles.watchlistcontainerbody}>{video.desciption}</div>
-                    </div>)
+                    </li>)
                 }
+                </ul>
             </div>
         </div>
     );

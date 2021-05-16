@@ -1,9 +1,9 @@
 import React, { useState, useEffect }from 'react';
 import Header from '../components/Header';
-import staticUrls from '../config/urls';
 import SingleSuggest from '../components/Suggestion';
 // import styles from '../css/adminSuggestion.module.css';
 import Loading from '../components/Loading';
+import firebase from '../util/Firebase';
 
 
 function AdminSuggestion(props) {
@@ -13,17 +13,26 @@ function AdminSuggestion(props) {
     const [sSuggetions, setsSuggetions] = useState(null);
 
     function deletesuggetion(e){
-        fetch(staticUrls.url + '/suggestions/' + e, {
-            method: 'DELETE'
-        }).then((response)=> { return response.json()})
-            .then((res) => { getBackEnd();})
+        alert('sorry');
+        // console.log(e.val());
+        // const todoref = firebase.database().ref('suggestion');
+        // todoref.remove(e);
+        // setsSuggetions([]);
+        // setfetched(false);
     }
 
     function getBackEnd(){
-        fetch(staticUrls.url +'/suggestions')
-            .then((response) => { return response.json()})
-            .then((response) =>{ 
-            setsSuggetions(response);
+        const todoref = firebase.database().ref('suggestion');
+        todoref.on('value', (snapshot) => {
+            if(snapshot.exists()){
+                let ssg = [];
+                snapshot.forEach((element) =>{
+                    ssg.push(element);
+                })
+                setsSuggetions(ssg);
+            }else{
+                console.log("suggestion not found");
+            }
         })
         return true;
     }
@@ -48,9 +57,7 @@ function AdminSuggestion(props) {
                             return sSuggetions.sort((a, b) => b.id - a.id).map((sug, i)=>
                                 <div key={i}>
                                     <SingleSuggest
-                                    id={sug.id}
-                                    title={sug.title}
-                                    content={sug.content}
+                                    data={sug}
                                     action="remove"
                                     onbtnclick={deletesuggetion}
                                     />

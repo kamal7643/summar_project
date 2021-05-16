@@ -5,7 +5,7 @@ import firebase from '../util/Firebase.js';
 function Test(props) {
 
     const get = async () => {
-        const todoref = firebase.database().ref('videos');
+        const todoref = firebase.database().ref('suggestion');
         todoref.on('value', (snapshot) => {
             console.log(snapshot.val());
         })
@@ -14,9 +14,9 @@ function Test(props) {
     const main = async () =>{
         const todoref = firebase.database().ref('videos');
         const todo = {
-            name: "second video",
+            name: "test 01",
             link: "https://www.youtube.com/embed/XumojP2HIkw",
-            desciption: "something"
+            desciption:"test 01"
         }
 
         todoref.push(todo);

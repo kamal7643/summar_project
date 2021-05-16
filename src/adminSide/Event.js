@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import styles from '../css/adminevent.module.css';
@@ -9,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import firebase from '../util/Firebase';
 
 
 function AdminEvents(props) {
@@ -16,19 +17,7 @@ function AdminEvents(props) {
         {
             label: "TDM",
             value: "TDM",
-        },
-        {
-            label: "Mango",
-            value: "mango",
-        },
-        {
-            label: "Banana",
-            value: "banana",
-        },
-        {
-            label: "Pineapple",
-            value: "pineapple",
-        },
+        }
     ];
 
     const [type, settype] = useState("");
@@ -38,29 +27,29 @@ function AdminEvents(props) {
     const [password, setpassword] = useState("");
     const [gotlast, setgotlist] = useState(false);
     const [events, setevents] = useState([]);
-    const [ID, setID] = useState(0);
 
-    function getData(){
-        fetch(staticUrls.url + '/events')
-        .then((response) => { return response.json()})
-        .then((response)=>{ 
-            setevents(response);
-            if(response.length !== 0){
-                setID(response[0].id+1);
+    function getData() {
+        const todoref = firebase.database().ref('events');
+        todoref.on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                let eet = [];
+                snapshot.forEach((element) => {
+                    eet.push(element.val());
+                })
+                setevents(eet);
             }
-            else{
-                setID(9988776655);
+            else {
+                console.log("event not found");
             }
-
         })
     }
 
 
-    function AddNew(){
-        if(type==="" || time === "" || date === ""){
+    function AddNew() {
+        if (type === "" || time === "" || date === "") {
             confirmAlert({
-                title:"ERROR",
-                message:"please fill all fields",
+                title: "ERROR",
+                message: "please fill all fields",
                 buttons: [
                     {
                         label: 'continue'
@@ -68,42 +57,35 @@ function AdminEvents(props) {
                 ],
                 closeOnClickOutside: false
             })
-        }else{
+        } else {
             getData();
-            try{
-                fetch(staticUrls.url + '/events', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8"
-                    },
-                    body: JSON.stringify({
-                        id: ID,
-                        type: type,
-                        time: time,
-                        date: date,
-                        eventid: id,
-                        password: password
-                    })
-                }
-                ).then((response) => { return response.json() })
-                    .then((res) => {
-                        NotificationManager.success('Event created', 'Added');
-                        getData();
-                        settype("");
-                        settime("");
-                        setdate("");
-                        setid("");
-                        setpassword("");
-                    })
+            try {
+                const todoref = firebase.database().ref('events');
+                const todo={
+                    type: type,
+                    date: date,
+                    time: time,
+                    eventid:id,
+                    password: password
+                };
+                todoref.push(todo);
+                NotificationManager.success('Event created', 'Added');
+                getData();
+                settype("");
+                settime("");
+                setdate("");
+                setid("");
+                setpassword("");
+
             }
-            catch(e){
+            catch (e) {
                 console.log(e);
             }
-            
+
         }
     }
 
-    function finalDeleteEvent(e){
+    function finalDeleteEvent(e) {
         fetch(staticUrls.url + '/events/' + e, {
             method: 'DELETE'
         }).then((response) => { return response.json() })
@@ -112,9 +94,9 @@ function AdminEvents(props) {
                 NotificationManager.success('Event delete successfull', 'Deleted');
             })
     }
-    
-    function deleteEvent(e){
-        try{
+
+    function deleteEvent(e) {
+        try {
             confirmAlert({
                 title: "Are you sure?",
                 message: "This event will be deleted",
@@ -128,23 +110,23 @@ function AdminEvents(props) {
                 ]
             })
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
-             
+
     }
 
-    function editEvent(e){
+    function editEvent(e) {
         console.log(e);
         getData();
     }
 
     useEffect(() => {
-        if(!gotlast){
+        if (!gotlast) {
             getData();
             setgotlist(true);
         }
-    },[setgotlist, gotlast])
+    }, [setgotlist, gotlast])
 
     return (<div>
         <Header />
@@ -156,42 +138,42 @@ function AdminEvents(props) {
                     <option value={option.value} key={option.value}>{option.label}</option>
                 ))}
             </select>
-            <input value={time} onChange={(e) =>(settime(e.target.value))}className={styles.item} type="time" placeholder="time" />
-            <input value={date} onChange={(e) =>{setdate(e.target.value)}}className={styles.item} type="date" placeholder="date" />
-            <input value={id} onChange={(e) =>{setid(e.target.value)}}className={styles.item} type="text" placeholder="id" />
-            <input value={password} onChange={(e) =>{setpassword(e.target.value)}} className={styles.item} type="text" placeholder="password" />
+            <input value={time} onChange={(e) => (settime(e.target.value))} className={styles.item} type="time" placeholder="time" />
+            <input value={date} onChange={(e) => { setdate(e.target.value) }} className={styles.item} type="date" placeholder="date" />
+            <input value={id} onChange={(e) => { setid(e.target.value) }} className={styles.item} type="text" placeholder="id" />
+            <input value={password} onChange={(e) => { setpassword(e.target.value) }} className={styles.item} type="text" placeholder="password" />
             <Button onClick={AddNew} className={styles.item} name=" Add " />
         </div>
         <div className={styles.heading}>
-                    Privious Events
+            Privious Events
         </div>
         <div>
             {
                 (
-                    ()=>{
-                        if(gotlast){
-                            return events.sort((a, b) => b.id- a.id).map((event, i)=>{
-                                return(<div key={i}><OneEvent 
-                                type={event.type}
-                                time={event.time}
-                                date={event.date}
-                                eventid={event.eventid}
-                                password={event.password}
+                    () => {
+                        if (gotlast) {
+                            return events.sort((a, b) => b.id - a.id).map((event, i) => {
+                                return (<div key={i}><OneEvent
+                                    type={event.type}
+                                    time={event.time}
+                                    date={event.date}
+                                    eventid={event.eventid}
+                                    password={event.password}
                                 />
-                                <div  className={styles.action}>
-                                        <Button name="edit" onClick={editEvent} passbtnonclick1={event.id}/>
-                                        <Button name="delete" onClick={deleteEvent} passbtnonclick1={event.id}/>
-                                </div>
+                                    <div className={styles.action}>
+                                        <Button name="edit" onClick={editEvent} passbtnonclick1={event.id} />
+                                        <Button name="delete" onClick={deleteEvent} passbtnonclick1={event.id} />
+                                    </div>
                                 </div>);
                             })
-                        }else{
-                            return(<Loading />);
+                        } else {
+                            return (<Loading />);
                         }
                     }
                 )()
             }
         </div>
-        <NotificationContainer/>
+        <NotificationContainer />
     </div>);
 }
 

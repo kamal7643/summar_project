@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import staticUrls from '../config/urls';
 import 'bootstrap/dist/css/bootstrap.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import SingleSuggest from '../components/Suggestion';
 import Loading from '../components/Loading';
 import firebase from '../util/Firebase';
+import refresh from '../images/refreshicon.png';
 
 
 function Suggestion(props) {
@@ -27,35 +27,14 @@ function Suggestion(props) {
         })
     }
 
-    function getid() {
-        var max = 0;
-        suggestion.map((s, i) => {
-            if (s.id > max) {
-                max = s.id;
-            }
-            return <div></div>
-        })
-        return max + 1;
-    }
 
     function addNewSuggestion() {
-        const newId = getid();
-        fetch(staticUrls.url + '/suggestions', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8"
-            },
-            body: JSON.stringify({
-                id: newId,
-                title: head,
-                content: body
-            })
-        }).then((response) => { return response.json() })
-            .then((response) => {
-                var temp = suggestion;
-                temp.push(response);
-                setsuggestion(temp);
-            })
+        const todoref = firebase.database().ref('suggestion');
+        const todo = {
+            title: head,
+            content: body
+        };
+        todoref.push(todo);
     }
 
     function addNew() {
@@ -76,9 +55,17 @@ function Suggestion(props) {
 
     useEffect(() => {
         setTimeout(() => {
-            const todoref = firebase.database().ref('suggestions')
-            todoref.on('value', (snapshot) =>{
-                
+            const todoref = firebase.database().ref('suggestion');
+            todoref.on('value', (snapshot) => {
+                if(snapshot.exists()){
+                    let ssg = [];
+                    snapshot.forEach((element)=>{
+                        ssg.push(element);
+                    })
+                    setsuggestion(ssg);
+                }else{
+                    console.log("suggestion not found");
+                }
             })
             setloading(false);
         }, 1000)
@@ -97,7 +84,18 @@ function Suggestion(props) {
                 <button style={{width:'70px'}} onClick={addNew}>add</button>
             </div>
             <br/>
-            <div style={{textAlign: 'center',padding:'5px'}}>Privious suggestions</div>
+            <div style={{textAlign: 'center',padding:'5px'}}>Privious suggestions &nbsp;
+                <img 
+                style={{
+                    widht:'20px', 
+                    height:'20px', 
+                    backgroundColor:'#FFFFFF'
+                }} 
+                alt=""
+                onClick={()=>{setsuggestion([]);    }}
+                src={refresh}
+                />
+            </div>
             <div>
                 {
                     (
@@ -106,12 +104,10 @@ function Suggestion(props) {
                                 return (<Loading />);
                             }
                             else{
-                                return suggestion.sort((a, b) => b.id - a.id).map((s, i) => {
+                                return suggestion.reverse().map((s, i) => {
                                     return (<div key={i}>
                                         <SingleSuggest
-                                            id={s.id}
-                                            title={s.title}
-                                            content={s.content}
+                                            data={s}
                                         />
                                     </div>);
                                 }

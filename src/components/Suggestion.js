@@ -8,8 +8,8 @@ function SingleSuggest(props) {
 
     function showMore(){
         confirmAlert({
-            title:props.title,
-            message:props.content,
+            title: props.data.val().title,
+            message: props.data.val().content,
             buttons:[
                 {
                     label: 'continue'
@@ -19,15 +19,15 @@ function SingleSuggest(props) {
     }
 
         
-    return<div className={styles.card} onClick={showMore} >
-        <div className={styles.title}>{props.title}</div>
-        <div className={styles.content}>{props.content.substring(0, 50)+"...\n\n"}</div>
+    return<div className={styles.card}>
+        <div className={styles.title} onClick={showMore} >{props.data.val().title}</div>
+        <div className={styles.content}>{props.data.val().content.substring(0, 50)+"...\n\n"}</div>
         {
             (
                 ()=>{
                     if(props.action){
                     return <div className={styles.defaultButton}>
-                        <Button onClick={props.onbtnclick} passbtnonclick1={props.id} name={props.action}/>
+                        <Button onClick={props.onbtnclick} passbtnonclick1={props.data} name={props.action}/>
                     </div>
                     }
                 }

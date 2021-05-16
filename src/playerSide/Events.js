@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import Header from '../components/Header';
-import staticUrls from '../config/urls';
+import firebase from '../util/Firebase';
 import OneEvent from '../components/Event';
 import Loading from '../components/Loading';
 
@@ -8,29 +8,23 @@ function Events(props){
     const [fetched, setfetched] = useState(false);
     const [loading, setloading] = useState(true);
     const [events, setevents] = useState([]);
-    const [size, setsize] = useState(0);
 
-    function getbackend(){
-        fetch(staticUrls.url + '/events')
-        .then((response) => { return response.json()})
-        .then((response) =>{
-            setevents(response);
-            try{
-                events.map((event, i)=>{
-                setsize(size+1);
-                return<div key={i}></div>
-            })}
-            catch(e){
-                console.log(e);
-            }finally{
-                setloading(false);
-            }
-        })
-    }
 
     useEffect(() => {
         if(!fetched){
-            getbackend();
+            const todoref = firebase.database().ref('events');
+            todoref.on('value', (snapshot) => {
+                if(snapshot.exists()){
+                    let eet = [];
+                    snapshot.forEach((element) =>{
+                        eet.push(element.val());
+                    })
+                    setevents(eet);
+                }
+                else{
+                    console.log("event not found");
+                }
+            })
             setfetched(true);
             setloading(false);
         }
