@@ -2,9 +2,9 @@ import React,{ useState, useEffect} from 'react';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import styles from '../css/ranks.module.css';
-import staticUrls from '../config/urls';
 import Table from 'react-bootstrap/Table'
 import {useHistory} from 'react-router-dom';
+import firebase from '../util/Firebase';
 
 
 function Ranks(props) {
@@ -19,9 +19,19 @@ function Ranks(props) {
     useEffect(() => {
         setTimeout(() => {
             if (players.length === 0) {
-                fetch(staticUrls.url + "/players")
-                    .then((response) => { return response.json() })
-                    .then((response) => { setplayers(response) })
+                const todoref = firebase.database().ref('players');
+                todoref.on('value', (snapshot) => {
+                    if (snapshot.exists()) {
+                        let ppl = [];
+                        snapshot.forEach((element) =>{
+                            ppl.push(element.val());
+                        })
+                        setplayers(ppl);
+
+                    } else {
+                        console.log("No data available");
+                    }
+                })
                 setloading(true);
             }
         },1000);
@@ -67,7 +77,7 @@ function Ranks(props) {
                                                                 <td>{player.matches}</td>
                                                                 <td>{player.win}</td>
                                                                 <td>{player.kills}</td>
-                                                                <td>{player.KD}</td>
+                                                                <td>{player.kd}</td>
                                                             </tr>
                                                         );
                                                     }

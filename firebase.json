@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "aplhasecond",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -6,6 +6,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import SingleSuggest from '../components/Suggestion';
 import Loading from '../components/Loading';
+import firebase from '../util/Firebase';
 
 
 function Suggestion(props) {
@@ -75,9 +76,10 @@ function Suggestion(props) {
 
     useEffect(() => {
         setTimeout(() => {
-            fetch(staticUrls.url + '/suggestions')
-                .then((response) => { return response.json() })
-                .then((response) => { setsuggestion(response);  })
+            const todoref = firebase.database().ref('suggestions')
+            todoref.on('value', (snapshot) =>{
+                
+            })
             setloading(false);
         }, 1000)
     })

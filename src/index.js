@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import LandingPage from './screens/LandingPage';
 import Ranks from './screens/Ranks';
 import NotFound from './screens/NotFound';
+import Test from './screens/TestForBackend';
 
 
 // player side
@@ -35,6 +36,7 @@ ReactDOM.render(
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
     
+      <Route path="/testfirebase" exact={true} component={Test}/>
       <Route path="/login" exact={true} component={Login}/>
     
       {
