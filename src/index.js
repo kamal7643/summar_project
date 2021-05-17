@@ -18,6 +18,8 @@ import Suggestion from './playerSide/Suggestion';
 import ProfileWall from './playerSide/ProfileWall';
 import Events from './playerSide/Events';
 import Login from './playerSide/login';
+import SignUp from './playerSide/Signup';
+import Profile from './playerSide/Profile';
 
 
 // admin side
@@ -35,9 +37,11 @@ ReactDOM.render(
       <Route path="/watch" exact={true} component={Watch} />
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
+      <Route path="/profile" exact={true} component={Profile}/>
     
       <Route path="/testfirebase" exact={true} component={Test}/>
       <Route path="/login" exact={true} component={Login}/>
+      <Route path="/signup" exact={true} component={SignUp}/>
     
       {
         //godmode

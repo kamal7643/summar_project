@@ -40,23 +40,24 @@ function LandingPage(props) {
         <div>
             extra 
             <div onClick={() => { history.push("/events"); }} style={{ textDecoration: 'underline' }}>events</div>
-            <div onClick={()=>{history.push("/login");}} style={{textDecoration:'underline'}}>login or signup</div>
+            <div onClick={()=>{history.push("/signup");}} style={{textDecoration:'underline'}}>signup</div>
             <br />
             <ul className="list-group">
-                <li class="list-group-item" onClick={gotowatch}> watch here</li>
+                <li className="list-group-item" onClick={gotowatch}> watch here</li>
             </ul>
         </div>
 
-        {//<embed style={{width: '100%', height: '200px', marginTop: "10%"}} autoPlay={true} src= {staticUrls.videoUrl}/>
-        }
         <div id="about">About</div>
         <div id="rules">Rules</div>
         <div>
             <ul className="list-group">
-                <li class="list-group-item" onClick={gotosuggetion}> watch here</li>
+                <li className="list-group-item" onClick={gotosuggetion}> suggest here</li>
             </ul>
         </div>
-        
+        <a 
+        href="mailto:kswami848@gmail.com&Subject= hey!" target="_blank">
+        Contact Us
+        </a>
     </div>
 }
 

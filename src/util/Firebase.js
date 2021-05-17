@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 // import 'firebase/database'; // If using Firebase database
 // import 'firebase/storage'; // If using Firebase storage
-// import 'firebase/auth';        // for authentication
+import 'firebase/auth';        // for authentication
 // import 'firebase/storage';     // for storage
 import 'firebase/database';    // for realtime database
 // import 'firebase/firestore';   // for cloud firestore
@@ -19,9 +19,5 @@ const firebaseConfig = {
     measurementId: "G-9Z7N8K3EW8"
 };
 
-// const firebaseApp = 
 firebase.initializeApp(firebaseConfig);
-// const db = firebase.firestore();
-
-// export default db;
 export default firebase;
