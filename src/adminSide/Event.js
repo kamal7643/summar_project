@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import Button from '../components/Button';
+import { Button } from 'react-bootstrap';
 import styles from '../css/adminevent.module.css';
 import Loading from '../components/Loading';
-import staticUrls from '../config/urls';
 import OneEvent from '../components/Event';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import firebase from '../util/Firebase';
-
+import deleteicon from '../images/Delete-Button.png';
+import editicon from '../images/pen.png';
 
 function AdminEvents(props) {
     const options = [
@@ -85,14 +85,8 @@ function AdminEvents(props) {
         }
     }
 
-    function finalDeleteEvent(e) {
-        fetch(staticUrls.url + '/events/' + e, {
-            method: 'DELETE'
-        }).then((response) => { return response.json() })
-            .then((res) => {
-                getData();
-                NotificationManager.success('Event delete successfull', 'Deleted');
-            })
+    function finalDeleteEvent(event) {
+        // const todoref = firebase.database().ref('events');
     }
 
     function deleteEvent(e) {
@@ -128,7 +122,7 @@ function AdminEvents(props) {
         }
     }, [setgotlist, gotlast])
 
-    return (<div>
+    return (<div >
         <Header />
         <div className={styles.heading}>Add New Event</div>
         <div className={styles.enter}>
@@ -142,7 +136,7 @@ function AdminEvents(props) {
             <input value={date} onChange={(e) => { setdate(e.target.value) }} className={styles.item} type="date" placeholder="date" />
             <input value={id} onChange={(e) => { setid(e.target.value) }} className={styles.item} type="text" placeholder="id" />
             <input value={password} onChange={(e) => { setpassword(e.target.value) }} className={styles.item} type="text" placeholder="password" />
-            <Button onClick={AddNew} className={styles.item} name=" Add " />
+            <Button onClick={AddNew}>Add</Button>
         </div>
         <div className={styles.heading}>
             Privious Events
@@ -152,18 +146,20 @@ function AdminEvents(props) {
                 (
                     () => {
                         if (gotlast) {
-                            return events.sort((a, b) => b.id - a.id).map((event, i) => {
-                                return (<div key={i}><OneEvent
+                            return events.reverse().map((event, i) => {
+                                return (<div key={i}>
+                                    <div className={styles.action}>
+                                        <Button style={{ marginRight: '10px', backgroundColor:'white', borderColor:'white' }} onClick={() => { deleteEvent(event) }}><img  className={styles.icon} src={deleteicon} alt=""/></Button>
+                                        <Button style={{ marginLeft: '10px', backgroundColor: 'white', borderColor: 'white' }} onClick={() => { editEvent(event) }}><img className={styles.icon} src={editicon} alt="" /></Button>
+                                    </div>
+                                    <OneEvent
                                     type={event.type}
                                     time={event.time}
                                     date={event.date}
                                     eventid={event.eventid}
                                     password={event.password}
                                 />
-                                    <div className={styles.action}>
-                                        <Button name="edit" onClick={editEvent} passbtnonclick1={event.id} />
-                                        <Button name="delete" onClick={deleteEvent} passbtnonclick1={event.id} />
-                                    </div>
+                                    
                                 </div>);
                             })
                         } else {

@@ -5,12 +5,25 @@ export const signup = async (email, password, seterror) => {
     var NUser;
     try{
         const newuser = firebase.auth().createUserWithEmailAndPassword(email, password);
-        (await newuser).user.sendEmailVerification();
-        (await newuser).user.updateProfile("kamal")
         NUser = (await newuser).user;
+        const todoref = firebase.database().ref('users/'+NUser.uid);
+        const todo={
+            name:"none", 
+            email:NUser.email,
+            playname:"none",
+            matches:0,
+            win:0,
+            defeat:0,
+            kills:0,
+            deaths:0,
+            kd:0,
+            points:0,
+            uid:NUser.uid
+        };
+        todoref.push(todo);
     }
     catch (e) {
-        console.log(e);
+        seterror(e.message);
     }
     return NUser;
 }
@@ -30,10 +43,10 @@ export const signup = async (email, password, seterror) => {
 // }
 
 export const signin = async (email, password, seterror) =>{
-    var user;
+    var user="hello";
     try{
-        const user = firebase.auth().signInWithEmailAndPassword(email, password);
-        return (await user).user;
+        const nuser = firebase.auth().signInWithEmailAndPassword(email, password);
+        user= (await nuser).user;
     }catch (e){
         console.log(e);
         seterror(e.message);
@@ -42,7 +55,7 @@ export const signin = async (email, password, seterror) =>{
 }
 
 export const getcurruser = async () =>{ 
-    var curruser;
+    var curruser="hello";
     while(curruser){
         try{
             const user = firebase.auth().currentUser;

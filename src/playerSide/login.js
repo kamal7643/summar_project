@@ -37,9 +37,14 @@ function Login(props) {
     async function handlesubmit (e){ 
         e.preventDefault();
         signin(email,password, seterr)
-        .then((response)=>{setuser(response);})
-        setemail("");
-        setpassword("");
+        .then((response)=>{
+            history.push(
+                {
+                    pathname: "/profile?id=" + response.uid,
+                    state: { name: response.displayName, email: response.email }
+                }
+            )
+        })
     }
 
     useEffect(() => {
@@ -55,13 +60,6 @@ function Login(props) {
 
     return (<div>
         <Header />
-        {
-            (
-                ()=>{ if(user){
-                    history.push("/profile?use="+user.email)
-                }}
-            )()
-        }
         {count}<Button onClick={incr}>+</Button>
         {console.log(user)}
         <div>nothing</div>

@@ -19,18 +19,15 @@ function Ranks(props) {
     useEffect(() => {
         setTimeout(() => {
             if (players.length === 0) {
-                const todoref = firebase.database().ref('players');
-                todoref.on('value', (snapshot) => {
-                    if (snapshot.exists()) {
-                        let ppl = [];
-                        snapshot.forEach((element) =>{
-                            ppl.push(element.val());
+                const ref = firebase.database().ref('users');
+                ref.on('value', (snapshot) => {
+                    var ppls =[];
+                    snapshot.forEach((element) =>{
+                        element.forEach((ele) => {
+                            ppls.push(ele.val());
                         })
-                        setplayers(ppl);
-
-                    } else {
-                        console.log("No data available");
-                    }
+                    })
+                    setplayers(ppls);
                 })
                 setloading(true);
             }
@@ -69,7 +66,8 @@ function Ranks(props) {
                                                         return(
                                                             <tr key={i}>
                                                                 <td onClick={() =>{history.push({
-                                                                    pathname:'/profileWall?userid='+player.id,
+                                                                    pathname:'/profileWall',
+                                                                    search:'userid='+player.uid,
                                                                     data: player
                                                                 })
                                                                 }} style={{ textDecoration: 'underline' }}>{player.playname}</td>

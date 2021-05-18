@@ -19,20 +19,22 @@ function SingleSuggest(props) {
     }
 
         
-    return<div className={styles.card}>
-        <div className={styles.title} onClick={showMore} >{props.data.val().title}</div>
-        <div className={styles.content}>{props.data.val().content.substring(0, 50)+"...\n\n"}</div>
-        {
-            (
-                ()=>{
-                    if(props.action){
-                    return <div className={styles.defaultButton}>
-                        <Button onClick={props.onbtnclick} passbtnonclick1={props.data} name={props.action}/>
-                    </div>
+    return <div className="hover-overlay hover-zoom hover-shadow ripple">
+        <div className={styles.card}>
+            <div className={styles.title} onClick={showMore} >{props.data.val().title}</div>
+            <div className={styles.content}>{props.data.val().content.substring(0, 50)+"...\n\n"}</div>
+            {
+                (
+                    ()=>{
+                        if(props.action){
+                        return <div className={styles.defaultButton}>
+                            <Button onClick={props.onbtnclick} passbtnonclick1={props.data} name={props.action}/>
+                        </div>
+                        }
                     }
-                }
-                )()
-    }
+                    )()
+        }
+        </div>
     </div>
 }
 

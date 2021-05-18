@@ -1,10 +1,10 @@
 import React,{ useState, useEffect } from 'react';
 import Header from '../components/Header';
-import staticUrls from '../config/urls';
 // import styles from '../css/profileWall.module.css';
 import Loading from '../components/Loading';
 // import { confirmAlert } from 'react-confirm-alert';
 // import {useHistory} from 'react-router-dom';
+import firebase from '../util/Firebase';
  
 function ProfileWall(props){
     const ID = new URLSearchParams(props.location.search).get('userid');
@@ -14,27 +14,15 @@ function ProfileWall(props){
     // const history = useHistory();
 
 
-    // function showerror(e) {
-    //     confirmAlert({
-    //         title: 'Error',
-    //         message: e,
-    //         buttons: [
-    //             {
-    //                 label: 'continue',
-    //                 onClick: () => history.push("/ranks")
-    //             }
-    //         ],
-    //         closeOnClickOutside: false
-    //     });
-    // }
 
 
     useEffect(() => {
         if(!fetched){
-            fetch(staticUrls.url + '/players/'+ID)
-            .then((response) => { return response.json()})
-            .then((response) => {
-                setuser(response);
+            const ref = firebase.database().ref('users/'+ID);
+            ref.on('value', (value) =>{
+                value.forEach(data=>{
+                    setuser(data.val());
+                })
             })
             setloading(false);
             setfetched(true);
@@ -52,13 +40,13 @@ function ProfileWall(props){
                             return (<Loading />);
                         }else{
                             if(user){
-                                return(<div>hello {user.name}</div>);
+                                return(
+                                    <div>
+                                        hello {user.email}
+                                    </div>
+                                    );
                             }else if(fetched){
-                                    return (<div>
-                                        {(
-                                            ()=>{//showerror("we are sorry!")
-                                            }
-                                        )()}
+                                    return (<div>wait...
                                     </div>);
                             }
                         }

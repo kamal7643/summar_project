@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "aplhasecond",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",

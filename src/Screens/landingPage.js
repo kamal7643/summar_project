@@ -7,22 +7,6 @@ import {useHistory} from 'react-router-dom';
 function LandingPage(props) {
     const history = useHistory();
 
-    // settings localStorage for current session
-    localStorage.setItem('name','Kamal Swami');
-    localStorage.setItem('isAdmin','false');
-    localStorage.setItem('id',1234567890);
-    localStorage.setItem('email','kswami848@gmail.com');
-    localStorage.setItem('username','kamal7643');
-    localStorage.setItem('password','123');
-    localStorage.setItem('playname','kamal7643');
-    localStorage.setItem('matches',0);
-    localStorage.setItem('win',0);
-    localStorage.setItem('loss',0);
-    localStorage.setItem('kills',0);
-    localStorage.setItem('deaths',0);
-    localStorage.setItem('KD',0);
-    localStorage.setItem('points',0);
-
     function gotowatch(){
         history.push("/watch");
     }
@@ -34,7 +18,7 @@ function LandingPage(props) {
     localStorage.setItem("logged", false);
     localStorage.setItem("start", false);
 
-    return<div>
+    return <div >
         <Header/>
         <Slides/>
         <div>
@@ -54,10 +38,6 @@ function LandingPage(props) {
                 <li className="list-group-item" onClick={gotosuggetion}> suggest here</li>
             </ul>
         </div>
-        <a 
-        href="mailto:kswami848@gmail.com&Subject= hey!" target="_blank">
-        Contact Us
-        </a>
     </div>
 }
 
