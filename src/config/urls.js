@@ -12,7 +12,8 @@ const staticUrls = {
             "link": 'https://www.youtube.com/embed/XumojP2HIkw',
             "desciption": "something"
         }
-    ]
+    ],
+    emailvalidation: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 };
 
 export default staticUrls;

@@ -6,11 +6,11 @@ import styles from '../css/watch.module.css';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import firebase from '../util/Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactPlayer from 'react-player/youtube';
 
 
 function Watch(props) {
 
-    const [pos, setpos] = useState(0);
     const [videos, setvideos] = useState(staticUrls.videos);
     const [link, setlink] = useState(staticUrls.videos[0].link);
     const [desciption, setdesciption] = useState(staticUrls.videos[0].desciption);
@@ -42,7 +42,6 @@ function Watch(props) {
     }
 
     function changeIndex(e) {
-        setpos(e);
         videos.map((vid, i) => {
             if (i === e) {
                 if(link!==vid.link){
@@ -58,10 +57,8 @@ function Watch(props) {
     return (
         <div className={styles.watchclass}>
             <Header />
-            <div className={styles.watchvideo}>{
-                //upgrade video player
-            }
-                <embed style={{ width: '100%', height: '100%' }} src={link} key={pos} />
+            <div >
+                <ReactPlayer light={true} className="embed-responsive-item" height="500px" width="100%" controls={true} url={link} />
             </div>
             <div className={styles.watchdesciption}>
                 {desciption}

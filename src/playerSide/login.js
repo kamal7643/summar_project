@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { signin, getcurruser, signout } from '../util/cognito';
 import { Form, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 function Login(props) {
@@ -14,71 +14,77 @@ function Login(props) {
     const [user, setuser] = useState(null);
     const [err, seterr] = useState();
     const [once, setonce] = useState(false);
-    const [count, setcount] = useState(0);
     const history = useHistory();
 
 
-    async function current(){
-        setuser(await getcurruser());
-    }
-    
-    if(!once){
-        current();
-        setonce(true);
-    }
+    // async function current(){
+    //     getcurruser()
+    //         .then((response) => {
+    //             if(response){
+    //                 setuser(response);
+    //                 history.push(
+    //                     {
+    //                         pathname: "/profile", search:"id=" + response.uid
+    //                     }
+    //                 )
+    //             }
+    //         })
+    // }
+
+    // if(!once){
+    //     current();
+    //     setonce(true);
+    // }
 
 
-    async function logout(e){
+    async function logout(e) {
         e.preventDefault();
         signout()
-        .then((res)=>{ setuser(res)})
+            .then((res) => { setuser(res) })
     }
 
-    async function handlesubmit (e){ 
+    async function handlesubmit(e) {
         e.preventDefault();
-        signin(email,password, seterr)
-        .then((response)=>{
-            history.push(
-                {
-                    pathname: "/profile?id=" + response.uid,
-                    state: { name: response.displayName, email: response.email }
+        signin(email, password, seterr)
+            .then((response) => {
+                if (response) {
+                    history.push(
+                        {
+                            pathname: "/profile", search: "id=" + response.uid
+                        }
+                    )
                 }
-            )
-        })
+            })
     }
 
     useEffect(() => {
-        if(err){
+        if (err) {
             NotificationManager.error("ERROR", err, 3000);
             seterr("");
         }
-    },[user, err])
 
-    function incr(){
-        setcount(count+1);
-    }
+    }, [user, err])
 
-    return (<div>
+
+    return (<div style={{ widht: '100%', justifyContent: 'center' }}>
         <Header />
-        {count}<Button onClick={incr}>+</Button>
-        {console.log(user)}
-        <div>nothing</div>
-        <Form style={{ maxWidth: '400px', border: '0.5px solid black', borderRadius:'5px', boxShadow:'0px 0px 15px solid black' }}>
+        <Form style={{ maxWidth: '400px', maxHeight: '400px', marginTop: '10%', padding: '10%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
             <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={email} onChange={(e) =>{setemail(e.target.value)}} placeholder="Email"/>
+                <Form.Control type="email" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email" />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={password} onChange={(e)=>{setpassword(e.target.value)}}placeholder="Password"/>
+                <Form.Control type="password" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="Password" />
             </Form.Group>
             <Form.Group style={{ textAlign: 'center' }}>
-            <Button variant="primary" type="button" onClick={handlesubmit}>
-                Login
+                <Button variant="primary" type="button" onClick={handlesubmit}>
+                    Login
             </Button>
             </Form.Group>
         </Form>
         <Button onClick={logout}>logout</Button>
+        {user}
         <NotificationContainer />
     </div>);
 }

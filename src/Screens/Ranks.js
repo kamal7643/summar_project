@@ -5,6 +5,7 @@ import styles from '../css/ranks.module.css';
 import Table from 'react-bootstrap/Table'
 import {useHistory} from 'react-router-dom';
 import firebase from '../util/Firebase';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 
 function Ranks(props) {
@@ -12,32 +13,35 @@ function Ranks(props) {
     const history = useHistory();
     const [players, setplayers] = useState([]);
     const [loading, setloading] = useState(false);
+    const [error, seterror] = useState(null);
+    const [one, setone] = useState(false);
+    const ref = firebase.database().ref('users');
 
-
+    function once(){    
+        ref.on('value', (snapshot) => {
+            var ppls = [];
+            snapshot.forEach((element) => {
+                    ppls.push(element.child("profile").val());  
+            })
+            setplayers(ppls);
+        })
+        setloading(true);
+    }
     
+    if(!one){
+        once();
+        setone(true);
+    }
+
 
     useEffect(() => {
-        setTimeout(() => {
-            if (players.length === 0) {
-                const ref = firebase.database().ref('users');
-                ref.on('value', (snapshot) => {
-                    var ppls =[];
-                    snapshot.forEach((element) =>{
-                        element.forEach((ele) => {
-                            ppls.push(ele.val());
-                        })
-                    })
-                    setplayers(ppls);
-                })
-                setloading(true);
-            }
-        },1000);
         
+        if (error) {
+            NotificationManager.error("ERROR", error, 3000);
+            seterror("");
+        }
         
-    },[setloading, players, setplayers])
-    if(localStorage.getItem('start')===false){
-        history.push('/')
-    }
+    },[players, error])
     return (
         <div>
             <Header/>
@@ -51,12 +55,12 @@ function Ranks(props) {
                             <Table striped bordered hover variant="primary" size="sm">
                                 <thead>
                                     <tr>
-                                        <th width="170">Playname</th>
-                                        <th width="170">Points</th>
-                                        <th width="170">matches</th>
-                                        <th width="170">Wins</th>
-                                        <th width="170">Kills</th>
-                                        <th width="170">KD</th>
+                                        <th width="100">Playname</th>
+                                        <th width="100">Points</th>
+                                        <th width="100">matches</th>
+                                        <th width="100">Wins</th>
+                                        <th width="100">Kills</th>
+                                        <th width="100">KD</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,6 +96,7 @@ function Ranks(props) {
                     }
                 }
             )()}
+            <NotificationContainer />
         </div>
     );
 }

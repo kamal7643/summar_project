@@ -1,26 +1,26 @@
 import firebase from '../util/Firebase';
 
 
-export const signup = async (email, password, seterror) => {
+export const signup = async (email, password, name, seterror) => {
     var NUser;
     try{
         const newuser = firebase.auth().createUserWithEmailAndPassword(email, password);
         NUser = (await newuser).user;
-        const todoref = firebase.database().ref('users/'+NUser.uid);
-        const todo={
-            name:"none", 
+        const todoref = firebase.database().ref('users/'+NUser.uid+"/profile");
+        todoref.set({
+            name:name,
             email:NUser.email,
             playname:"none",
-            matches:0,
-            win:0,
-            defeat:0,
-            kills:0,
-            deaths:0,
-            kd:0,
-            points:0,
-            uid:NUser.uid
-        };
-        todoref.push(todo);
+            matches: 0,
+            win: 0,
+            defeat: 0,
+            kills: 0,
+            deaths: 0,
+            kd: 0,
+            points: 0,
+            uid: NUser.uid
+        })
+        
     }
     catch (e) {
         seterror(e.message);
