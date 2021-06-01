@@ -90,7 +90,7 @@ function SignUp(props) {
                             return <div><Loading/></div>
                         } else {
                             return <div style={{ width: '100%', justifyContent: 'center', padding: "5%" }}>
-                                <Form style={{ maxWidth: '400px', marginTop: '30px', padding: '5%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
+                                <Form style={{ maxWidth: '400px', marginTop: '30px', padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
                                     <Form.Group>
                                         <Form.Label>Name</Form.Label>
                                         <Form.Control type="test" value={name} onChange={(e) => { setname(e.target.value) }} placeholder="name" required/>
@@ -125,6 +125,7 @@ function SignUp(props) {
                                         <Button variant="primary" type="button" onClick={handlesubmit}>
                                             Sign-up
                                         </Button>
+                                        <Button style={{marginLeft:'15%'}} onClick={() => { history.push("/login")}}>Log-in</Button>
                                     </Form.Group>
                                 </Form>
                             </div>

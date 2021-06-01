@@ -13,7 +13,7 @@ function Login(props) {
     const [password, setpassword] = useState("test7643");
     const [user, setuser] = useState(null);
     const [err, seterr] = useState();
-    const [once, setonce] = useState(false);
+    // const [once, setonce] = useState(false);
     const history = useHistory();
 
 
@@ -52,8 +52,9 @@ function Login(props) {
                         {
                             pathname: "/profile", search: "id=" + response.uid
                         }
-                    )
-                }
+                    );
+                    localStorage.setItem("logged", true);
+                }  
             })
     }
 
@@ -66,9 +67,10 @@ function Login(props) {
     }, [user, err])
 
 
+
     return (<div style={{ widht: '100%', justifyContent: 'center' }}>
         <Header />
-        <Form style={{ maxWidth: '400px', maxHeight: '400px', marginTop: '10%', padding: '10%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
+        <Form style={{ maxWidth: '400px', marginTop: '30px', padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
             <Form.Group>
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email" />
@@ -79,12 +81,13 @@ function Login(props) {
             </Form.Group>
             <Form.Group style={{ textAlign: 'center' }}>
                 <Button variant="primary" type="button" onClick={handlesubmit}>
-                    Login
-            </Button>
+                    Log-in
+                </Button>
+
+                <Button style={{ marginLeft: '15%' }} onClick={() => { history.push("/signup") }}>Sign-up</Button>
             </Form.Group>
         </Form>
         <Button onClick={logout}>logout</Button>
-        {user}
         <NotificationContainer />
     </div>);
 }

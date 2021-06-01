@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 // import 'firebase/database'; // If using Firebase database
 // import 'firebase/storage'; // If using Firebase storage
 import 'firebase/auth';        // for authentication
-// import 'firebase/storage';     // for storage
+import 'firebase/storage';     // for storage
 import 'firebase/database';    // for realtime database
 // import 'firebase/firestore';   // for cloud firestore
 // import 'firebase/messaging';   // for cloud messaging

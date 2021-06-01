@@ -7,38 +7,46 @@ import {useHistory} from 'react-router-dom';
 function LandingPage(props) {
     const history = useHistory();
 
+    const spsl ={
+        color:"blue",
+        fontSize:"20px",
+        textAlign:"left"
+    };
+
     function gotowatch(){
-        history.push("/watch");
+        // history.push("/watch");
+        alert("sorry");
     }
 
     function gotosuggetion(){
         history.push("/suggestion");
     }
 
-    localStorage.setItem("logged", false);
-    localStorage.setItem("start", false);
+    
 
     return <div >
         <Header/>
         <Slides/>
         <div>
-            extra 
-            <div onClick={() => { history.push("/events"); }} style={{ textDecoration: 'underline' }}>events</div>
-            <div onClick={()=>{history.push("/signup");}} style={{textDecoration:'underline'}}>signup</div>
-            <br />
-            <ul className="list-group">
-                <li className="list-group-item" onClick={gotowatch}> watch here</li>
+            soon...
+            <ul className="list-group" style={{display:'flex',flexDirection:'column', justifyContent: 'center'}}>
+                <li className="list-group-item" onClick={() => { history.push("/events"); }} style={spsl}> events &#x2192;</li>
+                <li className="list-group-item" onClick={() => { history.push("/signup"); }} style={spsl}> signup &#x2192;</li>
+                <li className="list-group-item" onClick={gotowatch} style={spsl}> watch &#x2300;</li>
+                <li className="list-group-item" onClick={gotosuggetion} style={spsl}> suggest &#x2192;</li>
             </ul>
         </div>
 
         <div id="about">About</div>
         <div id="rules">Rules</div>
-        <div>
-            <ul className="list-group">
-                <li className="list-group-item" onClick={gotosuggetion}> suggest here</li>
-            </ul>
-        </div>
+        <svg width="200" height="200" onClick={() =>{alert("Thanks")}}>
+            <line x1="10" y1="10" x2="10" y2="100" style={{stroke:"#006600", markerEnd: "url(#markerArrow)"}} />
+            <line x1="10" y1="50" x2="70" y2="10" style={{ stroke: "#006600", markerEnd: "url(#markerArrow)" }} />
+            <line x1="10" y1="50" x2="70" y2="100" style={{ stroke: "#006600", markerEnd: "url(#markerArrow)" }} />
+        </svg>
     </div>
 }
 
 export default LandingPage;
+
+//error symbol &#x2300;

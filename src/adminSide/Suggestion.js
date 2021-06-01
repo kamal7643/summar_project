@@ -13,12 +13,21 @@ function AdminSuggestion(props) {
     const [sSuggetions, setsSuggetions] = useState(null);
 
     function deletesuggetion(e){
-        alert('sorry');
-        // console.log(e.val());
+        // let key;
         // const todoref = firebase.database().ref('suggestion');
-        // todoref.remove(e);
-        // setsSuggetions([]);
-        // setfetched(false);
+        // todoref.on('value', (snapshot) => {
+        //     snapshot.forEach(val =>{
+        //         // console.log(val.val().title===e.val().title && val.val().content===e.val().content)
+        //         if(val.val().title===e.val().title && val.val().content===e.val().content){
+        //             val.val().set({deleted:true})
+        //         }
+        //     })
+        //     snapshot.pop(e);
+        // })
+        // // console.log("key:"+key)
+        // e.set({deleted:true});
+        setsSuggetions([]);
+        setfetched(false);
     }
 
     function getBackEnd(){

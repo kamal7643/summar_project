@@ -1,4 +1,5 @@
 import firebase from '../util/Firebase';
+// import defaultprofilephoto from '../images/signupprofilephoto.png';
 
 
 export const signup = async (email, password, name, seterror) => {
@@ -43,7 +44,7 @@ export const signup = async (email, password, name, seterror) => {
 // }
 
 export const signin = async (email, password, seterror) =>{
-    var user="hello";
+    var user;
     try{
         const nuser = firebase.auth().signInWithEmailAndPassword(email, password);
         user= (await nuser).user;

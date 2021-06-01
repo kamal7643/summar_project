@@ -7,7 +7,7 @@ import staticTexts from '../config/texts';
 import img1 from '../images/slides01.jpg';
 import img2 from '../images/slides02.jpg';
 import img3 from '../images/slides03.jpg';
-import img4 from '../images/slides04.jpg';
+// import img4 from '../images/slides04.jpg';
 
 
 function Slides(props) {
@@ -41,16 +41,6 @@ function Slides(props) {
                 />
                 <Carousel.Caption>
                     <p>{staticTexts.slides03}</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                    className="d-block w-100"
-                    src={img4}
-                    alt=""
-                />
-                <Carousel.Caption>
-                    <p>{staticTexts.slides04}</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
