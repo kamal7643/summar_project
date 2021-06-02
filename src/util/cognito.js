@@ -19,7 +19,8 @@ export const signup = async (email, password, name, seterror) => {
             deaths: 0,
             kd: 0,
             points: 0,
-            uid: NUser.uid
+            uid: NUser.uid,
+            photo:false
         })
         
     }

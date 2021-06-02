@@ -9,15 +9,16 @@ import { useHistory } from 'react-router-dom';
 function Login(props) {
 
 
-    const [email, setemail] = useState("kamalswami0808@gmail.com");
-    const [password, setpassword] = useState("test7643");
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
     const [user, setuser] = useState(null);
     const [err, seterr] = useState();
-    // const [once, setonce] = useState(false);
+    const [once, setonce] = useState(false);
     const history = useHistory();
 
 
-    // async function current(){
+    async function current(){
+        console.log('here');
     //     getcurruser()
     //         .then((response) => {
     //             if(response){
@@ -29,12 +30,12 @@ function Login(props) {
     //                 )
     //             }
     //         })
-    // }
+    }
 
-    // if(!once){
-    //     current();
-    //     setonce(true);
-    // }
+    if(!once){
+        current();
+        setonce(true);
+    }
 
 
     async function logout(e) {
@@ -53,7 +54,6 @@ function Login(props) {
                             pathname: "/profile", search: "id=" + response.uid
                         }
                     );
-                    localStorage.setItem("logged", true);
                 }  
             })
     }
