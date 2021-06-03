@@ -58,16 +58,16 @@ function Watch(props) {
         <div className={styles.watchclass}>
             <Header />
             <div >
-                <ReactPlayer light={true} className="embed-responsive-item" height="500px" width="100%" controls={true} url={link} />
+                <ReactPlayer playing={true} light={true} className="embed-responsive-item" style={{width: '100%', maxWidth:'400px', height:'400px'}} controls={true} url={link} />
             </div>
-            <div className={styles.watchdesciption}>
+            <div className={styles.watchdesciption} style={{padding:'10px', border: '1px solid gray', height:'50px', overflow: 'hidden'}}>
                 {desciption}
             </div>
             <div className={styles.watchlist}>
-                <label style={{ textShadow: ' 2px 2px 5px red', width: '100%', textAlign: 'center', backgroundColor: 'blue', padding: '1%' }} >All Videos</label>
+                <label style={{ width: '100%', textAlign: 'center', backgroundColor: 'gray', padding: '1%' }} >All Videos</label>
                 <ul className="list-group">
                 {
-                    videos.map((video, i) => <li className="list-group-item" onClick={() => { changeIndex(i) }} key={i}>
+                    videos.map((video, i) => <li style={{ padding:'10px', borderRadius:'10px', border: '1px solid gray', marginBottom:'10px'}} onClick={() => { changeIndex(i) }} key={i}>
                         <div className={styles.watchlistcontainerhead}>{video.name}</div>
                         <div className={styles.watchlistcontainerbody}>{video.desciption}</div>
                     </li>)
