@@ -4,14 +4,14 @@ import firebase from '../util/Firebase';
 
 export const signup = async (email, password, name, seterror) => {
     var NUser;
-    try{
+    try {
         const newuser = firebase.auth().createUserWithEmailAndPassword(email, password);
         NUser = (await newuser).user;
-        const todoref = firebase.database().ref('users/'+NUser.uid+"/profile");
+        const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
-            name:name,
-            email:NUser.email,
-            playname:"none",
+            name: name,
+            email: NUser.email,
+            playname: "none",
             matches: 0,
             win: 0,
             defeat: 0,
@@ -20,9 +20,9 @@ export const signup = async (email, password, name, seterror) => {
             kd: 0,
             points: 0,
             uid: NUser.uid,
-            photo:false
+            photo: false
         })
-        
+
     }
     catch (e) {
         seterror(e.message);
@@ -44,39 +44,36 @@ export const signup = async (email, password, name, seterror) => {
 //     return NUser;
 // }
 
-export const signin = async (email, password, seterror) =>{
+export const signin = async (email, password, seterror) => {
     var user;
-    try{
+    try {
         const nuser = firebase.auth().signInWithEmailAndPassword(email, password);
-        user= (await nuser).user;
-    }catch (e){
+        user = (await nuser).user;
+    } catch (e) {
         console.log(e);
         seterror(e.message);
     }
     return user;
 }
 
-export const getcurruser = async () =>{ 
-    var curruser="hello";
-    while(curruser){
-        try{
-            const user = firebase.auth().currentUser;
-            curruser = (await user);
-            console.log(user);
-        }
-        catch(e){
-            console.log(e);
-            return ;
-        }
+export const getcurruser = async () => {
+    var curruser;
+    try {
+        const user = firebase.auth().currentUser;
+        curruser = (await user);
+        return (curruser);
     }
-    return curruser;
+    catch (e) {
+        console.log(e);
+        return;
+    };
 }
 
-export const signout = async () =>{
+export const signout = async () => {
     var user;
-    try{
+    try {
         user = firebase.auth().signOut();
         return user;
-    }catch (e){console.log(e.message);}
+    } catch (e) { console.log(e.message); }
     return user;
 }

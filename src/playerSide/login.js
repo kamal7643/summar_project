@@ -18,7 +18,6 @@ function Login(props) {
 
 
     async function current(){
-        console.log('here');
     //     getcurruser()
     //         .then((response) => {
     //             if(response){

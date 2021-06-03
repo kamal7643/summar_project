@@ -58,7 +58,7 @@ function Watch(props) {
         <div className={styles.watchclass}>
             <Header />
             <div >
-                <ReactPlayer playing={true} light={true} className="embed-responsive-item" style={{width: '100%', maxWidth:'400px', height:'400px'}} controls={true} url={link} />
+                <ReactPlayer playing={true} light={true} className="embed-responsive-item" style={{width: '100%', maxWidth:'400 px', height:'400px'}} controls={true} url={link} />
             </div>
             <div className={styles.watchdesciption} style={{padding:'10px', border: '1px solid gray', height:'50px', overflow: 'hidden'}}>
                 {desciption}
