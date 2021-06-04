@@ -47,6 +47,7 @@ function Events(props){
                                         eventid={event.eventid}
                                         password={event.password}
                                         key={i}
+                                        uid={uid}
                                     />
                                 )
                         }
