@@ -9,6 +9,7 @@
     "bootstrap": "^4.6.0",
     "clipboard-copy": "^4.0.1",
     "firebase": "^8.6.1",
+    "mdbreact": "^5.0.2",
     "mongodb": "^3.6.6",
     "mongodb-client-encryption": "^1.2.3",
     "mongoose": "^5.12.7",

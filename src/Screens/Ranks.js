@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table'
 import {useHistory} from 'react-router-dom';
 import firebase from '../util/Firebase';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 
 function Ranks(props) {
@@ -49,21 +50,17 @@ function Ranks(props) {
                 ()=>{
                     if(loading){
                         return<div>
-                            <div>
-                                developers knows
-                            </div>
-                            <Table striped bordered hover variant="primary" size="sm">
-                                <thead>
+                            <MDBTable hover variant="primary" size="sm" responsive>
+                                <MDBTableHead>
                                     <tr>
-                                        <th width="100">Playname</th>
-                                        <th width="100">Points</th>
-                                        <th width="100">matches</th>
-                                        <th width="100">Wins</th>
-                                        <th width="100">Kills</th>
-                                        <th width="100">KD</th>
+                                        <th>Playname</th>
+                                        <th>Points</th>
+                                        <th>Wins</th>
+                                        <th>Kills</th>
+                                        <th>KD</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                </MDBTableHead>
+                                <MDBTableBody>
                                         {
                                                 players.sort((a,b)=>b.points-a.points).map((player, i) => {
                                                     if(i<100){
@@ -76,7 +73,6 @@ function Ranks(props) {
                                                                 })
                                                                 }} style={{ textDecoration: 'underline' }}>{player.playname}</td>
                                                                 <td>{player.points}</td>
-                                                                <td>{player.matches}</td>
                                                                 <td>{player.win}</td>
                                                                 <td>{player.kills}</td>
                                                                 <td>{player.kd}</td>
@@ -86,8 +82,8 @@ function Ranks(props) {
                                                     return <div></div>
                                                     })
                                         }
-                                </tbody>
-                            </Table>
+                                </MDBTableBody>
+                            </MDBTable>
                         </div>
                     }else{
                         return<div  className={styles.loading}>
