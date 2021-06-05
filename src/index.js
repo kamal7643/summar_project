@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 
 
 // screens 
-import LandingPage from './screens/LandingPage';
-import Ranks from './screens/Ranks';
-import NotFound from './screens/NotFound';
-import Test from './screens/TestForBackend';
+import LandingPage from './Screens/LandingPage';
+import Ranks from './Screens/Ranks';
+import NotFound from './Screens/NotFound';
+import Test from './Screens/TestForBackend';
 
 
 // player side
