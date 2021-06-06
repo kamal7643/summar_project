@@ -2,7 +2,6 @@ import React,{ useState, useEffect} from 'react';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import styles from '../css/ranks.module.css';
-import Table from 'react-bootstrap/Table'
 import {useHistory} from 'react-router-dom';
 import firebase from '../util/Firebase';
 import { NotificationContainer, NotificationManager } from 'react-notifications';

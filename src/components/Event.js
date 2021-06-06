@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import styles from '../css/singleevent.module.css';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { useHistory } from 'react-router-dom';
-import {getcurruser} from '../util/cognito';
-import { ConfirmAlert } from 'react-confirm-alert';
+import { getcurruser } from '../util/cognito';
+import { confirmAlert } from 'react-confirm-alert';
 
 
 function OneEvent(props){
     const history = useHistory();
+
 
     function join(){
         getcurruser().then((user)=>{
@@ -15,17 +16,20 @@ function OneEvent(props){
                 if(props.open){history.push('profile?id='+user.uid+'&join='+props.uid)}
             }
             else{
-                ConfirmAlert({
+                confirmAlert({
                     title: 'You are not logged in',
                     message: 'please login',
                     buttons: [{
-                        label:'login',
-                        onClick: () =>history.push("/login")
+                        label: 'login',
+                        onClick: () => history.push("/login")
                     }]
                 })
+                history.push("/login");
             }
         })
     }
+
+    
 
     return(
         <div className={styles.card}>

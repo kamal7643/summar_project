@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import { signin, getcurruser, signout } from '../util/cognito';
-import { Form, Button } from 'react-bootstrap';
+import { signin, getcurruser } from '../util/cognito';
+import { Form } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useHistory } from 'react-router-dom';
 
@@ -11,24 +11,14 @@ function Login(props) {
 
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
-    const [user, setuser] = useState(null);
     const [err, seterr] = useState();
     const [once, setonce] = useState(false);
+    const [cursor, setcursor] = useState("default");
     const history = useHistory();
 
 
     async function current(){
-    //     getcurruser()
-    //         .then((response) => {
-    //             if(response){
-    //                 setuser(response);
-    //                 history.push(
-    //                     {
-    //                         pathname: "/profile", search:"id=" + response.uid
-    //                     }
-    //                 )
-    //             }
-    //         })
+        
     }
 
     if(!once){
@@ -37,13 +27,9 @@ function Login(props) {
     }
 
 
-    async function logout(e) {
-        e.preventDefault();
-        signout()
-            .then((res) => { setuser(res) })
-    }
 
     async function handlesubmit(e) {
+        setcursor("wait");
         e.preventDefault();
         signin(email, password, seterr)
             .then((response) => {
@@ -55,40 +41,50 @@ function Login(props) {
                     );
                 }  
             })
+        setcursor("default");
     }
 
     useEffect(() => {
+        getcurruser()
+            .then((response) => {
+                if (response) {
+                    history.push(
+                        {
+                            pathname: "/profile", search: "id=" + response.uid
+                        }
+                    )
+                }
+            })
         if (err) {
             NotificationManager.error("ERROR", err, 3000);
             seterr("");
         }
 
-    }, [user, err])
+    }, [err, history])
 
 
-
-    return (<div style={{ widht: '100%', justifyContent: 'center' }}>
-        <Header />
-        <Form style={{ maxWidth: '400px', marginTop: '30px', padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
-            <Form.Group>
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email" />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="Password" />
-            </Form.Group>
-            <Form.Group style={{ textAlign: 'center' }}>
-                <Button variant="primary" type="button" onClick={handlesubmit}>
-                    Log-in
-                </Button>
-
-                <Button style={{ marginLeft: '15%' }} onClick={() => { history.push("/signup") }}>Sign-up</Button>
-            </Form.Group>
-        </Form>
-        <Button onClick={logout}>logout</Button>
-        <NotificationContainer />
-    </div>);
+    return(<div style={{width: '100%', cursor:cursor}}>
+            <Header />
+            <div style={{margin:'10%'}}>
+                <Form style={{ width: '80%', maxWidth:"400px", minWidth: "300px", height:'400px', padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
+                    <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email" />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" value={password} onChange={(e) => {setpassword(e.target.value) }} placeholder="Password" />
+                    </Form.Group>
+                    <Form.Group>
+                        <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
+                            <span style={{width: '100%' }} onClick={handlesubmit}>Log-in</span>
+                            <span style={{ width: '100%' }} onClick={() =>{ history.push('/signup')}}>Sign-up</span>
+                        </div>
+                    </Form.Group>
+                </Form>
+            </div>
+            <NotificationContainer />
+        </div>);
 }
 
 export default Login;

@@ -53,5 +53,3 @@ function LandingPage(props) {
 export default LandingPage;
 
 //error symbol &#x2300;
-
-

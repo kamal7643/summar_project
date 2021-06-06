@@ -7,11 +7,20 @@ import { useHistory } from 'react-router-dom';
 import Progress from 'react-progressbar';
 import Friends from '../components/Friends';
 import staticUrls from '../config/urls';
+import { signout, getcurruser } from '../util/cognito';
 
 
 
 function Profile(props) {
     const ID = new URLSearchParams(props.location.search).get('id');
+    getcurruser().then((user)=>{
+        if(user){
+            if(user.uid===ID){console.log('all done');}
+            else{history.push('/404')}
+        }else{
+            history.push('/404')
+        }
+    })
     const [user, setuser] = useState();
     const [fetched, setfetched] = useState(false);
     const [playname, setplayname] = useState("");
@@ -61,8 +70,19 @@ function Profile(props) {
         }
     }
 
+    function LOGOUT(){
+        signout().then((user)=>{
+            if(user){
+                history.push('profile?id='+user.uid);
+            }else{
+                history.push('/login');
+            }
+        }) 
+    }
+
     function updatePlayName() {
         ref.child("playname").set(playname)
+        alert('updated');
         setfetched(false);
     }
 
@@ -118,6 +138,7 @@ function Profile(props) {
 
     useEffect(() => {
         if (!fetched) {
+            
             ref.on('value', (value) => {
                 if (value) {
                     setuser(value.val());
@@ -135,7 +156,7 @@ function Profile(props) {
                 console.log(e);
             }
         }
-    }, [ID, fetched, setplayname, user, ref, Storage])
+    }, [ID, fetched, setplayname, user, ref, Storage, history])
 
     return (
         <div>
@@ -146,7 +167,7 @@ function Profile(props) {
                         if (user) {
                             return <div style={{ textAlign: 'center', width: '100%' }}>
                                 <div><img alt="profile" src={imageAsUrl && imageAsUrl.imgUrl} width={profileWidth} height={profileHeight} onClick={profilePhotoViewFunction} style={{ borderRadius: !profilePhotoView && '50px' }} /></div>
-                                Name : {user.name} Authentication pass
+                                Name : {user.name} <button onClick={LOGOUT}>log-out</button>
                                 <br />
                                 Email : {user.email}
                                 <br /><br />
