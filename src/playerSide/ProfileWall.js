@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-// import styles from '../css/profileWall.module.css';
 import Loading from '../components/Loading';
-// import { confirmAlert } from 'react-confirm-alert';
-// import {useHistory} from 'react-router-dom';
 import firebase from '../util/Firebase';
 import Progress from 'react-progressbar';
 import staticUrls from '../config/urls';
@@ -15,23 +12,16 @@ function ProfileWall(props) {
     const [fetched, setfetched] = useState(false);
     const [winpercent, setwinpercent] = useState(0);
     const [killpercent, setkillpercent] = useState(0);
-    const [imageAsUrl, setImageAsUrl] = useState(prevObject => ({ ...prevObject, imgUrl: staticUrls.profilephotourl }));
-    // const history = useHistory();
+    const [imageAsUrl, setImageAsUrl] = useState(staticUrls.profilephotourl);
 
-    try {
-        const action = firebase.storage().ref(`/images/${ID}/photo`);
-        action.getDownloadURL().then((downloadURL) => {
-            if (downloadURL) {
-                setImageAsUrl(prevObject => ({ ...prevObject, imgUrl: downloadURL }))
-            }
-        })
-    }
-    catch (e) {
-        console.log(e);
-    }
 
 
     useEffect(() => {
+        if(user){
+            if(user.photo && user.photo !== imageAsUrl){
+                setImageAsUrl(user.photo);
+            }
+        }
         if (!fetched) {
             const ref = firebase.database().ref('users/' + ID);
             ref.on('value', (value) => {
@@ -77,7 +67,7 @@ function ProfileWall(props) {
                                                         if(imageAsUrl){
                                                             return(<div style={{width:'100%', textAlign: 'center'}}>
                                                                     
-                                                                    <img alt="profile" src={imageAsUrl.imgUrl} width="100px" height="100px" style={{borderRadius:'50px'}}/>
+                                                                    <img alt="profile" src={imageAsUrl} width="100px" height="100px" style={{borderRadius:'50px'}}/>
                                                                 </div>);
                                                         }
                                                     }
