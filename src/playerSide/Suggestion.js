@@ -123,16 +123,16 @@ function Suggestion(props) {
 
     if (!wait) {
         return (
-            <div>
+            <div style={{ backgroundColor: '#550080', color: '#00FFFF' }} >
                 <Header />
                 <div style={{ maxWidth: '400px', marginTop: '30px', padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
                     <div style={{ marginTop: '5%' }}>
-                        <input style={{ width: '100%' }} type="text" name="" placeholder="heading" value={head} onChange={(e) => { sethead(e.target.value) }} />
+                        <input style={{ width: '100%', backgroundColor:'#550080' }} type="text" name="" placeholder="heading" value={head} onChange={(e) => { sethead(e.target.value) }} />
                     </div>
                     <div>
-                        <textarea style={{ width: '100%', height: '100px' }} type="text" name="" placeholder="content" value={body} onChange={(e) => { setbody(e.target.value) }} />
+                        <textarea style={{ width: '100%', height: '100px', backgroundColor: '#550080' }} type="text" name="" placeholder="content" value={body} onChange={(e) => { setbody(e.target.value) }} />
                     </div>
-                    <button style={{ width: '70px' }} onClick={addNew}>add</button>
+                    <button style={{ width: '70px', backgroundColor: '#550080' }} onClick={addNew}>add</button>
                 </div>
                 <br />
                 <div style={{ textAlign: 'center', padding: '5px' }}>Privious suggestions &nbsp;

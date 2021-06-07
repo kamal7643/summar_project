@@ -70,7 +70,7 @@ function Ranks(props) {
                                                                     search:'userid='+player.uid,
                                                                     data: player
                                                                 })
-                                                                }} style={{ textDecoration: 'underline' }}>{player.playname}</td>
+                                                                }} style={{ textDecoration: 'underline', color:'green' }}>{player.playname}</td>
                                                                 <td>{player.points}</td>
                                                                 <td>{player.win}</td>
                                                                 <td>{player.kills}</td>

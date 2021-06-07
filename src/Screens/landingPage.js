@@ -10,7 +10,7 @@ function LandingPage(props) {
     const history = useHistory();
 
 
-    return <div >
+    return <div style={{ backgroundColor: '#550080', color: '#00FFFF'}} >
         <Header/>
         <Slides/>
         <div>

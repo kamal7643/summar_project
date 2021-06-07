@@ -1,12 +1,19 @@
 import firebase from '../util/Firebase';
 // import defaultprofilephoto from '../images/signupprofilephoto.png';
+// import defaultprofile from '../images/signupprofilephoto.png';
+import staticUrls from '../config/urls';
 
 
 export const signup = async (email, password, name, seterror) => {
     var NUser;
+
     try {
         const newuser = firebase.auth().createUserWithEmailAndPassword(email, password);
         NUser = (await newuser).user;
+        NUser.updateProfile({ 
+            name: name,
+            photoURL:staticUrls.profilephotourl
+        })
         const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
             name: name,
@@ -20,7 +27,7 @@ export const signup = async (email, password, name, seterror) => {
             kd: 0,
             points: 0,
             uid: NUser.uid,
-            photo: false
+            photo: staticUrls.profilephotourl
         })
 
     }
@@ -31,18 +38,9 @@ export const signup = async (email, password, name, seterror) => {
 }
 
 
-// export const phonesignup = async (phonenumber, seterror) => {
-//     var NUser;
-//     try {
-//         const newuser = firebase.auth().createUserWithPhoneNumber(phonenumber);
-//         (await newuser).user.sendEmailVerification();
-//         NUser = (await newuser).user;
-//     }
-//     catch (e) {
-//         console.log(e);
-//     }
-//     return NUser;
-// }
+export const test = async () => {
+    // console.log(defaultprofile);
+}
 
 export const signin = async (email, password, seterror) => {
     var user;

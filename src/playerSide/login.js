@@ -88,4 +88,3 @@ function Login(props) {
 }
 
 export default Login;
-//16365K9cTCPrCoW2kQXDo0QJG0C2
