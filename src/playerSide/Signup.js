@@ -85,7 +85,7 @@ function SignUp(props) {
                 signup(email, password, name, seterror)
                     .then((res) => {
                         if (res) {
-                            history.push({ pathname: "profile", search: "id=" + res.uid })
+                            history.push("/profile?id=" + res.uid + "&state=profile");
                         }
                     })
             } else {

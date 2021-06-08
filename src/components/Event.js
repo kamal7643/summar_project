@@ -13,7 +13,7 @@ function OneEvent(props){
     function join(){
         getcurruser().then((user)=>{
             if(user){
-                if(props.open){history.push('profile?id='+user.uid+'&join='+props.uid)}
+                if(props.open){history.push('profile?id='+user.uid+'&join='+props.uid+'&state=events')}
             }
             else{
                 confirmAlert({

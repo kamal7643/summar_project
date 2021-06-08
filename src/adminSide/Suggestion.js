@@ -13,19 +13,7 @@ function AdminSuggestion(props) {
     const [sSuggetions, setsSuggetions] = useState(null);
 
     function deletesuggetion(e){
-        // let key;
-        // const todoref = firebase.database().ref('suggestion');
-        // todoref.on('value', (snapshot) => {
-        //     snapshot.forEach(val =>{
-        //         // console.log(val.val().title===e.val().title && val.val().content===e.val().content)
-        //         if(val.val().title===e.val().title && val.val().content===e.val().content){
-        //             val.val().set({deleted:true})
-        //         }
-        //     })
-        //     snapshot.pop(e);
-        // })
-        // // console.log("key:"+key)
-        // e.set({deleted:true});
+        e.removeValue();
         setsSuggetions([]);
         setfetched(false);
     }

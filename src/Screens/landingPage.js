@@ -1,32 +1,51 @@
-import React from 'react';
+import React,{ useState, useEffect} from 'react';
 import Header from '../components/Header';
 import Slides from '../components/Slides';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useHistory} from 'react-router-dom';
 import Footer from '../components/Footer';
+import { MDBProgress } from 'mdbreact';
 
 
 function LandingPage(props) {
     const history = useHistory();
+    const [ count, setcount ]= useState(0);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setcount(count+1);
+        },100)
+    })
 
-    return <div style={{ backgroundColor: '#550080', color: '#00FFFF'}} >
+    return <div>
+        {
+            (
+                () => {
+                    if (count < 10) {
+                        return (
+                            <MDBProgress className="my-2" material value={count*10} color="info" />
+                        );
+                    }
+                }
+            )()
+        }
         <Header/>
+        
         <Slides/>
         <div>
-            <div onClick={() => {history.push('/events')}} style={{display: 'flex', flexDirection: 'column', border: '1px solid black', borderRadius:'20px',paddingLeft:'30px',paddingRight:'30px', height:'100px', maxWidth:'400px',margin:'20px', boxShadow:'0px 0px 10px black'}}>
+            <div onClick={() => {history.push('/events')}} style={{display: 'flex', flexDirection: 'column', borderRadius:'20px',paddingLeft:'30px',paddingRight:'30px', height:'100px', maxWidth:'400px',margin:'20px', boxShadow:'0px 0px 10px gray'}}>
                 <span style={{marginTop:'10px'}}>Join events</span>
                 <span style={{textAlign:'right'}}>&#x2192;</span>
             </div>
-            <div onClick={() => { history.push('/signup') }} style={{ display: 'flex', flexDirection: 'column', border: '1px solid black', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px black' }}>
+            <div onClick={() => { history.push('/signup') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
                 <span style={{ marginTop: '10px' }}>Make an account</span>
                 <span style={{ textAlign: 'right' }}>&#x2192;</span>
             </div>
-            <div onClick={() => { history.push('/watch') }} style={{ display: 'flex', flexDirection: 'column', border: '1px solid black', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px black' }}>
+            <div onClick={() => { history.push('/watch') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
                 <span style={{ marginTop: '10px' }}>Watch videos</span>
                 <span style={{ textAlign: 'right' }}>&#x2192;</span>
             </div>
-            <div onClick={() => { history.push('/suggestion') }} style={{ display: 'flex', flexDirection: 'column', border: '1px solid black', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px black' }}>
+            <div onClick={() => { history.push('/suggestion') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
                 <span style={{ marginTop: '10px' }}>Give suggestion</span>
                 <span style={{ textAlign: 'right' }}>&#x2192;</span>
             </div>

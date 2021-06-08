@@ -46,7 +46,7 @@ function ProfileWall(props) {
             setloading(false);
             setfetched(true);
         }
-    }, [fetched, ID, setfetched, setloading])
+    }, [fetched, ID, setfetched, setloading, user, imageAsUrl])
 
     return (
         <div>

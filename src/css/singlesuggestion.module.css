@@ -1,6 +1,5 @@
 .card{
     width: 95%;
-    height: 120px;
     margin-top:7px;
     margin-bottom:7px;
     margin-left: 2.5%;
@@ -31,5 +30,6 @@
 
 .defaultButton{
     text-align:right;
-    margin-top:20px;
+    margin-top:10px;
+    background-color:bisque;
 }

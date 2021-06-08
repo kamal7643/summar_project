@@ -34,11 +34,7 @@ function Login(props) {
         signin(email, password, seterr)
             .then((response) => {
                 if (response) {
-                    history.push(
-                        {
-                            pathname: "/profile", search: "id=" + response.uid
-                        }
-                    );
+                    history.push("/profile?id=" + response.uid+"&state=profile");
                 }  
             })
         setcursor("default");
@@ -48,11 +44,7 @@ function Login(props) {
         getcurruser()
             .then((response) => {
                 if (response) {
-                    history.push(
-                        {
-                            pathname: "/profile", search: "id=" + response.uid
-                        }
-                    )
+                    history.push("/profile?id=" + response.uid + "&state=profile");
                 }
             })
         if (err) {

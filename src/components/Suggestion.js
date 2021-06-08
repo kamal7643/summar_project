@@ -41,7 +41,7 @@ function SingleSuggest(props) {
                     () => {
                         if (props.action) {
                             return <div className={styles.defaultButton}>
-                                <Button onClick={props.onbtnclick} passbtnonclick1={props.data} name={props.action} />
+                                <Button style={{backgroundColor:'bisque'}} onClick={props.onbtnclick} passbtnonclick1={props.data} name={props.action} />
                             </div>
                         }
                     }

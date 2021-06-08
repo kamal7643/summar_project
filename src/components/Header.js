@@ -10,7 +10,7 @@ function Header(props) {
         marginRight:'100px',
     };
     return(
-        <Navbar expand="lg" style={{ backgroundColor: '#2200CC', color: '#00FFFF' }} >
+        <Navbar expand="lg" style={{ boxShadow:'0px 0px 10px gray' }} >
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
