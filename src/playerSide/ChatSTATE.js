@@ -2,7 +2,7 @@
 
 function ChatSTATE(props) {
     return (
-        <div></div>
+        <div>chating..</div>
     );
 }
 

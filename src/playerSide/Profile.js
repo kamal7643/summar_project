@@ -17,7 +17,7 @@ function Profile(props) {
     getcurruser().then((user) => {
         if (user) {
             if (user.uid !== ID) { history.push('/404'); }
-        } 
+        }
     })
     const ref = firebase.database().ref('users/' + ID + "/profile");
     const history = useHistory();
@@ -46,22 +46,22 @@ function Profile(props) {
                     }
                 ]
             })
-            history.push("profile?id=" + ID+'&state=events');
+            history.push("profile?id=" + ID + '&state=events');
         }
-        setTimeout(()=>{setneed(need+1)},1000)
-    }, [ID, ref, history, setneed, need, JOIN ])
+        setTimeout(() => { setneed(need + 1) }, 1000)
+    }, [ID, ref, history, setneed, need, JOIN])
 
     return (
         <div style={{ minHeight: '100%' }}>
             <Header />
             <div
                 style={{
-                    display: 'flex', 
-                    flexDirection: 'row', 
+                    display: 'flex',
+                    flexDirection: 'row',
                     textAlign: 'center',
-                    width:'100%',
-                    marginTop:'10px',
-                    boxShadow:'0px 0px 4px gray'
+                    width: '100%',
+                    marginTop: '10px',
+                    boxShadow: '0px 0px 4px gray'
                 }}
             >
                 <span
@@ -108,15 +108,24 @@ function Profile(props) {
             {
                 (
                     () => {
-                        switch(STATE){
-                            case 'profile': return(<ProfileSTATE uid={ID} />);break;
-                            case 'peoples': return(<PeoplesSTATE uid={ID}/>);break;
-                            case 'events' : return(<EventSTATE uid={ID}/>);break;
-                            case 'chat'   : return(<ChatSTATE uid={ID}/>);break;
+                        if (STATE === 'profile') {
+                            return(<ProfileSTATE uid={ID} />);
+                        }
+                        else {
+                            if (STATE === 'peoples') {
+                                return(<PeoplesSTATE uid={ID} />);
+                            }
+                            else {
+                                if (STATE === 'events') {
+                                    return (<EventSTATE uid={ID} />);
+                                } else {
+                                    return (<ChatSTATE uid={ID} />);
+                                }
+                            }
                         }
                     }
                 )()
-            }           
+            }
         </div>
     );
 }

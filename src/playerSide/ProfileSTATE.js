@@ -5,7 +5,7 @@ import{ confirmAlert} from 'react-confirm-alert';
 import staticUrls from '../config/urls';
 import { useHistory } from 'react-router-dom';
 import { signout } from '../util/cognito';
-import { MDBBtn, MDBProgress  } from 'mdbreact';
+import { MDBProgress  } from 'mdbreact';
 import 'react-circular-progressbar/dist/styles.css';
 
 
@@ -184,7 +184,7 @@ function ProfileSTATE(props) {
                      onChange={(e) =>{setplayname(e.target.value);}}
                     />
                     <Fragment>
-                        <MDBBtn
+                        <button
                             color="primary"
                             style={{
                                 borderRadius:'0px',
@@ -193,7 +193,7 @@ function ProfileSTATE(props) {
                             }}
                             onClick={(e) => { updatePlayName();}}
                             disabled={playname===user.playname}
-                        >update</MDBBtn>
+                        >update</button>
                     </Fragment>
                 </div>
                 <div
@@ -221,7 +221,7 @@ function ProfileSTATE(props) {
                             setImageAsFile(e.target.files[0])
                         }}
                     />
-                    <MDBBtn
+                    <button
                         style={{
                             padding: '0.5%',
                             width:'70px',
@@ -231,7 +231,7 @@ function ProfileSTATE(props) {
                         onClick={upload}
                         disabled={!imageAsFile}
                     >upload
-                    </MDBBtn>
+                    </button>
                 </div>
                 <div>
                     {
