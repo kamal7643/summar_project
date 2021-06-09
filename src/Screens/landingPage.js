@@ -30,8 +30,7 @@ function LandingPage(props) {
             )()
         }
         <Header/>
-        
-        <Slides/>
+        <div style={{maxWidth: '450px'}}><Slides/></div>
         <div>
             <div onClick={() => {history.push('/events')}} style={{display: 'flex', flexDirection: 'column', borderRadius:'20px',paddingLeft:'30px',paddingRight:'30px', height:'100px', maxWidth:'400px',margin:'20px', boxShadow:'0px 0px 10px gray'}}>
                 <span style={{marginTop:'10px'}}>Join events</span>

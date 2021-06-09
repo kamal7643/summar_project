@@ -19,7 +19,9 @@ function Suggestion(props) {
     const [wait, setwait] = useState(false);
     const [name, setname] = useState('');
     const [uid, setuid] = useState();
+    const [id, setid] = useState('');
     const history = useHistory();
+    const inforef = firebase.database().ref('info');
 
     function showAlert(a, b) {
         confirmAlert({
@@ -33,20 +35,54 @@ function Suggestion(props) {
         })
     }
 
+    function updateSuggestionInfoId(e) {
+        if (((parseInt(e)) + 1).toString()!=="NaN"){
+            inforef.child('suggestionid').set(((parseInt(e)) + 1).toString());
+        }
+        else{
+            inforef.child('suggestionid').set(99);
+        }
+        return;
+    }
+
+    function sleep(time) {
+        return new Promise((resolve) => setTimeout(resolve, time)
+        )
+    }
 
     function addNewSuggestion() {
+
+        try {
+            inforef.child('suggestionid').on('value', (snap) => {
+                if(id!==snap.val()){
+                    setid(snap.val());
+                }
+
+            })
+            sleep(1000);
+        }
+        catch (e) {
+            console.log(e);
+        }
+        finally {
+            updateSuggestionInfoId(id);
+        }
         if (head !== "") {
             if (body !== "") {
-                const todoref = firebase.database().ref('suggestion');
+                const todoref = firebase.database().ref('suggestion/' + id);
+
                 const todo = {
                     title: head,
                     content: body,
                     uid: uid,
-                    name: name
+                    name: name,
+                    id: id
                 };
-                todoref.push(todo);
+                console.log(todo);
+                todoref.set(todo);
                 sethead("");
                 setbody("");
+
                 showAlert("Action complete", "Your suggetion has been added")
             } else {
                 showAlert("Empty Input", "Please fill the content ")
@@ -54,21 +90,22 @@ function Suggestion(props) {
         } else {
             showAlert("Empty Input", "please fill the heading")
         }
+
+
     }
 
     async function addNew() {
         setwait(true);
         if (!uid) {
-            console.log('go for uid')
             getcurruser().then((user) => {
                 if (user) {
-                    setuid(user.uid);
+                    if(uid!==user.uid){setuid(user.uid);}
                     const ref = firebase.database().ref('users/' + user.uid + "/profile");
                     ref.on('value', (value) => {
-                        if(value){
+                        if (value) {
                             setname(value.val().playname)
                             addNewSuggestion();
-                        }else{
+                        } else {
                             confirmAlert({
                                 title: 'Account releted problem',
                                 message: 'please login',
@@ -97,8 +134,8 @@ function Suggestion(props) {
 
             })
         }
-        else { addNewSuggestion();}
-        
+        else { addNewSuggestion(); }
+
         setwait(false);
 
     }
@@ -130,12 +167,12 @@ function Suggestion(props) {
                         <input style={{ width: '100%' }} type="text" name="" placeholder="heading" value={head} onChange={(e) => { sethead(e.target.value) }} />
                     </div>
                     <div>
-                        <textarea style={{ width: '100%', height: '100px'}} type="text" name="" placeholder="content" value={body} onChange={(e) => { setbody(e.target.value) }} />
+                        <textarea style={{ width: '100%', height: '100px' }} type="text" name="" placeholder="content" value={body} onChange={(e) => { setbody(e.target.value) }} />
                     </div>
                     <button style={{ width: '70px' }} onClick={addNew}>add</button>
                 </div>
                 <br />
-                <div style={{ textAlign: 'center', padding: '5px' }}>Privious suggestions &nbsp;
+                <div style={{ textAlign: 'center', padding: '5px', maxWidth: '400px' }}>Privious suggestions &nbsp;
                 <img
                         style={{
                             widht: '20px',

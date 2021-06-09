@@ -36,6 +36,13 @@ function ProfileSTATE(props) {
             setstates(profileScale, 100);
         }
     }
+    const sst={
+        width: '100%', 
+        borderRadius: '50px', 
+        border: '10px solid gray', 
+        boxShadow: '0px 0px 20px gray'
+    };
+
 
     function LOGOUT() {
         signout().then((user) => {
@@ -164,7 +171,8 @@ function ProfileSTATE(props) {
                         display: 'flex',
                         flexDirection: 'row',
                         marginTop: '10px',
-                        marginBottom:'10px'
+                        marginBottom:'10px',
+                        maxWidth:'400px'
                     }}
                 >
                     <span
@@ -200,7 +208,8 @@ function ProfileSTATE(props) {
                     style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        marginTop: '10px'
+                        marginTop: '10px',
+                        maxWidth: '400px'
                     }}
                 >
                     <div
@@ -248,54 +257,54 @@ function ProfileSTATE(props) {
                 </div>
                 <div
                  style={{
-                     width:'100%',
+                     maxWidth:'400px',
                      display: 'flex',
                      flexDirection: 'row',
                      marginTop: '50px',
                      textAlign: 'center'
                  }}
                 >
-                    <div style={{width:'100%'}}>
+                    <div style={sst}>
                         <div>{user.kills}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>kills</span></div>
                     </div>
-                    <div style={{ width:'100%'}}>
+                    <div style={sst}>
                         <div>{user.deaths}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>deaths</span></div>
                     </div>
                 </div>
                 <div
                     style={{
-                        width: '100%',
+                        maxWidth: '400px',
                         display: 'flex',
                         flexDirection: 'row',
                         marginTop: '50px',
                         textAlign: 'center'
                     }}
                 >
-                    <div style={{ width: '100%' }}>
+                    <div style={sst}>
                         <div>{user.win}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>wins</span></div>
                     </div>
-                    <div style={{ width: '100%' }}>
+                    <div style={sst}>
                         <div>{user.defeat}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>defeats</span></div>
                     </div>
                 </div>
                 <div
                     style={{
-                        width: '100%',
+                        maxWidth: '400px',
                         display: 'flex',
                         flexDirection: 'row',
                         marginTop: '50px',
                         textAlign: 'center'
                     }}
                 >
-                    <div style={{ width: '100%' }}>
+                    <div style={sst}>
                         <div>{user.kd}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>kd</span></div>
                     </div>
-                    <div style={{ width: '100%' }}>
+                    <div style={sst}>
                         <div>{user.points}</div>
                         <div ><span style={{ borderTop: '1px solid gray' }}>points</span></div>
                     </div>

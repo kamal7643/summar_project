@@ -11,6 +11,7 @@ import 'react-notifications/lib/notifications.css';
 import firebase from '../util/Firebase';
 import deleteicon from '../images/Delete-Button.png';
 import editicon from '../images/pen.png';
+import { useHistory } from 'react-router-dom';
 
 function AdminEvents(props) {
     const options = [
@@ -27,6 +28,7 @@ function AdminEvents(props) {
     const [password, setpassword] = useState("");
     const [gotlast, setgotlist] = useState(false);
     const [events, setevents] = useState([]);
+    const history = useHistory();
 
     function getData() {
         const todoref = firebase.database().ref('events');
@@ -124,6 +126,7 @@ function AdminEvents(props) {
 
     return (<div >
         <Header />
+        <div><span onClick={() => { history.push('/admin') }}>admin{'>'}</span><span>suggestions</span></div>
         <div className={styles.heading}>Add New Event</div>
         <div className={styles.enter}>
             <select className={styles.item} value={type} onChange={(e) => { settype(e.target.value) }}>

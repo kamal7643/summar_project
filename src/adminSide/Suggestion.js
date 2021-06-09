@@ -1,9 +1,9 @@
 import React, { useState, useEffect }from 'react';
 import Header from '../components/Header';
 import SingleSuggest from '../components/Suggestion';
-// import styles from '../css/adminSuggestion.module.css';
 import Loading from '../components/Loading';
 import firebase from '../util/Firebase';
+import {useHistory} from 'react-router-dom';
 
 
 function AdminSuggestion(props) {
@@ -11,9 +11,11 @@ function AdminSuggestion(props) {
     const [fetched, setfetched] = useState(false);
     const [loading, setloading] = useState(true);
     const [sSuggetions, setsSuggetions] = useState(null);
+    const history = useHistory();
 
     function deletesuggetion(e){
-        e.removeValue();
+        const ref = firebase.database().ref('suggestion/'+e);
+        ref.remove();
         setsSuggetions([]);
         setfetched(false);
     }
@@ -45,6 +47,7 @@ function AdminSuggestion(props) {
     return(
         <div>
             <Header />
+            <div><span onClick={()=>{ history.push('/admin')}}>admin{'>'}</span><span>suggestions</span></div>
             {
                 (
                     ()=>{

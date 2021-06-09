@@ -14,6 +14,8 @@ function Admin(props) {
                     <li className="list-group-item" onClick={() => { history.push("/admin/suggestion") }}>Suggestion</li>
                     <li className="list-group-item" onClick={() => { history.push("/admin/events") }}>Event</li>
                 </ul>
+                
+                
             </div>
         </div>);
 }
