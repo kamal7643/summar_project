@@ -7,7 +7,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import ProfileSTATE from './ProfileSTATE';
 import PeoplesSTATE from './PeoplesSTATE';
 import EventSTATE from './EventSTATE';
-// import ChatSTATE from './ChatSTATE';
 import Chat from './Chat';
 
 

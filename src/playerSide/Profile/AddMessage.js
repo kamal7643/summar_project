@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
 import firebase from '../../util/Firebase';
+import { BiArrowBack } from "react-icons/bi";
 
 function AddMessage(props){
     const [content, setcontent] = useState('');
@@ -26,6 +27,7 @@ function AddMessage(props){
             bottom:'0px'
         }}
         >
+        <button onClick={() => { props.usertochat(); }}><BiArrowBack/></button>
             <input 
             type="text" 
             placeholder="type here ..." 

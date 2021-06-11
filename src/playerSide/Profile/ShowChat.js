@@ -20,7 +20,7 @@ function ShowChat(props){
                 textAlign: props.data.type === 'out' && 'right',
                 overflow: 'hidden' ,
                 minHeight:'20px',
-                marginTop:'30px'
+                marginTop:'10px'
             }}
         >
         <div

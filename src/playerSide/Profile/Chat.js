@@ -47,20 +47,14 @@ function Chat(props){
     
 
     if(userToChat){
+        
+        window.scrollTo(0, document.body.scrollHeight);
         return(
             <div
                 style={{
                     width: '100%'
                 }}
             >
-                <div
-                    style={{
-                        textAlign: 'right',
-                        width: '100%'
-                    }}
-                >
-                    <span style={{ marginRight: '10px' }} onClick={() => { setuserToChat();  }}>X</span>
-                </div>
                 <div
                     style={{
                         textAlign: 'center'
@@ -74,11 +68,10 @@ function Chat(props){
                     <br />
                     <span style={{ width: '100%', marginBottom: '30px' }}>{userToChat.name}</span>
                 </div>
-                <div><ChatOneToOne firstperson={props.uid} secondperson={userToChat.uid}/></div>
+                <div><ChatOneToOne usertochat={setuserToChat} firstperson={props.uid} secondperson={userToChat.uid}/></div>
             </div>
         );
     }else{
-        
         return(
             <div style={{marginTop:'20px'}}>{
                 ppls.map((ppl, i) => {

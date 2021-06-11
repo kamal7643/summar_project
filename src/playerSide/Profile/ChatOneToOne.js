@@ -33,7 +33,7 @@ function ChatOneToOne(props) {
         >{
                 ids.map((id, i) => <ShowChat key={i} data={id}></ShowChat>)
             }
-            <AddMessage from={props.firstperson} to={props.secondperson} />
+            <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
             </div>
     );
 }
