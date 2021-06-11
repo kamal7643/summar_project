@@ -4,6 +4,7 @@ import staticUrls from '../../config/urls';
 import ChatOneToOne from './ChatOneToOne';
 
 
+
 function Chat(props){
     const [userToChat, setuserToChat] = useState();
     const [ppls, setppls] = useState([]);
@@ -15,15 +16,12 @@ function Chat(props){
         setTimeout(() => {
             if(once){
                 const ref = firebase.database().ref('message-hash/' + props.uid);
-                
-                ref.once('value', (value) => {
-                    var templist = [];
+                var templist = [];
+                ref.on('value', (value) => {
                     value.forEach((snap) => {
                         templist.push(snap.key);
                     })
-                    if(ids!==templist){
-                        setids(templist);
-                    }
+                    setids(templist);
                 })
                 setonce(false);
             }
@@ -33,7 +31,7 @@ function Chat(props){
             const ref = firebase.database().ref('users');
             const templist =[];
             ids.map((id) =>{
-                ref.child(id).child('profile').once('value', (value)=>{
+                ref.child(id).child('profile').on('value', (value)=>{
                     const temp = value.val();
                     templist.push({name:temp.name,uid:temp.uid, photo:temp.photo});
                 })
@@ -103,7 +101,17 @@ function Chat(props){
                         {ppl.name}
                     </div>);
                 })
-            }</div>
+            }
+            {
+                (
+                    ()=>{
+                        if(ppls.length===0){
+                            return(<div>loading...</div>);
+                        }
+                    }
+                )()
+            }
+            </div>
         );
     }
     
