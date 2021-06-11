@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import firebase from '../util/Firebase';
+import Header from '../../components/Header';
+import firebase from '../../util/Firebase';
 import { useHistory } from 'react-router-dom';
-import { getcurruser } from '../util/cognito';
+import { getcurruser } from '../../util/cognito';
 import { confirmAlert } from 'react-confirm-alert';
 import ProfileSTATE from './ProfileSTATE';
 import PeoplesSTATE from './PeoplesSTATE';

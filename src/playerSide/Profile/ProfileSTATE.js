@@ -1,10 +1,10 @@
 import { useState, useEffect, Fragment  } from 'react';
-import Loading from '../components/Loading';
-import firebase from '../util/Firebase';
+import Loading from '../../components/Loading';
+import firebase from '../../util/Firebase';
 import{ confirmAlert} from 'react-confirm-alert';
-import staticUrls from '../config/urls';
+import staticUrls from '../../config/urls';
 import { useHistory } from 'react-router-dom';
-import { signout } from '../util/cognito';
+import { signout } from '../../util/cognito';
 import { MDBProgress  } from 'mdbreact';
 import 'react-circular-progressbar/dist/styles.css';
 

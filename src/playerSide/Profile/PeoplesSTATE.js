@@ -1,6 +1,6 @@
 import React from 'react';
-import Friends from '../components/Friends';
-import Peoples from '../components/Peoples';
+import Friends from '../../components/Friends';
+import Peoples from '../../components/Peoples';
 
 function PeoplesSTATE(props){
     return(<div>

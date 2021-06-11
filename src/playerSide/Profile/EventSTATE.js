@@ -1,7 +1,7 @@
 import React from 'react';
-import firebase from '../util/Firebase';
+import firebase from '../../util/Firebase';
 import { useState, useEffect } from 'react';
-import OneEvent from '../components/Event';
+import OneEvent from '../../components/Event';
 
 function EventSTATE(props) {
     const [events, setevents] = useState([]);

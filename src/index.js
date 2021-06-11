@@ -19,7 +19,7 @@ import ProfileWall from './playerSide/ProfileWall';
 import Events from './playerSide/Events';
 import Login from './playerSide/login';
 import SignUp from './playerSide/Signup';
-import Profile from './playerSide/Profile';
+import Profile from './playerSide/Profile/Profile';
 
 
 // admin side
