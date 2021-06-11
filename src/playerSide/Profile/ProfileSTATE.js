@@ -30,7 +30,14 @@ function ProfileSTATE(props) {
     function profilePhotoViewFunction() {
         if (!profilePhotoView) {
             setprofilePhotoView(true);
-            setstates(profileScale, window.innerWidth);
+            var width= 500;
+            if(width>window.innerWidth){
+                width=window.innerWidth;
+            }
+            if(window.innerWidth<100){
+                width=100;
+            }
+            setstates(profileScale, width);
         } else {
             setprofilePhotoView(false);
             setstates(profileScale, 100);
@@ -99,7 +106,7 @@ function ProfileSTATE(props) {
 
     function setstates(scale, width) {
         setprofileScale(scale);
-        setprofileHeight((width / scale).toString() + 'px');
+        setprofileHeight((width /scale).toString() + 'px');
         if (width === 100) {
             setprofileHeight(width.toString() + 'px');
         }
@@ -110,7 +117,7 @@ function ProfileSTATE(props) {
         var img = new Image();
         img.src = url;
         img.onload = function (e) {
-            const scale = 100 / img.width;
+            const scale =  img.width/img.height;
             setstates(scale, 100);
         };
     }
@@ -318,3 +325,16 @@ function ProfileSTATE(props) {
 }
 
 export default ProfileSTATE;
+
+
+
+
+/* 
+img.width=1280px
+img.height=720px
+scale = 1280/720
+width=100px
+height=100/scalepx
+width=400px
+height=400*scalepx
+*/

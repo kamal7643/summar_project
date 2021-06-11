@@ -7,7 +7,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import ProfileSTATE from './ProfileSTATE';
 import PeoplesSTATE from './PeoplesSTATE';
 import EventSTATE from './EventSTATE';
-import ChatSTATE from './ChatSTATE';
+// import ChatSTATE from './ChatSTATE';
+import Chat from './Chat';
 
 
 function Profile(props) {
@@ -119,7 +120,7 @@ function Profile(props) {
                                 if (STATE === 'events') {
                                     return (<EventSTATE uid={ID} />);
                                 } else {
-                                    return (<ChatSTATE uid={ID} />);
+                                    return (<Chat uid={ID} />);
                                 }
                             }
                         }

@@ -26,10 +26,10 @@ function ChatSTATE(props) {
     }
 
     function storemessages() {
-        console.log('fuck you');
-        setmsgs([]);
+        
         const ref = firebase.database().ref('message-hash/' + props.uid + '/' + userIdToChat.uid + '/messages');
         ref.on('value', (value) => {
+            setmsgs([]);
             value.forEach((snap) => {
                 const newref = firebase.database().ref('messages/' + snap.val().messageid);
                 newref.on('value', (value) => {
@@ -42,14 +42,19 @@ function ChatSTATE(props) {
     }
 
     function storeppls() {
-        setppls([]);
+        
         const dbref = firebase.database().ref('message-hash/' + props.uid);
         dbref.on('value', (snapshot) => {
+            console.log('count');
+            setppls([]);
             snapshot.forEach((snap) => {
                 const ref = firebase.database().ref('users').child(snap.key).child('profile');
                 ref.on('value', (value) => {
+                    console.log(ppls);
+                    console.log({ photo: value.val().photo, name: value.val().name, uid: value.val().uid });
                     var temp = ppls;
                     temp.push({ photo: value.val().photo, name: value.val().name, uid: value.val().uid });
+                    console.log(temp);
                     setppls(temp);
                 })
             })
@@ -58,6 +63,8 @@ function ChatSTATE(props) {
     }
 
     useEffect(() => {
+        console.log(ppls.length);
+        console.log(msgs.length);
         setTimeout(() => {
             if (once) {
                 storeppls();
@@ -84,9 +91,6 @@ function ChatSTATE(props) {
                         width: '100%'
                     }}
                 >
-
-
-
                     <span style={{ marginRight: '10px' }} onClick={() => { setuserIdToChat(); setmsgs([]); }}>X</span>
                 </div>
                 <div
