@@ -1,73 +1,55 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import staticUrls from '../config/urls';
 import styles from '../css/watch.module.css';
 // import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import firebase from '../util/Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactPlayer from 'react-player/youtube';
 
 
 function Watch(props) {
 
-    const [videos, setvideos] = useState(staticUrls.videos);
-    const [link, setlink] = useState(staticUrls.videos[0].link);
-    const [desciption, setdesciption] = useState(staticUrls.videos[0].desciption);
+    const [videos, setvideos] = useState([]);
+    const [link, setlink] = useState();
+    const [desciption, setdesciption] = useState();
+    const [name, setname] = useState();
     const [fetched, setfetched] = useState(false);
+    const [watching, setwatching] = useState(false);
+    const todoref = firebase.database().ref('videos').limitToLast(20);
 
 
-    function fetchbackend() {
-        try {
-            const todoref = firebase.database().ref('videos');
-            todoref.on('value', (snapshot) => {
-                if(snapshot.exists()){
-                    let vds = [];
-                    snapshot.forEach((element) =>{
-                        vds.push(element.val());
-                    })
-                    setvideos(vds);
-                }else{
-                    console.log("videos not found");
-                }
-            })
-        } catch (e) {
-            console.log(e);
-        }
+    if (!fetched) {
+        todoref.once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                let vds = [];
+                snapshot.forEach((element) => {
+                    vds.push(element.val());
+                    console.log(element.val());
+                    setlink(element.val().link);
+                })
+                setvideos(vds);
+            } else {
+                console.log("videos not found");
+            }
+        })
         setfetched(true);
     }
 
-    if (!fetched) {
-        fetchbackend();
-    }
-
-    function changeIndex(e) {
-        videos.map((vid, i) => {
-            if (i === e) {
-                if(link!==vid.link){
-                    setlink(vid.link);
-                }
-                setdesciption(vid.desciption);
-            }
-            return <div></div>
-        })
-
-    }
 
     return (
         <div className={styles.watchclass}>
             <Header />
-            <div >
-                <ReactPlayer playing={true} light={true} className="embed-responsive-item" style={{width: '100%', maxWidth:'400 px', height:'400px'}} controls={true} url={link} />
-            </div>
-            <div className={styles.watchdesciption} style={{padding:'10px', border: '1px solid gray', height:'50px', overflow: 'hidden'}}>
-                {desciption}
-            </div>
+            {watching && <div className="embed-responsive embed-responsive-16by9">
+                <iframe title="watch" className="embed-responsive-item" controls={true} src={link} allowFullScreen ></iframe>
+                <div>
+                    <label>{name}</label>
+                    <label>{desciption}</label>
+                </div>
+            </div>}
             <div className={styles.watchlist}>
-                <label style={{ width: '100%', textAlign: 'center', backgroundColor: 'gray', padding: '1%' }} >All Videos</label>
                 <ul className="list-group">
                 {
-                    videos.map((video, i) => <li style={{ padding:'10px', borderRadius:'10px', border: '1px solid gray', marginBottom:'10px'}} onClick={() => { changeIndex(i) }} key={i}>
+                        videos.map((video, i) => <li style={{ padding: '10px', borderRadius: '10px', border: '1px solid gray', marginBottom: '10px' }} onClick={() => { setwatching(true); setlink(video.name); setdesciption(video.desciption); setname(video.name) }} key={i}>
                         <div className={styles.watchlistcontainerhead}>{video.name}</div>
                         <div className={styles.watchlistcontainerbody}>{video.desciption}</div>
                     </li>)
