@@ -10,14 +10,19 @@ function Friends(props) {
     const ref = firebase.database().ref('users/' + props.uid + "/friends");
 
     useEffect(() => {
-        let uids = [];
-        if (!fetched) {
+        
+        setTimeout(() => {
+            let uids = [];
             ref.on('value', (snapshot) => {
+                uids = [];
                 snapshot.forEach((user) => {
-                    uids.push(user.val().uid);
+                    uids.push(user.key);
                 })
             })
             setfriends(uids);
+        },1000)
+        if (!fetched) {
+           
             setfetched(true);
         }
     }, [fetched, ref, setfriends, setfetched])

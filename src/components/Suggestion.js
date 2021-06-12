@@ -38,7 +38,7 @@ function SingleSuggest(props) {
                 <span style={{width: '100%', overflow:"hidden" }} onClick={showMore}>{props.data.val().title}</span>
                 <div><LikesSuggestion uid={props.data.val().id} /></div>
             </div>
-            <div className={styles.content}>{props.data.val().content.substring(0, 50) + "...\n\n"}</div>
+            <div className={styles.content}>{props.data.val().content && props.data.val().content.substring(0, 50) + "...\n\n"}</div>
             <span style={{ marginLeft: '10px', fontSize: '10px' }} onClick={gotoprofileview}>By : <b>{props.data.val().name}</b></span>
             <div
                 style={{width:'100%',

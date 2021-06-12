@@ -9,8 +9,7 @@ function AddMessage(props){
     function Add(){
         if(content!==''){
             const msgsref = firebase.database().ref('messages');
-            var key = msgsref.push({ content: content }).key;
-            console.log(key);
+            var key = msgsref.push({ content: content, from:props.from }).key;
             setcontent('');
             const msghashref = firebase.database().ref('message-hash');
             msghashref.child(props.from).child(props.to).child("messages").push({ messageid: key, type: 'out' })

@@ -31,7 +31,7 @@ function ChatOneToOne(props) {
                 width: '100%'
             }}
         >{
-                ids.map((id, i) => <ShowChat key={i} data={id}></ShowChat>)
+                ids.map((id, i) => <ShowChat key={i} data={id} uid={props.firstperson}></ShowChat>)
             }
             <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
             </div>

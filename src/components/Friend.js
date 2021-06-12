@@ -33,8 +33,15 @@ function Friend(props) {
                     ()=>{ 
                         if(user){
                             return(
-                                <div style={{display: 'flex', flexDirection: 'row'}} onClick={() =>{history.push({pathname:'profilewall', search:'userid='+props.uid})}}>
-                                    <div style={{ width: '50%' }}><img alt="profile" src={url} style={{width:'30px', height:'30px', marginTop:'5px', borderRadius:'50px'}}/></div>
+                                <div style={{display: 'flex', flexDirection: 'row'}} onClick={()=>{
+                                    if(props.onClick){
+                                        props.onClick();
+                                    }
+                                    if(props.functioncall){
+                                        props.functioncall(user);
+                                    }
+                                } } >
+                                    <div style={{ width: '50%' }}><img alt="profile" src={url} onClick={() => { history.push({ pathname: 'profilewall', search: 'userid=' + props.uid }) }} style={{width:'30px', height:'30px', marginTop:'5px', borderRadius:'50px'}}/></div>
                                     <div style={{ width: '150%', textAlign:'left' }}>{user.name}</div>
                                     <div style={{ width: '100%' }}>{user.points} points</div>
                                 </div>

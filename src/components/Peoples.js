@@ -8,11 +8,15 @@ function Peoples(props) {
     const [ppls, setppls] = useState();
     const ref = firebase.database().ref('users');
 
+    function Addfriend(ppl){
+        ref.child(props.uid).child('friends').child(ppl).set({uid:ppl});
+    }
+
 
     useEffect(() => { 
         if(!fetched){
             var data = [];
-            ref.on('value', (snapshot) => {
+            ref.once('value', (snapshot) => {
                 snapshot.forEach((snap)=>{
                     if(props.uid !==snap.child("profile").val().uid){
                         data.push(snap.child("profile").val().uid);
@@ -28,7 +32,7 @@ function Peoples(props) {
         return(
             <div>
             {
-                ppls.map((ppl, i) =><Friend key={i} uid={ppl}/>)
+                    ppls.map((ppl, i) => <div key={i} style={{ display: 'flex', flexDirection: 'row' }}><div style={{ width: '100%' }}><Friend uid={ppl} /></div><button onClick={() => { Addfriend(ppl)}} style={{height:'35px',marginTop:'10px'}}>add</button></div>)
             }
             </div>
         );

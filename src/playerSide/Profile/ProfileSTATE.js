@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { signout } from '../../util/cognito';
 import { MDBProgress  } from 'mdbreact';
 import 'react-circular-progressbar/dist/styles.css';
+import { GrUserSettings } from 'react-icons/gr';
+import Popup from '../../components/Popup';
 
 
 function ProfileSTATE(props) {
@@ -25,6 +27,7 @@ function ProfileSTATE(props) {
     const [profileWidth, setprofileWidth] = useState('100px');
     const [profileHeight, setprofileHeight] = useState('100px');
     const [profileScale, setprofileScale] = useState(1);
+    const [isOpen, setisOpen] = useState(false);
     
 
     function profilePhotoViewFunction() {
@@ -72,6 +75,10 @@ function ProfileSTATE(props) {
             }]
         });
         setfetched(false);
+    }
+
+    function removePhoto(){
+        ref.child('photo').set(staticUrls.profilephotourl);
     }
 
     function upload() {
@@ -122,6 +129,10 @@ function ProfileSTATE(props) {
         };
     }
 
+    const togglePopup = () =>{
+        setisOpen(!isOpen);
+    }
+
     useEffect(() => {
         if(!fetched){
             ref.on('value', (value) => {
@@ -144,6 +155,31 @@ function ProfileSTATE(props) {
         return(
             <div>
                 <div
+                style={{
+                    width:'100%',
+                    textAlign:'right',
+                    position:'relative',
+                    right:'20px', 
+                    top:'20px'
+                }}
+                >
+                    <label>
+                        <GrUserSettings 
+                            onClick={togglePopup}
+                        />
+                    </label>
+                </div>
+                {isOpen && <Popup
+                    content={<>
+                        <ul>
+                            <li onClick={() => { LOGOUT(); togglePopup();}}>Logout</li>
+                            <li onClick={() => { removePhoto(); togglePopup();}}>Remove profile photo</li>
+                            <li onClick={() => { togglePopup(); }}>Delete Accout</li>
+                        </ul>
+                    </>}
+                    handleClose={togglePopup}
+                />}
+                <div
                     style={{
                         width: '100%',
                         textAlign: 'center',
@@ -161,15 +197,7 @@ function ProfileSTATE(props) {
                     }}
                     />
                     <div>
-                        {user.name} &nbsp;&nbsp;
-                        <span 
-                            style={{
-                                fontSize:'10px'
-                            }}
-                            onClick={LOGOUT}
-                        >
-                            LOGOUT
-                        </span>
+                        {user.name}                         
                     </div>
                     <span>{user.email}</span>
                 </div>

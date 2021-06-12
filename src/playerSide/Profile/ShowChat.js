@@ -17,7 +17,7 @@ function ShowChat(props){
             style={{
                 width: '100%',
                 maxWidth: '400px',
-                textAlign: props.data.type === 'out' && 'right',
+                textAlign: message.from === props.uid && 'right',
                 overflow: 'hidden' ,
                 minHeight:'20px',
                 marginTop:'10px'
@@ -33,7 +33,7 @@ function ShowChat(props){
                 paddingRight: '20px',
                 border: '1px solid gray',
                 maxWidth: '300px',
-                backgroundColor: (props.data.type === 'out' && '#BF5EFA') || '#5F9EA0'
+                backgroundColor: (message.from === props.uid && '#BF5EFA') || '#5F9EA0'
                 }}>{message.content}</label></div></div>
     );
 }
