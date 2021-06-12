@@ -42,6 +42,15 @@ function SetStartingState(props) {
                         </div>
                     </div>)
                 }
+                {
+                    (
+                        ()=>{ 
+                            return(
+                                <div>Add some Friends firebase</div>
+                            );
+                        }
+                    )()
+                }
             </div>
         );
     }

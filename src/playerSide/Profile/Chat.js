@@ -2,7 +2,6 @@ import firebase from '../../util/Firebase';
 import React, { useState, useEffect } from 'react';
 import staticUrls from '../../config/urls';
 import ChatOneToOne from './ChatOneToOne';
-import Loading from '../../components/Loading';
 import Popup from '../../components/Popup';
 import SetStartingState from './SetStartingState';
 import { RiAddCircleLine } from 'react-icons/ri';
@@ -141,15 +140,6 @@ function Chat(props) {
                     </div>);
                 })
             }
-                {
-                    (
-                        () => {
-                            if (ppls.length === 0) {
-                                return (<div><Loading /></div>);
-                            }
-                        }
-                    )()
-                }
             </div>
         );
     }

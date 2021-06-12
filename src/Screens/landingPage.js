@@ -53,7 +53,10 @@ function LandingPage(props) {
         <div id="about">
             About
             <br/>
-            Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br/><br/>
+            Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br/>
+            Chat with firends.<br/>
+            Upload videos.<br/>
+            <br/>
         </div>
         <div id="rules">Rules</div>
         <ul>

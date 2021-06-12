@@ -16,9 +16,10 @@ function Ranks(props) {
     const [error, seterror] = useState(null);
     const [one, setone] = useState(false);
     const ref = firebase.database().ref('users');
+    
 
     function once(){    
-        ref.on('value', (snapshot) => {
+        ref.once('value', (snapshot) => {
             var ppls = [];
             snapshot.forEach((element) => {
                     ppls.push(element.child("profile").val());  

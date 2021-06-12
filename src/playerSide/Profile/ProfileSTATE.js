@@ -49,8 +49,9 @@ function ProfileSTATE(props) {
     const sst={
         width: '100%', 
         borderRadius: '50px', 
-        border: '10px solid gray', 
-        boxShadow: '0px 0px 20px gray'
+        border: '0px solid gray', 
+        boxShadow: '0px 0px 20px gray',
+        margin:'10px'
     };
 
 
@@ -173,7 +174,8 @@ function ProfileSTATE(props) {
                     content={<>
                         <ul>
                             <li onClick={() => { LOGOUT(); togglePopup();}}>Logout</li>
-                            <li onClick={() => { removePhoto(); togglePopup();}}>Remove profile photo</li>
+                            <li onClick={() => { togglePopup(); }}>Report Error</li>
+                            <li onClick={() => { removePhoto(); togglePopup();}}>Remove Profile Photo</li>
                             <li onClick={() => { togglePopup(); }}>Delete Accout</li>
                         </ul>
                     </>}
