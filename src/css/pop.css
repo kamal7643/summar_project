@@ -6,6 +6,8 @@
   top: 0;
   left: 0;
 }
+
+.popup-box:hover{cursor:pointer;}
  
 .box {
   position: relative;
