@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from '../components/Loading';
 import Popup from '../components/Popup';
@@ -8,7 +8,7 @@ import Popup from '../components/Popup';
 
 function Admin(props) {
     const [isOpen, setisOpen] = useState(true);
-    const history = useHistory();
+    // const history = useHistory();
     const togglePopup = () => {
         setisOpen(!isOpen);
     }

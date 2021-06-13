@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment  } from 'react';
+import { useState, useEffect } from 'react';
 import Loading from '../../components/Loading';
 import firebase from '../../util/Firebase';
 import{ confirmAlert} from 'react-confirm-alert';
@@ -8,7 +8,10 @@ import { signout } from '../../util/cognito';
 import { MDBProgress  } from 'mdbreact';
 import 'react-circular-progressbar/dist/styles.css';
 import { GrUserSettings } from 'react-icons/gr';
+import { FiEdit2 } from 'react-icons/fi';
 import Popup from '../../components/Popup';
+import Videos from '../../components/Videos';
+import { FaHandPointRight } from 'react-icons/fa';
 
 
 function ProfileSTATE(props) {
@@ -27,7 +30,88 @@ function ProfileSTATE(props) {
     const [profileWidth, setprofileWidth] = useState('100px');
     const [profileHeight, setprofileHeight] = useState('100px');
     const [profileScale, setprofileScale] = useState(1);
-    const [isOpen, setisOpen] = useState(false);
+    // const [videofile, setvideofile] = useState();
+
+
+    //popups
+    const [isOpen1, setisOpen1] = useState(false);
+    const [isOpen2, setisOpen2] = useState(false);
+    const togglePopup1 = () => {
+        setisOpen1(!isOpen1);
+    }
+    const togglePopup2 = () => { 
+        setisOpen2(!isOpen2);
+    }
+    const content1 = <div style={{textAlign:'left'}}>
+        <div onClick={() => { LOGOUT(); togglePopup1(); }}><FaHandPointRight />Logout</div>
+        <div onClick={() => { togglePopup1(); }}><FaHandPointRight />Report Error</div>
+        <div onClick={() => { removePhoto(); togglePopup1(); }}><FaHandPointRight />Remove Profile Photo</div>
+        <div onClick={() => { togglePopup1(); }}><FaHandPointRight />Delete Accout</div>
+                    </div>;
+    
+    const content2 = <div
+        style={{
+            marginTop: '10px',
+            textAlign: 'center'
+        }}
+    >
+        <b>Edit Profile</b><br/>
+        photo
+        <div style={{
+            display: 'flex',
+            justifyContent: 'center'
+        }}><input
+            type="file"
+            accept="image/*"
+            style={{width:'500px'}}
+            onChange={(e) => {
+                setImageAsFile(e.target.files[0])
+            }}
+            onKeyPress={(e)=>{console.log(e)}}
+            txt="Select"
+        />
+        <button
+            color="primary"
+            style={{width:'200px'}}
+            onClick={upload}
+            disabled={!imageAsFile}
+        >upload
+        </button></div>
+        <div>
+            {
+                (
+                    () => {
+                        if (uploading) {
+                            return (
+                                <MDBProgress value={uploadpercent} className="my-2" >{parseInt(uploadpercent)}%</MDBProgress>
+                            );
+                        }
+                    }
+                )()
+            }
+        </div>
+        <br/>
+        Playname
+        <div style={{
+            display: 'flex',
+            justifyContent: 'center'
+        }}><input
+                type="text"
+                value={playname}
+                style={{ width: '500px', textAlign: 'center' }}
+                onChange={(e) => {
+                    setplayname(e.target.value); 
+                }}
+                onKeyPress={(e) => { console.log(e) }}
+                txt="Select"
+            />
+            <button
+                color="primary"
+                style={{ width: '200px' }}
+                onClick={updatePlayName}
+            >update
+            </button></div>
+    </div>;
     
 
     function profilePhotoViewFunction() {
@@ -50,7 +134,7 @@ function ProfileSTATE(props) {
         width: '100%', 
         borderRadius: '50px', 
         border: '0px solid gray', 
-        boxShadow: '0px 0px 20px gray',
+        boxShadow: '0px 0px 10px gray',
         margin:'10px'
     };
 
@@ -111,6 +195,31 @@ function ProfileSTATE(props) {
             })
     }
 
+    // function uploadTask() {
+        // const uploadref = Storage.ref('videos/'+props.uid+'/'+videofile.name).put(videofile);
+        // uploadref.on('state_changed',
+        // (snapShot)=>{
+        //     console.log((snapShot._delegate.bytesTransferred / snapShot._delegate.totalBytes) * 100);
+        //     }, (err) => {
+        //         console.log(err)
+        //     }, () => {
+        //         setuploading(false);
+        //         confirmAlert({
+        //             title: 'Upload message',
+        //             message: 'success!',
+        //             buttons: [{
+        //                 label: 'continue'
+        //             }]
+        //         })
+        //         Storage.ref('videos/'+props.uid+'/' + videofile.name).getDownloadURL()
+        //             .then(fireBaseUrl => {
+        //                 const videoref = firebase.database().ref('users/' + props.uid +'/videos');
+        //                 videoref.push({url:fireBaseUrl});
+        //                 // ref.child("photo").set(fireBaseUrl);
+        //             })
+        //     })
+    // }
+
 
     function setstates(scale, width) {
         setprofileScale(scale);
@@ -130,9 +239,6 @@ function ProfileSTATE(props) {
         };
     }
 
-    const togglePopup = () =>{
-        setisOpen(!isOpen);
-    }
 
     useEffect(() => {
         if(!fetched){
@@ -154,7 +260,9 @@ function ProfileSTATE(props) {
             getMeta(user.photo);
         }
         return(
-            <div>
+            <div style={{
+                width: '100%',
+                textAlign: 'center'}}>
                 <div
                 style={{
                     width:'100%',
@@ -166,20 +274,13 @@ function ProfileSTATE(props) {
                 >
                     <label>
                         <GrUserSettings 
-                            onClick={togglePopup}
+                            onClick={togglePopup1}
                         />
                     </label>
                 </div>
-                {isOpen && <Popup
-                    content={<>
-                        <ul>
-                            <li onClick={() => { LOGOUT(); togglePopup();}}>Logout</li>
-                            <li onClick={() => { togglePopup(); }}>Report Error</li>
-                            <li onClick={() => { removePhoto(); togglePopup();}}>Remove Profile Photo</li>
-                            <li onClick={() => { togglePopup(); }}>Delete Accout</li>
-                        </ul>
-                    </>}
-                    handleClose={togglePopup}
+                {isOpen1 && <Popup
+                    content={content1}
+                    handleClose={togglePopup1}
                 />}
                 <div
                     style={{
@@ -198,100 +299,27 @@ function ProfileSTATE(props) {
                         borderRadius: !profilePhotoView && '50px'
                     }}
                     />
+                    <br/>
+                    <FiEdit2 onClick={togglePopup2}/>
+                    {
+                        isOpen2 && <Popup
+                        content={content2}
+                        handleClose={togglePopup2}
+                        />
+                    }
+                    <div>
+                        {user.playname}
+                    </div>
                     <div>
                         {user.name}                         
                     </div>
-                    <span>{user.email}</span>
+                    <div>
+                        {user.email}
+                    </div>
                 </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        marginTop: '10px',
-                        marginBottom:'10px',
-                        maxWidth:'400px'
-                    }}
-                >
-                    <span
-                        style={{
-                            width: '100px'
-                        }}
-                    >
-                        Playname : 
-                    </span>
-                    <input
-                     type="text" 
-                     value={playname}
-                     style={{
-                         width:'250px',
-                         height:'25px'
-                     }}
-                     onChange={(e) =>{setplayname(e.target.value);}}
-                    />
-                    <Fragment>
-                        <button
-                            color="primary"
-                            style={{
-                                borderRadius:'0px',
-                                padding:'0.5%',
-                                width:'70px'
-                            }}
-                            onClick={(e) => { updatePlayName();}}
-                            disabled={playname===user.playname}
-                        >update</button>
-                    </Fragment>
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        marginTop: '10px',
-                        maxWidth: '400px'
-                    }}
-                >
-                    <div
-                    style={{
-                        width:'100px'
-                    }}
-                    >
-                        photo:
-                                </div>
-                    <input
-                        type="file"
-                        style={{
-                            width:'250px',
-                            height:'30px'
-                        }}
-                        accept="image/*"
-                        onChange={(e) => {
-                            setImageAsFile(e.target.files[0])
-                        }}
-                    />
-                    <button
-                        style={{
-                            padding: '0.5%',
-                            width:'70px',
-                            borderRadius: '0px'
-                        }}
-                        color="primary"
-                        onClick={upload}
-                        disabled={!imageAsFile}
-                    >upload
-                    </button>
-                </div>
-                <div>
-                    {
-                        (
-                            ()=>{ 
-                                if(uploading){
-                                    return(
-                                        <MDBProgress value={uploadpercent} className="my-2" >{parseInt(uploadpercent)}%</MDBProgress>
-                                    );
-                                }
-                            }
-                        )()
-                    }
-                </div>
+                
+                
+                
                 <div
                  style={{
                      maxWidth:'400px',
@@ -346,7 +374,7 @@ function ProfileSTATE(props) {
                         <div ><span style={{ borderTop: '1px solid gray' }}>points</span></div>
                     </div>
                 </div>
-                
+                <Videos uid={props.uid} />
             </div>
         );
     }else{

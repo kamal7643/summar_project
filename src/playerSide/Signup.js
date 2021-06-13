@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { signup } from '../util/cognito';
+import { signup, socialsignin } from '../util/cognito';
 import { Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
@@ -8,7 +8,7 @@ import '../css/global.css';
 import staticUrls from '../config/urls';
 import Loading from '../components/Loading';
 import { FaGoogle } from 'react-icons/fa';
-import { confirmAlert } from 'react-confirm-alert';
+// import { confirmAlert } from 'react-confirm-alert';
 
 
 function SignUp(props) {
@@ -60,6 +60,7 @@ function SignUp(props) {
     }
 
     function googlelogin(){
+        socialsignin();
         // var provider = new firebase.auth.GoogleAuthProvider();
         // firebase.auth().signUpWithPopup(provider).then(function (result) {
         //     // This gives you a Google Access Token.
@@ -69,13 +70,13 @@ function SignUp(props) {
         //     var user = result.user;
         //     console.log(user);
         // });
-        confirmAlert({
-            title:'sorry',
-            message:'sorry',
-            buttons:[{
-                label:'continue'
-            }]
-        })
+        // confirmAlert({
+        //     title:'sorry',
+        //     message:'sorry',
+        //     buttons:[{
+        //         label:'continue'
+        //     }]
+        // })
     }
 
     const handlesubmit = () => {

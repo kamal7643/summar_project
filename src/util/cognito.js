@@ -13,7 +13,9 @@ export const signup = async (email, password, name, seterror) => {
         NUser.updateProfile({ 
             name: name,
             photoURL:staticUrls.profilephotourl
-        })
+        });
+        NUser.sendEmailVerification();
+        
         const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
             name: name,
@@ -38,8 +40,15 @@ export const signup = async (email, password, name, seterror) => {
 }
 
 
-export const test = async () => {
-    // console.log(defaultprofile);
+export const socialsignin = async () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider)
+    .then((user)=>{
+        console.log(user);
+    })
+    .catch((error)=>{console.log(error);})
 }
 
 export const signin = async (email, password, seterror) => {
