@@ -37,7 +37,7 @@ function Watch(props) {
 
 
     return (
-        <div className={styles.watchclass}>
+        <div style={{ backgroundColor: 'black', color: '#A52A2A' }} className={styles.watchclass}>
             <Header />
             {watching && <div className="embed-responsive embed-responsive-16by9">
                 <iframe title="watch" className="embed-responsive-item" controls={true} src={link} allowFullScreen ></iframe>

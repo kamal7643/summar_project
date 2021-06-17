@@ -127,6 +127,7 @@ function Chat(props) {
                             }}
                             onClick={() => {
                                 setuserToChat(ppl);
+                                localStorage.setItem('userToChat',ppl);
                             }}
                             
                         >

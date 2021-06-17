@@ -11,11 +11,17 @@ function LandingPage(props) {
     const history = useHistory();
     const [ count, setcount ]= useState(0);
 
+    
     useEffect(() => {
         setTimeout(() => {
+            // navigator.geolocation.getCurrentPosition(function (position) {
+            //     console.log("Latitude is :", position.coords.latitude);
+            //     console.log("Longitude is :", position.coords.longitude);
+            // }, function (error){console.log(error)});
             setcount(count+1);
         },100)
     })
+
 
     return <div>
         {
@@ -30,43 +36,56 @@ function LandingPage(props) {
             )()
         }
         <Header/>
-        <div style={{maxWidth: '450px'}}><Slides/></div>
-        <div>
-            <div onClick={() => {history.push('/events')}} style={{display: 'flex', flexDirection: 'column', borderRadius:'20px',paddingLeft:'30px',paddingRight:'30px', height:'100px', maxWidth:'400px',margin:'20px', boxShadow:'0px 0px 10px gray'}}>
-                <span style={{marginTop:'10px'}}>Join events</span>
-                <span style={{textAlign:'right'}}>&#x2192;</span>
+        <div className="text-secondary">
+            <div style={{ maxWidth: '450px' }}><Slides /></div>
+            <div>
+                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px'}}>
+                    <div className="card-body">
+                        <h5 className="card-title">Join events</h5>
+                        <p className="card-text">$cardContent</p>
+                        <span onClick={() => { history.push('/events') }}  className="btn btn-primary">Button</span>
+                    </div>
+                </div>
+                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                    <div className="card-body">
+                        <h5 className="card-title">Make an account</h5>
+                        <p className="card-text">$cardContent</p>
+                        <span onClick={() => { history.push('/signup') }} className="btn btn-primary">Button</span>
+                    </div>
+                </div>
+                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                    <div className="card-body">
+                        <h5 className="card-title">Watch videos</h5>
+                        <p className="card-text">$cardContent</p>
+                        <span onClick={() => { history.push('/watch') }} className="btn btn-primary">Button</span>
+                    </div>
+                </div>
+                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                    <div className="card-body">
+                        <h5 className="card-title">Give suggestion</h5>
+                        <p className="card-text">$cardContent</p>
+                        <span onClick={() => { history.push('/suggestion') }} className="btn btn-primary">Button</span>
+                    </div>
+                </div>
             </div>
-            <div onClick={() => { history.push('/signup') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
-                <span style={{ marginTop: '10px' }}>Make an account</span>
-                <span style={{ textAlign: 'right' }}>&#x2192;</span>
+            <div id="about" style={{padding:'10px'}}>
+                About
+                <br />
+                Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br />
+                Chat with firends.<br />
+                Upload videos.<br />
+                <br />
             </div>
-            <div onClick={() => { history.push('/watch') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
-                <span style={{ marginTop: '10px' }}>Watch videos</span>
-                <span style={{ textAlign: 'right' }}>&#x2192;</span>
-            </div>
-            <div onClick={() => { history.push('/suggestion') }} style={{ display: 'flex', flexDirection: 'column', borderRadius: '20px', paddingLeft: '30px', paddingRight: '30px', height: '100px', maxWidth: '400px', margin: '20px', boxShadow: '0px 0px 10px gray' }}>
-                <span style={{ marginTop: '10px' }}>Give suggestion</span>
-                <span style={{ textAlign: 'right' }}>&#x2192;</span>
-            </div>
-        </div>
-
-        <div id="about">
-            About
-            <br/>
-            Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br/>
-            Chat with firends.<br/>
-            Upload videos.<br/>
-            <br/>
-        </div>
-        <div id="rules">Rules</div>
-        <ul>
-            <li>No Hats Allowed</li>
-            <li>No Fraternizing With The Enemy</li>
-            <li>Always On Time</li>
-            <li>Away From The Information Super Highway</li>
-            <li>Obey The Rules Or Else</li>
-            <li>One For All And All For One</li>
-        </ul>
+            <div id="rules" style={{padding:'10px'}}>Rules</div>
+            <ul>
+                <li>No Hats Allowed</li>
+                <li>No Fraternizing With The Enemy</li>
+                <li>Always On Time</li>
+                <li>Away From The Information Super Highway</li>
+                <li>Obey The Rules Or Else</li>
+                <li>One For All And All For One</li>
+            </ul>
+        </div>        
         <Footer/>
     </div>
 }

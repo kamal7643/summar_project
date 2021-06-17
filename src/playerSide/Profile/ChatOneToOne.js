@@ -11,6 +11,7 @@ function ChatOneToOne(props) {
     useEffect(() => {
         if (once) {
             const ref = firebase.database().ref('message-hash/' + props.firstperson + '/' + props.secondperson + '/messages');
+            //.limitToLast(10)
             ref.orderByKey().limitToLast(10).on('value', (value) => {
                 var templist = [];
                 value.forEach((snap) => {
@@ -20,7 +21,6 @@ function ChatOneToOne(props) {
             })
             setonce(false);
         }
-
 
 
     }, [ids, once, props])

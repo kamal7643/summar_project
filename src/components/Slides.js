@@ -16,7 +16,8 @@ function Slides(props) {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src={img1}
+                    src={img1}
+                    height="250px"
                 alt=""
                 />
                 <Carousel.Caption>
@@ -27,6 +28,7 @@ function Slides(props) {
                 <img
                     className="d-block w-100"
                     src={img2}
+                    height="250px"
                     alt=""
                 />
                 <Carousel.Caption>
@@ -37,6 +39,7 @@ function Slides(props) {
                 <img
                     className="d-block w-100"
                     src={img3}
+                    height="250px"
                     alt=""
                 />
                 <Carousel.Caption>

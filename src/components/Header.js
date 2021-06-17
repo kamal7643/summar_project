@@ -2,25 +2,26 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useHistory} from 'react-router-dom';
+import photo from '../images/icon.ico';
 
 
 function Header(props) {
     const history = useHistory();
-    const sst = { 
-        marginRight:'100px',
-    };
+    
+
     return(
-        <Navbar expand="lg" style={{ boxShadow:'0px 0px 10px gray' }} >
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ boxShadow:'0px 0px 10px gray' }} >
+            <Navbar.Brand style={{ marginRight: '100px' }} onClick={() => { history.push('/') }}><img style={{ width: '40px', height: '40px', borderRadius:'50px'}} src={photo} alt="logo"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <label style={sst} onClick={() => { history.push("/") }}>Home</label>
-                    <label style={sst} onClick={() => { history.push("/ranks") }}>Ranks</label>
-                    <label style={sst} onClick={() => { history.push("/events") }}>Events</label>
-                    <label style={sst} onClick={() => { history.push("/login") }}>Login</label>
-                    <label style={sst} onClick={() => { history.push("/#about") }}>About</label>
-                    <label style={sst} onClick={() => { history.push("/suggestion") }}>Suggestion</label>
-                    <label style={sst} onClick={() => { history.push("/admin") }}>Admin</label>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/") }} >Home</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/ranks") }}>Ranks</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/events") }}>Events</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/login") }}>Login</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/#about") }}>About</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/suggestion") }}>Suggestion</Nav.Link>
+                    <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/admin") }}>Admin</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Navbar>

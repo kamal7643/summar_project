@@ -1,7 +1,7 @@
 import React from 'react';
 import AddPlaylist from './AddPlaylist';
 import AddVideo from './AddVideo';
-import Playlist from './Playlist';
+import Playlists from './Playlists';
 import Individualvideos from './Individualvideos';
 
 
@@ -20,7 +20,7 @@ function Videos(props){
         <br/>
         <AddVideo uid={props.uid}/>
         <br/>
-        <Playlist uid={props.uid} />
+        <Playlists uid={props.uid} />
         <br/>
         <Individualvideos uid={props.uid}/>
         </div>

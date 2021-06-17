@@ -39,6 +39,7 @@ function Friend(props) {
                                     }
                                     if(props.functioncall){
                                         props.functioncall(user);
+                                        localStorage.setItem('userToChat', user);
                                     }
                                 } } >
                                     <div style={{ width: '50%' }}><img alt="profile" src={url} onClick={() => { history.push({ pathname: 'profilewall', search: 'userid=' + props.uid }) }} style={{width:'30px', height:'30px', marginTop:'5px', borderRadius:'50px'}}/></div>

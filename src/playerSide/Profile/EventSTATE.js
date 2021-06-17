@@ -24,7 +24,8 @@ function EventSTATE(props) {
                             eventid: event.eventid,
                             password: event.password,
                             uid: event.uid,
-                            open: event.open
+                            open: event.open,
+                            game:event.game
                         });
                     })
                 })
@@ -48,6 +49,7 @@ function EventSTATE(props) {
                         key={i}
                         uid={event.uid}
                         open={event.open}
+                        game={event.game}
                     />
                 )
             }

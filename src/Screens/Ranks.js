@@ -68,8 +68,7 @@ function Ranks(props) {
                                                             <tr key={i}>
                                                                 <td onClick={() =>{history.push({
                                                                     pathname:'/profileWall',
-                                                                    search:'userid='+player.uid,
-                                                                    data: player
+                                                                    search:'userid='+player.uid
                                                                 })
                                                                 }} style={{ textDecoration: 'underline', color:'green' }}>{player.playname}</td>
                                                                 <td>{player.points}</td>
