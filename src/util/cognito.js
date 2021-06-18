@@ -40,15 +40,24 @@ export const signup = async (email, password, name, seterror) => {
 }
 
 
-export const socialsignin = async () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    firebase.auth().signInWithPopup(provider)
-    .then((user)=>{
-        console.log(user);
-    })
-    .catch((error)=>{console.log(error);})
+export const socialsignin = async (e) => {console.log(e);
+    var user;
+    var provider;
+    if(e==='google'){
+        provider = new firebase.auth.GoogleAuthProvider();
+        
+    }else if(e==='twitter'){
+        provider = new firebase.auth.TwitterAuthProvider();
+    }    
+    else if(e==='facebook'){
+        provider = new firebase.auth.FacebookAuthProvider();
+    }
+    try {
+        const nuser = firebase.auth().signInWithPopup(provider);
+        user = (await nuser).user;
+    } catch (e) { console.log(e) }
+    return user;
+    
 }
 
 export const signin = async (email, password, seterror) => {

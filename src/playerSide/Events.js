@@ -8,6 +8,7 @@ function Events(props) {
     const [fetched, setfetched] = useState(false);
     const [loading, setloading] = useState(true);
     const [events, setevents] = useState([]);
+    const [search, setSearch] = useState('');
 
 
     useEffect(() => {
@@ -40,9 +41,19 @@ function Events(props) {
                             return (<Loading />);
                         } else {
                             return (<div>
+                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row'}}>
+                                    <input type="search" placeholder="Search" value={search} onChange={(e)=>{setSearch(e.target.value)}} style={{ width:'100%', margin:'20px', padding:'20px' }}/>
+                                </div>
                                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                     {
-                                        events.sort((a, b) => b.id - a.id).map((event, i) =>
+                                        events.filter(e=>{
+                                            return(
+                                                (e.game && e.game.toLowerCase().includes(search.toLowerCase())) ||
+                                                (e.type && e.type.toLowerCase().includes(search.toLowerCase())) || 
+                                                (e.time && e.time.toLowerCase().includes(search.toLowerCase())) || 
+                                                (e.date && e.date.toLowerCase().includes(search.toLowerCase()))
+                                                )
+                                        }).sort((a, b) => b.id - a.id).map((event, i) =>
                                             <OneEvent
                                                 style={{ display: 'inline' }}
                                                 game={event.game}

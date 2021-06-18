@@ -7,6 +7,10 @@ function ShowChat(props){
     const [message, setmessage] = useState([]);
     const ref = firebase.database().ref('messages/'+props.data.messageid);
     useEffect(()=>{
+        if (message.content === localStorage.getItem('lastmsg')){
+            localStorage.removeItem('lastmsg');
+            window.scrollTo(0, document.body.scrollHeight);
+        }
         setTimeout(()=>{
             ref.on('value',(value)=>{
                 setmessage(value.val());

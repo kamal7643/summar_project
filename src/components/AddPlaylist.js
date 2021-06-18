@@ -44,7 +44,7 @@ function AddPlaylist(props) {
             })
             setonce(false);
         }
-    })
+    }, [once, ref])
 
 
     return (

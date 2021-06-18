@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import { signin, getcurruser } from '../util/cognito';
+import { signin, getcurruser, socialsignin } from '../util/cognito';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useHistory } from 'react-router-dom';
-import { FaFacebookF } from 'react-icons/fa';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { FiTwitter } from 'react-icons/fi';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Login(props) {
@@ -12,21 +14,16 @@ function Login(props) {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [err, seterr] = useState();
-    const [once, setonce] = useState(false);
     const [cursor, setcursor] = useState("default");
     const history = useHistory();
 
-
-    async function current() {
-
+    async function handleSocialSignIn(e){
+        socialsignin(e).then((response)=>{
+            if (response) {
+                history.push("/profile?id=" + response.uid + "&state=profile");
+            }
+        })
     }
-
-    if (!once) {
-        current();
-        setonce(true);
-    }
-
-
 
     async function handlesubmit(e) {
         setcursor("wait");
@@ -61,7 +58,7 @@ function Login(props) {
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div className="card bg-dark text-white" style={{borderRadius:'1rem'}}>
+                        <div className="card bg-primary text-white" style={{borderRadius:'1rem'}}>
                             <div className="card-body p-5 text-center">
 
                                 <div className="mb-md-5 mt-md-4 pb-5">
@@ -71,28 +68,26 @@ function Login(props) {
 
                                     <div className="form-outline form-white mb-4">
                                         <input type="email" className="form-control form-control-lg" value={email} onChange={(e) => { setemail(e.target.value)}} placeholder="Email Address"/>
-                                        <label className="form-label" htmlFor="typeEmailX">Email</label>
                                     </div>
 
                                     <div className="form-outline form-white mb-4">
                                         <input type="password" className="form-control form-control-lg" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password"/>
-                                        <label className="form-label" htmlFor="typePasswordX">Password</label>
                                     </div>
 
-                                    <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
+                                    <p className="small mb-5 pb-lg-2"><span className="text-white-50">Forgot password?</span></p>
 
-                                    <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                                    <button className="btn btn-outline-light btn-lg px-5" type="submit" onClick={handlesubmit}>Login</button>
 
                                     <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                                        <label className="text-white"><i className="fab fa-facebook-f fa-lg"><FaFacebookF/></i></label>
-                                        <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2">login with twitter</i></a>
-                                        <a href="#!" className="text-white"><i className="fab fa-google fa-lg">login with google</i></a>
+                                        <span className="text-white"><i className="fab fa-facebook-f fa-lg" onClick={() => { handleSocialSignIn('facebook') }}><FaFacebookF /></i></span>
+                                        <span className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2" onClick={() => { handleSocialSignIn('twitter') }}><FiTwitter/></i></span>
+                                        <span className="text-white"><i className="fab fa-google fa-lg" onClick={()=>{handleSocialSignIn('google')}}><FaGoogle/></i></span>
                                     </div>
 
                                 </div>
 
                                 <div>
-                                    <p className="mb-0">Don't have an account? <a href="/signup" className="text-white-50 fw-bold">Sign Up</a></p>
+                                    <p className="mb-0">Don't have an account? <span className="text-white-50 fw-bold" onClick={()=>{history.push('/signup')}}>Sign Up</span></p>
                                 </div>
 
                             </div>

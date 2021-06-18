@@ -38,29 +38,29 @@ function LandingPage(props) {
         <Header/>
         <div className="text-secondary">
             <div style={{ maxWidth: '450px' }}><Slides /></div>
-            <div>
-                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px'}}>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div className="card w-50" style={{ maxWidth: '200px', margin: '5px' }}>
                     <div className="card-body">
                         <h5 className="card-title">Join events</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/events') }}  className="btn btn-primary">Button</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                <div className="card w-50" style={{ maxWidth: '200px', margin: '5px' }}>
                     <div className="card-body">
                         <h5 className="card-title">Make an account</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/signup') }} className="btn btn-primary">Button</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                <div className="card w-50" style={{ maxWidth: '200px', margin: '5px' }}>
                     <div className="card-body">
                         <h5 className="card-title">Watch videos</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/watch') }} className="btn btn-primary">Button</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '400px', margin: '20px' }}>
+                <div className="card w-50" style={{ maxWidth: '200px', margin: '5px' }}>
                     <div className="card-body">
                         <h5 className="card-title">Give suggestion</h5>
                         <p className="card-text">$cardContent</p>

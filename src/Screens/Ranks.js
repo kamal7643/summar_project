@@ -7,7 +7,6 @@ import firebase from '../util/Firebase';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
-
 function Ranks(props) {
 
     const history = useHistory();
@@ -16,8 +15,10 @@ function Ranks(props) {
     const [error, seterror] = useState(null);
     const [one, setone] = useState(false);
     const ref = firebase.database().ref('users');
+    const [searchField, setSearchField] = useState('a');
     
 
+    
     function once(){    
         ref.once('value', (snapshot) => {
             var ppls = [];
@@ -36,7 +37,6 @@ function Ranks(props) {
 
 
     useEffect(() => {
-        
         if (error) {
             NotificationManager.error("ERROR", error, 3000);
             seterror("");
@@ -50,6 +50,10 @@ function Ranks(props) {
                 ()=>{
                     if(loading){
                         return<div>
+                            <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
+                                <input type="search" placeholder="Search" value={searchField} onChange={(e)=>{setSearchField(e.target.value)}} style={{width: '100%', margin:'20px', border:'0 px solid gray', padding:'20px'}}/>
+                                
+                            </div>
                             <MDBTable hover variant="primary" size="sm" responsive>
                                 <MDBTableHead>
                                     <tr>
@@ -62,7 +66,16 @@ function Ranks(props) {
                                 </MDBTableHead>
                                 <MDBTableBody>
                                         {
-                                                players.sort((a,b)=>b.points-a.points).map((player, i) => {
+                                        players.filter(
+                                            person => {
+                                                return (
+                                                    person
+                                                        .playname
+                                                        .toLowerCase()
+                                                        .includes(searchField.toLowerCase()) 
+                                                );
+                                            }
+                                        ).sort((a,b)=>b.points-a.points).map((player, i) => {
                                                     if(i<100){
                                                         return(
                                                             <tr key={i}>

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { signup, socialsignin } from '../util/cognito';
-import { Form } from 'react-bootstrap';
+import { signup } from '../util/cognito';
 import Header from '../components/Header';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useHistory } from 'react-router-dom';
 import '../css/global.css';
 import staticUrls from '../config/urls';
 import Loading from '../components/Loading';
-import { FaGoogle } from 'react-icons/fa';
-// import { confirmAlert } from 'react-confirm-alert';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function SignUp(props) {
@@ -20,8 +18,6 @@ function SignUp(props) {
     const [confirmpassword, setconfirmpassword] = useState("");
     const history = useHistory();
     const [loading, setloading] = useState(false);
-    const [type, settype] = useState("password");
-    const [checked, setchecked] = useState(false);
 
 
     async function validate() {
@@ -59,25 +55,6 @@ function SignUp(props) {
         return true;
     }
 
-    function googlelogin(){
-        socialsignin();
-        // var provider = new firebase.auth.GoogleAuthProvider();
-        // firebase.auth().signUpWithPopup(provider).then(function (result) {
-        //     // This gives you a Google Access Token.
-        //     var token = result.credential.accessToken;
-        //     console.log(token);
-        //     // The signed-in user info.
-        //     var user = result.user;
-        //     console.log(user);
-        // });
-        // confirmAlert({
-        //     title:'sorry',
-        //     message:'sorry',
-        //     buttons:[{
-        //         label:'continue'
-        //     }]
-        // })
-    }
 
     const handlesubmit = () => {
         setloading(true);
@@ -111,47 +88,51 @@ function SignUp(props) {
                         if (loading) {
                             return <div><Loading /></div>
                         } else {
-                            return <div style={{ margin:'10%' }}>
-                                <Form style={{ width: '80%', maxWidth: "400px", minWidth: "300px", padding: '3%', border: '2px', borderRadius: '5px', boxShadow: '0px 0px 15px black' }}>
-                                        <Form.Group>
-                                            <Form.Label>Name</Form.Label>
-                                            <Form.Control type="test" value={name} onChange={(e) => { setname(e.target.value) }} placeholder="name" required />
-                                        </Form.Group>
-                                        <Form.Group>
-                                            <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email" />
-                                        </Form.Group>
-                                        <Form.Group>
-                                            <Form.Label>Password</Form.Label>
-                                            <Form.Control type={type} value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="Password" />
-                                        </Form.Group>
-                                        <Form.Group>
-                                            <Form.Label>Confirm Password</Form.Label>
-                                            <Form.Control type="password" value={confirmpassword} onChange={(e) => { setconfirmpassword(e.target.value) }} placeholder="Confirm Password" />
-                                        </Form.Group>
-                                        <Form.Group>
-                                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                <Form.Control style={{ width: "20px", height: "20px" }} type="checkbox" checked={checked} onChange={
-                                                    (e) => {
-                                                        setchecked(e.currentTarget.checked);
-                                                        if (type === "password") {
-                                                            settype("text");
-                                                        } else {
-                                                            settype("password");
-                                                        }
-                                                    }} />
-                                                <div>Show Password</div>
+                            return <div style={{ margin: '10%' }}>
+                                <section className="vh-100 gradient-custom">
+                                    <div className="container py-5 h-100">
+                                        <div className="row d-flex justify-content-center align-items-center h-100">
+                                            <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                                                <div className="card bg-primary text-white" style={{ borderRadius: '1rem' }}>
+                                                    <div className="card-body p-5 text-center">
+
+                                                        <div className="mb-md-5 mt-md-4 pb-5">
+
+                                                            <h2 className="fw-bold mb-2 text-uppercase">Sign up</h2>
+                                                            <p className="text-white-50 mb-5">Please enter your correct Information!</p>
+
+                                                            <div className="form-outline form-white mb-4">
+                                                                <input type="email" className="form-control form-control-lg" value={name} onChange={(e) => { setname(e.target.value) }} placeholder="Name" />
+                                                            </div>
+
+                                                            <div className="form-outline form-white mb-4">
+                                                                <input type="email" className="form-control form-control-lg" value={email} onChange={(e) => { setemail(e.target.value) }} placeholder="Email Address" />
+                                                            </div>
+
+                                                            <div className="form-outline form-white mb-4">
+                                                                <input type="password" className="form-control form-control-lg" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password" ></input>
+                                                            </div>
+
+                                                            <div className="form-outline form-white mb-4">
+                                                                <input type="password" className="form-control form-control-lg" value={confirmpassword} onChange={(e) => { setconfirmpassword(e.target.value) }} placeholder="confimr password" />
+                                                            </div>
+
+
+                                                            <button className="btn btn-outline-light btn-lg px-5" type="submit" onClick={handlesubmit}>Sign up</button>
+
+                                                        </div>
+
+                                                        <div>
+                                                            <p className="mb-0">Already have an account? <span className="text-white-50 fw-bold" onClick={() => { history.push('/login') }}>Log in</span></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </Form.Group>
-                                        <Form.Group style={{ textAlign: 'center' }}>
-                                            <div style={{display: 'flex', flexDirection: 'row' }}>
-                                                <span style={{width: '100%' }} onClick={handlesubmit}>Sign-up</span>
-                                                <span style={{ width: '100%' }} onClick={() => { history.push("/login") }}>Log-in</span>
-                                                <FaGoogle style={{ width: '100%', marginTop:'10px' }} onClick={googlelogin} />
-                                            </div>
-                                        </Form.Group>
-                                    </Form>
-                                </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
                         }
                     }
                 )()

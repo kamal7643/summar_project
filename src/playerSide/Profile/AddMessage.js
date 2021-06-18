@@ -31,7 +31,7 @@ function AddMessage(props){
             window.scrollTo(0, document.body.scrollHeight);
             setonce(false);
         }
-    })
+    },[once])
 
     return(<div
         style={{

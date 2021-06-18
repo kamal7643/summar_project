@@ -8,11 +8,10 @@
 }
 
 .card:hover{
-    box-shadow: 0px 0px 10px gray;
+    box-shadow: 0px 0px 10px rgb(40, 42, 43);
 }
 
 .tr{
     margin:'20px';
     padding:'20px';
-
 }
