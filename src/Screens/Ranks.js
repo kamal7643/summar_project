@@ -15,7 +15,7 @@ function Ranks(props) {
     const [error, seterror] = useState(null);
     const [one, setone] = useState(false);
     const ref = firebase.database().ref('users');
-    const [searchField, setSearchField] = useState('a');
+    const [searchField, setSearchField] = useState('');
     
 
     

@@ -9,20 +9,22 @@ function AddMessage(props){
 
     function Add(){
         if (content !== '') {
-            // if(content.indexOf(' ')===-1){
-            //     var i = 0;
-            //     while(i<content.length){
-            //         i=i+25;
-            //         setcontent(content.slice(0, i)+' '+content.slice(i));
-            //     }
-            // }
+            const data ={ content: { text: content, photourl: "", fileurl: "" }, time: Date().toString().substr(16, 5), date: Date().toString().substr(4, 11), type: 'out', from: props.from, to: props.to };
+            const data1 ={ content: { text: content, photourl: "", fileurl: "" }, time: Date().toString().substr(16, 5), date: Date().toString().substr(4, 11), type: 'in', from: props.to, to: props.from };
+            if(content.indexOf(' ')===-1){
+                var i = 0;
+                while(i<content.length){
+                    i=i+25;
+                    setcontent(content.slice(0, i)+' '+content.slice(i));
+                }
+            }
             localStorage.setItem('lastmsg', content);
-            setcontent('');
-            const msgsref = firebase.database().ref('messages');
-            var key = msgsref.push({ content: content, from:props.from }).key;
+            window.scrollTo(0, document.body.scrollHeight);
             const msghashref = firebase.database().ref('message-hash');
-            msghashref.child(props.from).child(props.to).child("messages").push({ messageid: key, type: 'out' });
-            msghashref.child(props.to).child(props.from).child("messages").push({ messageid: key, type: 'in' });
+            msghashref.child(props.from).child(props.to).child("messages").push(data);
+            msghashref.child(props.to).child(props.from).child("messages").push(data1);
+            setcontent('');
+            window.scrollTo(0, document.body.scrollHeight);
         }
     }
 
