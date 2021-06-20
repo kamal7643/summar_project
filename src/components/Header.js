@@ -2,7 +2,6 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useHistory} from 'react-router-dom';
-import photo from '../images/icon.ico';
 
 
 function Header(props) {
@@ -11,8 +10,8 @@ function Header(props) {
 
     return(
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ boxShadow:'0px 0px 10px gray' }} >
-            <Navbar.Brand style={{ marginRight: '100px' }} onClick={() => { history.push('/') }}><img style={{ width: '40px', height: '40px', borderRadius:'50px'}} src={photo} alt="logo"/></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+            {//<Navbar.Brand style={{ marginRight: '100px' }} onClick={() => { history.push('/') }}><img style={{ width: '40px', height: '40px', borderRadius:'50px'}} src={photo} alt="logo"/></Navbar.Brand>
+            }<Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link style={{ marginRight: '100px' }} onClick={() => { history.push("/") }} >Home</Nav.Link>

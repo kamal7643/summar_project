@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import { signin, getcurruser, socialsignin } from '../util/cognito';
+import { signin, getcurruser, socialsignin, passwordReset } from '../util/cognito';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useHistory } from 'react-router-dom';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
@@ -13,7 +13,8 @@ function Login(props) {
 
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
-    const [err, seterr] = useState();
+    const [err, seterr] = useState('');
+    const [success, setsuccess] = useState('');
     const [cursor, setcursor] = useState("default");
     const history = useHistory();
 
@@ -21,6 +22,16 @@ function Login(props) {
         socialsignin(e).then((response)=>{
             if (response) {
                 history.push("/profile?id=" + response.uid + "&state=profile");
+            }
+        })
+    }
+
+    async function resetPassword(e){
+        passwordReset(email, setsuccess).then((msg)=>{
+            console.log(msg);
+            if (msg ==='success')NotificationManager.success('', "A mail sent to your email address", 3000);
+            else{
+                NotificationManager.error('','Something went wrong',3000);
             }
         })
     }
@@ -74,7 +85,7 @@ function Login(props) {
                                         <input type="password" className="form-control form-control-lg" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password"/>
                                     </div>
 
-                                    <p className="small mb-5 pb-lg-2"><span className="text-white-50">Forgot password?</span></p>
+                                    <p className="small mb-5 pb-lg-2"><span className="text-white-50" onClick={resetPassword}>Forgot password?</span></p>
 
                                     <button className="btn btn-outline-light btn-lg px-5" type="submit" onClick={handlesubmit}>Login</button>
 

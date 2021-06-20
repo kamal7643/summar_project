@@ -35,7 +35,7 @@ function Ranks(props) {
         setone(true);
     }
 
-
+    
     useEffect(() => {
         if (error) {
             NotificationManager.error("ERROR", error, 3000);
@@ -50,8 +50,9 @@ function Ranks(props) {
                 ()=>{
                     if(loading){
                         return<div>
-                            <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
-                                <input type="search" placeholder="Search" value={searchField} onChange={(e)=>{setSearchField(e.target.value)}} style={{width: '100%', margin:'20px', border:'0 px solid gray', padding:'20px'}}/>
+                        
+                            <div className={styles.searchbox}>
+                                <input className={styles.searchboxinput} type="search" placeholder="Search..." value={searchField} onChange={(e)=>{setSearchField(e.target.value)}}/>
                                 
                             </div>
                             <MDBTable hover variant="primary" size="sm" responsive>
@@ -83,7 +84,7 @@ function Ranks(props) {
                                                                     pathname:'/profileWall',
                                                                     search:'userid='+player.uid
                                                                 })
-                                                                }} style={{ textDecoration: 'underline', color:'green' }}>{player.playname}</td>
+                                                                }} className={styles.playnamebox}>{player.playname}</td>
                                                                 <td>{player.points}</td>
                                                                 <td>{player.win}</td>
                                                                 <td>{player.kills}</td>

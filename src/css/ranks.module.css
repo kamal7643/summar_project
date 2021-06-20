@@ -1,3 +1,31 @@
 .loading{
     margin:45%;
 }
+
+
+.searchbox{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+}
+
+.searchboxinput{
+    width:100%;
+    margin:20px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.searchboxinput:active{
+    border: 0px solid gray;
+    color: green;
+}
+.searchboxinput:focus{
+    border: 0px solid gray;
+    color: green;
+}
+
+.playnamebox{
+    text-align: center;
+    color:green;
+}

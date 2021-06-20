@@ -93,3 +93,8 @@ export const signout = async () => {
     } catch (e) { console.log(e.message); }
     return user;
 }
+
+
+export const passwordReset = async (email, setsuccess) => {
+      (await firebase.auth().sendPasswordResetEmail(email)).then((event)=>{console.log('here')}).catch((error)=>{console.log(error)})
+}      

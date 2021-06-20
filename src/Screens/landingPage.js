@@ -1,25 +1,26 @@
-import React,{ useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Slides from '../components/Slides';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { MDBProgress } from 'mdbreact';
+import style from '../css/landingpage.module.css';
 
 
 function LandingPage(props) {
     const history = useHistory();
-    const [ count, setcount ]= useState(0);
+    const [count, setcount] = useState(0);
 
-    
+
     useEffect(() => {
         setTimeout(() => {
             // navigator.geolocation.getCurrentPosition(function (position) {
             //     console.log("Latitude is :", position.coords.latitude);
             //     console.log("Longitude is :", position.coords.longitude);
             // }, function (error){console.log(error)});
-            setcount(count+1);
-        },100)
+            setcount(count + 1);
+        }, 100)
     })
 
 
@@ -29,38 +30,38 @@ function LandingPage(props) {
                 () => {
                     if (count < 10) {
                         return (
-                            <MDBProgress className="my-2" material value={count*10} color="info" />
+                            <MDBProgress className="my-2" material value={count * 10} color="info" />
                         );
                     }
                 }
             )()
         }
-        <Header/>
+        <Header />
         <div className="text-secondary">
-            <div style={{ maxWidth: '450px' }}><Slides /></div>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div className="card w-50" style={{ maxWidth: '300px', margin: '10px' }}>
+            <div><Slides /></div>
+            <div className={style.groupcards}>
+                <div className={style.landingpagegotocards}>
                     <div className="card-body">
                         <h5 className="card-title">Join events</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/events') }} className="btn btn-primary">Click</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '300px', margin: '10px' }}>
+                <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Make an account</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/signup') }} className="btn btn-primary">Click</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '300px', margin: '10px' }}>
+                <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Watch videos</h5>
                         <p className="card-text">$cardContent</p>
                         <span onClick={() => { history.push('/watch') }} className="btn btn-primary">Click</span>
                     </div>
                 </div>
-                <div className="card w-50" style={{ maxWidth: '300px', margin: '10px' }}>
+                <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Give suggestion</h5>
                         <p className="card-text">$cardContent</p>
@@ -68,7 +69,7 @@ function LandingPage(props) {
                     </div>
                 </div>
             </div>
-            <div id="about" style={{padding:'10px'}}>
+            <div id="about" className={style.instuctionbox}>
                 About
                 <br />
                 Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br />
@@ -76,7 +77,7 @@ function LandingPage(props) {
                 Upload videos.<br />
                 <br />
             </div>
-            <div id="rules" style={{padding:'10px'}}>Rules</div>
+            <div id="rules" className={style.instuctionbox}>Rules</div>
             <ul>
                 <li>No Hats Allowed</li>
                 <li>No Fraternizing With The Enemy</li>
@@ -85,8 +86,8 @@ function LandingPage(props) {
                 <li>Obey The Rules Or Else</li>
                 <li>One For All And All For One</li>
             </ul>
-        </div>        
-        <Footer/>
+        </div>
+        <Footer />
     </div>
 }
 

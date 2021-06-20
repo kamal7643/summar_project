@@ -1,0 +1,15 @@
+.landingpagegotocards{
+    border:1px solid #ccc;
+    width:100%;
+    max-width: 430px;
+    margin:10px;
+}
+
+.instuctionbox{
+    padding: 10px;
+}
+
+.groupcards{
+    display:flex;
+    flex-wrap: wrap;
+}
