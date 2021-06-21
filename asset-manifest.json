@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fb61d9ad.chunk.css",
+    "main.js": "/static/js/main.63788497.chunk.js",
+    "main.js.map": "/static/js/main.63788497.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8ed2b900.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8ed2b900.js.map",
+    "static/css/2.c0798be4.chunk.css": "/static/css/2.c0798be4.chunk.css",
+    "static/js/2.6f4f67a9.chunk.js": "/static/js/2.6f4f67a9.chunk.js",
+    "static/js/2.6f4f67a9.chunk.js.map": "/static/js/2.6f4f67a9.chunk.js.map",
+    "static/js/3.5ff69965.chunk.js": "/static/js/3.5ff69965.chunk.js",
+    "static/js/3.5ff69965.chunk.js.map": "/static/js/3.5ff69965.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.c0798be4.chunk.css.map": "/static/css/2.c0798be4.chunk.css.map",
+    "static/css/main.fb61d9ad.chunk.css.map": "/static/css/main.fb61d9ad.chunk.css.map",
+    "static/js/2.6f4f67a9.chunk.js.LICENSE.txt": "/static/js/2.6f4f67a9.chunk.js.LICENSE.txt",
+    "static/media/Delete-Button.e2091054.png": "/static/media/Delete-Button.e2091054.png",
+    "static/media/notifications.css": "/static/media/notification.c5d9251e.ttf",
+    "static/media/pen.51bb6b37.png": "/static/media/pen.51bb6b37.png",
+    "static/media/refreshicon.5db667fc.png": "/static/media/refreshicon.5db667fc.png",
+    "static/media/slides01.bbd73425.jpg": "/static/media/slides01.bbd73425.jpg",
+    "static/media/slides02.7e0ab268.jpg": "/static/media/slides02.7e0ab268.jpg",
+    "static/media/slides03.6eec61ad.jpg": "/static/media/slides03.6eec61ad.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8ed2b900.js",
+    "static/css/2.c0798be4.chunk.css",
+    "static/js/2.6f4f67a9.chunk.js",
+    "static/css/main.fb61d9ad.chunk.css",
+    "static/js/main.63788497.chunk.js"
+  ]
+}
