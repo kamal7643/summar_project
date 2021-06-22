@@ -6,7 +6,15 @@ import { BiArrowBack } from "react-icons/bi";
 function AddMessage(props){
     const [content, setcontent] = useState('');
     const [once, setonce] = useState(true);
+    const [dateToBeUpdated, setDateToBeUpdated] = useState(false);
 
+
+    function updateDate(){
+        const lastupdatetimeref1 = firebase.database().ref('message-hash/' + props.from + '/' + props.to + '/time');
+        lastupdatetimeref1.set({ time: Date() })
+        const lastupdatetimeref2 = firebase.database().ref('message-hash/' + props.to + '/' + props.from + '/time');
+        lastupdatetimeref2.set({ time: Date() })
+    }
     function Add(){
         if (content !== '') {
             const data ={ content: { text: content, photourl: "", fileurl: "" }, time: Date().toString().substr(16, 5), date: Date().toString().substr(4, 11), type: 'out', from: props.from, to: props.to };
@@ -18,13 +26,11 @@ function AddMessage(props){
                     setcontent(content.slice(0, i)+' '+content.slice(i));
                 }
             }
-            localStorage.setItem('lastmsg', content);
-            window.scrollTo(0, document.body.scrollHeight);
             const msghashref = firebase.database().ref('message-hash');
             msghashref.child(props.from).child(props.to).child("messages").push(data);
             msghashref.child(props.to).child(props.from).child("messages").push(data1);
             setcontent('');
-            window.scrollTo(0, document.body.scrollHeight);
+            setDateToBeUpdated(true);
         }
     }
 

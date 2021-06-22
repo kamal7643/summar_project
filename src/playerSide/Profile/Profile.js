@@ -16,6 +16,7 @@ function Profile(props) {
     const STATE = new URLSearchParams(props.location.search).get('state');
     getcurruser().then((user) => {
         if (user) {
+            localStorage.setItem('user',JSON.stringify(user));
             if (user.uid !== ID) { history.push('/404'); }
         }
     })
@@ -126,6 +127,7 @@ function Profile(props) {
                     }
                 )()
             }
+            
             <div style={{height:'50px'}}></div>
         </div>
     );

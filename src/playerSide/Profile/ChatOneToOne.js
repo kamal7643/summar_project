@@ -22,23 +22,18 @@ function ChatOneToOne(props) {
         
         if (once) {
             const ref = firebase.database().ref('message-hash/' + props.firstperson + '/' + props.secondperson + '/messages');
-            //.limitToLast(10)
-            ref.on('value',value=>{
-                // setmaxlimit(ref.numChildren());
-                setTimeout(()=>{
-                    window.scrollTo(0, document.body.scrollHeight);
-                },1000);
-            })
             ref.orderByKey().on('value', (value) => {
                 var templist = [];
-                setmaxlimit(value.numChildren());
                 value.forEach((snap) => {
                     templist.push(snap.val());
-                    if(snap.val().content.text===localStorage.getItem('lastmsg')){
-                        localStorage.removeItem('lastmsg');
-                    }
                 })
                 setmessages(templist);
+            })
+            ref.on('value', value => {
+                setmaxlimit(value.numChildren());
+                setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }, 1000);
             })
             setonce(false);
         }

@@ -8,6 +8,7 @@ function Events(props) {
     const [fetched, setfetched] = useState(false);
     const [loading, setloading] = useState(true);
     const [events, setevents] = useState([]);
+    
     const [search, setSearch] = useState('');
 
 

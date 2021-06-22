@@ -123,11 +123,10 @@ function Chat(props) {
                             style={{
                                 width: '100%',
                                 borderRadius: '10px',
-                                border: '1px solid gray'
+                                border: '1px solid gray', display: 'flex', flexDirection: 'row'
                             }}
                             onClick={() => {
                                 setuserToChat(ppl);
-                                localStorage.setItem('userToChat',ppl);
                             }}
                             
                         >
@@ -136,7 +135,7 @@ function Chat(props) {
                                 alt="icon"
                                 style={{ width: '30px', height: '30px', marginTop: '5px', borderRadius: '50px' }}
                             />
-                            {ppl.name}
+                            <label style={{marginLeft:'20px', marginTop:'5px '}}>{ppl.name}</label>
                         </div>
                     </div>);
                 })
