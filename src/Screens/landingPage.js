@@ -12,8 +12,20 @@ function LandingPage(props) {
     const history = useHistory();
     const [count, setcount] = useState(0);
 
+    function _handleScroll(ev) {
+        console.log("Scrolling!");
+    }
+
+    function myFunction() {
+        const bottom = document.documentElement.scrollHeight - window.screen.height - document.documentElement.scrollTop;
+        if(bottom<5){
+            _handleScroll();
+        }
+    }
 
     useEffect(() => {
+        window.onscroll = function () { myFunction() };
+
         setTimeout(() => {
             // navigator.geolocation.getCurrentPosition(function (position) {
             //     console.log("Latitude is :", position.coords.latitude);
@@ -23,8 +35,10 @@ function LandingPage(props) {
         }, 100)
     })
 
+   
 
-    return <div>
+
+    return <div >
         {
             (
                 () => {
@@ -58,7 +72,7 @@ function LandingPage(props) {
                     <div className="card-body">
                         <h5 className="card-title">Watch videos</h5>
                         <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/watch') }} className="btn btn-primary">Click</span>
+                        <span onClick={() => { history.push('/videos') }} className="btn btn-primary">Click</span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >

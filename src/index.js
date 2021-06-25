@@ -34,7 +34,7 @@ ReactDOM.render(
       <Route path="/" exact={true} component={LandingPage} />
       <Route path="/ranks" exact={true} component={Ranks} />
       <Route path="/events" exact={true} component={Events} />
-      <Route path="/watch" exact={true} component={Watch} />
+      <Route path="/videos" exact={true} component={Watch} />
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
       <Route path="/profile" exact={true} component={Profile}/>

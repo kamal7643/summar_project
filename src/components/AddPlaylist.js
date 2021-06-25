@@ -8,6 +8,7 @@ function AddPlaylist(props) {
     const [once, setonce] = useState(true);
     const [names, setnames] = useState([]);
     const [newName, setNewName] = useState('');
+    
     const ref = firebase.database().ref('users/' + props.uid + '/videos/playlists');
     
 
@@ -19,12 +20,10 @@ function AddPlaylist(props) {
         if(newName!==''){
             if(names.indexOf(newName)===-1){
                 const date = new Date();
-                ref.on('value',(value)=>{
-                    console.log(value.val())
-                })
-                ref.child(newName).set({createdAt:date});
-                // const key = ref.child(newName).set({createdAt:date}).key;
-                // console.log(key);
+                const ref2 = firebase.database().ref('users/' + props.uid + '/videos/playlists/'+newName);
+                ref2.set({name:newName, createdAt:date.toString()});
+                setNewName('');
+                NotificationManager.success('','New playlist created', 3000);
             }else{
                 NotificationManager.error("", "This name already exists", 3000);
             }
