@@ -88,7 +88,7 @@ function SignUp(props) {
                         if (loading) {
                             return <div><Loading /></div>
                         } else {
-                            return <div style={{ margin: '10%' }}>
+                            return <div>
                                 <section className="vh-100 gradient-custom">
                                     <div className="container py-5 h-100">
                                         <div className="row d-flex justify-content-center align-items-center h-100">

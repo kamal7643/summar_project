@@ -9,6 +9,7 @@ function WatchItem(props){
     const watch = new URLSearchParams(props.location.search).get('watch');
     const ref = firebase.database().ref('videos/' + watch);
     const [video, setvideo] = useState();
+    // console.log(watch);
 
     useEffect(() => {
         if(watch){
@@ -23,7 +24,7 @@ function WatchItem(props){
             <iframe
                 title="watch"
                 className="embed-responsive-item"
-                src={video.link}
+                src={video.url}
                 style={{ border: 'none' }}
                 sandbox="allow-scripts allow-presentation allow-same-origin"
                 allow="autoplay; fullscreen; picture-in-picture; xr-spatial-tracking; encrypted-media"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import firebase from '../util/Firebase';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { FaPlus } from 'react-icons/fa';
 
 
 function AddPlaylist(props) {
@@ -52,10 +53,10 @@ function AddPlaylist(props) {
                 //show and hide
                 //input 
             }
-            <div onClick={toggleshow}
-                style={{ width: '100%', border: '1px solid gray', display: 'flex', justifyContent: 'center' }}
+            <div
+                style={{ width: '100%', border: '1px solid white', display: 'flex', justifyContent: 'center' }}
             >
-                <span >Add new playlist</span>
+                <span >Add new playlist <i onClick={toggleshow}><FaPlus/></i></span>
             </div>
             {show && <div 
                 style={{ 

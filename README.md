@@ -31,6 +31,6 @@ landingpage.module.css file has the css<br/>
 
 # next 
 
-## erase bottom space in profile
+## after video upload toggle add frame
 ## apply window.scroll to chat
 ## playlist

@@ -58,7 +58,7 @@ function Watch(props) {
                 <ul className="list-group">
                 {
                         videos.map((video, i) => <li style={{ padding: '10px', borderRadius: '10px', border: '1px solid gray', marginBottom: '10px' }} onClick={() => { history.push('/videos?watch='+video.key)}} key={i}>
-                        <div className={styles.watchlistcontainerhead}>{video.name}</div>
+                        <div className={styles.watchlistcontainerhead}>{video.title}</div>
                         <div className={styles.watchlistcontainerbody}>{video.description}</div>
                     </li>)
                 }

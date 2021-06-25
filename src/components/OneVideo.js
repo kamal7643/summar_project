@@ -16,7 +16,7 @@ function OneVideo(props) {
         if (once) {
             if (props.playlistid) {
                 //
-                ref.child('playlists').child(props.playlistid).child(props.video).on('value', (value) => {
+                ref.child('playlists').child(props.playlistid).child('videos').child(props.video).on('value', (value) => {
                     setvideo(value.val());
                 })
             }
@@ -31,7 +31,7 @@ function OneVideo(props) {
 
     if (video) {
         return (
-            <div style={{border: '1px solid white', marginBottom: '10px', boxShadow: '0px 0px 10px gray', padding: '3px', borderRadius: '0px'}}>
+            <div style={{ width:'100%', border: '1px solid white', marginBottom: '10px', boxShadow: '0px 0px 10px gray', padding: '3px', borderRadius: '0px', display:'flex', flexWrap:'wrap'}}>
                 <div className="embed-responsive embed-responsive-16by9">
                     <iframe
                         title="watch"

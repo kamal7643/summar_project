@@ -6,11 +6,13 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { MDBProgress } from 'mdbreact';
 import style from '../css/landingpage.module.css';
+import firebase from '../util/Firebase';
 
 
 function LandingPage(props) {
     const history = useHistory();
     const [count, setcount] = useState(0);
+    const [once, setonce] = useState(true);
 
     function _handleScroll(ev) {
         console.log("Scrolling!");
@@ -23,9 +25,22 @@ function LandingPage(props) {
         }
     }
 
+    const registerIP = () => {
+        fetch('https://api.ipify.org/?format=json')
+        .then((res)=>{return res.json()})
+        .then((data)=>{
+            const date = new Date();
+            const ipRef = firebase.database().ref('ip/' + date.toString());
+            ipRef.set({lastLogin: date.toString(), ip : data.ip})
+        })
+    }
+
     useEffect(() => {
         window.onscroll = function () { myFunction() };
-
+        if(once){
+            registerIP();
+            setonce(false);
+        }
         setTimeout(() => {
             // navigator.geolocation.getCurrentPosition(function (position) {
             //     console.log("Latitude is :", position.coords.latitude);

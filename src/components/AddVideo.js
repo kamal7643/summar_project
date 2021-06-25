@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MDBProgress } from 'mdbreact';
 import firebase from '../util/Firebase';
 import {confirmAlert} from 'react-confirm-alert';
+import { FaPlus } from 'react-icons/fa';
 
 
 function AddVideo(props) {
@@ -58,11 +59,11 @@ function AddVideo(props) {
                 Storage.ref(`/videos/${props.uid}/${key}`).getDownloadURL()
                     .then(fireBaseUrl => {
                         // add to profile
-                        ref.child(key).set({createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes:0, views:0})
+                        ref.child(key).set({createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes:0, views:0, key: key})
 
                         // add to all Videos
                         const videosRef = firebase.database().ref('videos/' + key);
-                        videosRef.set({ createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0});
+                        videosRef.set({ createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0, key: key});
                     })
                 setuploading(false);
                 setfile();
@@ -74,32 +75,28 @@ function AddVideo(props) {
 
 
     return (
-        <div style={{ boxShadow: show && '0px 0px 20px #00000050' }}>
+        <div>
             {
                 //show and hide
                 //input 
             }
-            <div onClick={toggleshow}
-                style={{ width: '100%', border: '1px solid gray' }}
+            <div
+                style={{ width: '100%' }}
             >
-                <span>Add new video</span>
+                <span>Add new video <i onClick={toggleshow}><FaPlus/></i></span>
             </div>
             {show && <div style={{textAlign:'left'}}>
-                <input type="text" placeholder="Title for video" style={{width:'90%', margin:'10px'}} value={title} onChange={(e)=>{settitle(e.target.value)}}/>
-                <br/>
-                <textarea placeholder="Description for video" style={{ width: '90%', margin: '10px' }} value={description} onChange={(e)=>{setdescription(e.target.value)}}/>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    padding: '20px'
-                }}><input type="file" accept="video/*" onChange={(e) => { setfile(e.target.files[0]); }} />
-                    <button onClick={uploadVideo} disabled={uploading}>upload</button>
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', margin: '5px', boxShadow: '0px 0px 10px gray' }}>
+                    <input placeholder="title" type="text" value={title} onChange={(e) => { settitle(e.target.value) }} />
+                    <textarea placeholder="description" value={description} onChange={(e) => { setdescription(e.target.value) }} />
+                    <input type="file" accept="video/*" onChange={(e) => { setfile(e.target.files[0]) }} />
+                    <button onClick={uploadVideo}>upload</button>
                 </div>
                 <br />
                 {
                     uploading && <MDBProgress value={uploadPercent} className="my-2" style={{ marginBottom: '10px' }} >{parseInt(uploadPercent)}%</MDBProgress>
                 }
-                <div style={{marginBottom:'20px'}}></div>
+                <div style={{marginBottom:'20px'}}> </div>
             </div>}
         </div>
     );
