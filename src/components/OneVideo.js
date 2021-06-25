@@ -16,12 +16,12 @@ function OneVideo(props) {
         if (once) {
             if (props.playlistid) {
                 //
-                ref.child('playlists').child(props.playlistid).child(props.video).once('value', (value) => {
+                ref.child('playlists').child(props.playlistid).child(props.video).on('value', (value) => {
                     setvideo(value.val());
                 })
             }
             else {
-                ref.child('videos').child(props.video).once('value', (value) => {
+                ref.child('videos').child(props.video).on('value', (value) => {
                     setvideo(value.val());
                 })
             }
@@ -44,7 +44,7 @@ function OneVideo(props) {
                 </div>
                 <div style={{ textAlign: 'left', display: 'flex', flexDirection: 'column', overflowX:'hidden' }}>
                     <b>{video.title}</b>
-                    <i>{video.description}<div><AiFillEye/></div></i>
+                    <i>{video.description}<div><AiFillEye/>{video.views}</div></i>
                 </div>
             </div>
         );

@@ -27,3 +27,10 @@ landingpage.module.css file has the css<br/>
 ## done
 ## doing
 ## to be done
+
+
+# next 
+
+## erase bottom space in profile
+## apply window.scroll to chat
+## playlist
