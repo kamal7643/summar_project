@@ -7,10 +7,10 @@ import { AiFillEye } from 'react-icons/ai';
 
 
 function WatchItem(props) {
-    const watch = new URLSearchParams(props.location.search).get('watch');
+    const watch = props.videoid;
     const ref = firebase.database().ref('videos/' + watch);
     const [video, setvideo] = useState();
-    // console.log(watch);
+    console.log(watch);
 
     useEffect(() => {
         if (watch) {

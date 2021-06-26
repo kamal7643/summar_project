@@ -17,6 +17,7 @@ function Watch(props) {
     const todoref = firebase.database().ref('videos');
     const history = useHistory();
     const [video, setvideo] = useState('');
+    const watch = new URLSearchParams(props.location.search).get('watch');
 
 
     if (!fetched) {
@@ -100,13 +101,13 @@ function Watch(props) {
         <div >
             <Header />
 
-            <WatchItem {...props} setvideo={setvideo}/>
+            <WatchItem {...props} setvideo={setvideo} videoid={watch}/>
             
             {
-                videos.filter(vdeo=>(vdeo.title!==video.titile && vdeo.description!==video.description)).sort((a, b) => compareTwoPercet(a,b)).map((video, i) => <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', margin: '10px', boxShadow: '0px 0px 10px gray'}} onClick={() => { history.push('/videos?watch=' + video.key); window.scrollTo(0, 0); }} key={i}>
-                    <b>{video.title}</b>
-                    <span>{video.description}</span>
-                    <i><AiFillEye />{video.views}</i>
+                videos.filter(vdeo => (vdeo.title !== video.titile && vdeo.description !== video.description)).sort((a, b) => compareTwoPercet(a, b)).map((vdo, i) => <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', margin: '10px', boxShadow: '0px 0px 10px gray' }} onClick={() => { history.push('/videos?watch=' + vdo.key); window.scrollTo(0, 0); }} key={i}>
+                    <b>{vdo.title}</b>
+                    <span>{vdo.description}</span>
+                    <i><AiFillEye />{vdo.views}</i>
                 </div>)
             }
             
