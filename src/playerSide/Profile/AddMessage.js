@@ -15,6 +15,13 @@ function AddMessage(props){
         const lastupdatetimeref2 = firebase.database().ref('message-hash/' + props.to + '/' + props.from + '/time');
         lastupdatetimeref2.set({ time: Date() })
     }
+
+    if (dateToBeUpdated) {
+        updateDate();
+        setDateToBeUpdated(false);
+    }
+
+    
     function Add(){
         if (content !== '') {
             const data ={ content: { text: content, photourl: "", fileurl: "" }, time: Date().toString().substr(16, 5), date: Date().toString().substr(4, 11), type: 'out', from: props.from, to: props.to };
@@ -35,6 +42,7 @@ function AddMessage(props){
     }
 
     useEffect(() => {
+        
         if(once){
             window.scrollTo(0, document.body.scrollHeight);
             setonce(false);

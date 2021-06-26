@@ -6,17 +6,17 @@ import AddMessage from './AddMessage';
 function ChatOneToOne(props) {
     const [once, setonce] = useState(true);
     const [messages, setmessages] = useState([]);
-    const [maxlimit, setmaxlimit] = useState(0);
-    const [limit, setlimit] = useState(10);
+    // const [maxlimit, setmaxlimit] = useState(0);
+    // const [limit, setlimit] = useState(10);
 
-    async function getMeta(url) {
-        var img = new Image();
-        img.src = url;
-        img.onload = function (e) {
-            const scale = img.width / img.height;
+    // async function getMeta(url) {
+    //     var img = new Image();
+    //     img.src = url;
+    //     img.onload = function (e) {
+    //         const scale = img.width / img.height;
             
-        };
-    }
+    //     };
+    // }
 
     useEffect(() => {
         
@@ -30,7 +30,7 @@ function ChatOneToOne(props) {
                 setmessages(templist);
             })
             ref.on('value', value => {
-                setmaxlimit(value.numChildren());
+                // setmaxlimit(value.numChildren());
                 setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
                 }, 1000);
@@ -39,7 +39,7 @@ function ChatOneToOne(props) {
         }
 
 
-    }, [messages, once, props, limit])
+    }, [messages, once, props])
     return (
 
         <div
@@ -54,7 +54,7 @@ function ChatOneToOne(props) {
                 key={i}
                 style={{ borderRadius:'10px', padding:'10px', textAlign:message.type==='out'&&'right'}}
                 >
-                    <div>{message.content.photourl!=='' && <img src={message.content.photourl} alt="image" />}</div>
+                    <div>{message.content.photourl!=='' && <img src={message.content.photourl} alt="icon" />}</div>
                     <div>
                     {
                         message.content.photourl==='' && message.content.fileurl!=='' && <div>file</div>

@@ -13,6 +13,7 @@ function LandingPage(props) {
     const history = useHistory();
     const [count, setcount] = useState(0);
     const [once, setonce] = useState(true);
+    window.onscroll = function () { myFunction() };
 
     function _handleScroll(ev) {
         console.log("Scrolling!");
@@ -36,7 +37,7 @@ function LandingPage(props) {
     }
 
     useEffect(() => {
-        window.onscroll = function () { myFunction() };
+        
         if(once){
             registerIP();
             setonce(false);
@@ -47,8 +48,9 @@ function LandingPage(props) {
             //     console.log("Longitude is :", position.coords.longitude);
             // }, function (error){console.log(error)});
             setcount(count + 1);
+            
         }, 100)
-    })
+    }, [once, count])
 
    
 

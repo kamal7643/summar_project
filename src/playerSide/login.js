@@ -27,6 +27,7 @@ function Login(props) {
     }
 
     async function resetPassword(e){
+        console.log(success);
         passwordReset(email, setsuccess).then((msg)=>{
             console.log(msg);
             if (msg ==='success')NotificationManager.success('', "A mail sent to your email address", 3000);

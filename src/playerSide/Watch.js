@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import styles from '../css/watch.module.css';
 // import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import firebase from '../util/Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from 'react-router-dom';
 import WatchItem from '../components/WatchItem';
+import { AiFillEye } from 'react-icons/ai';
 
 
 function Watch(props) {
@@ -16,6 +16,7 @@ function Watch(props) {
     const [number, setnumber] = useState(10);
     const todoref = firebase.database().ref('videos');
     const history = useHistory();
+    const [video, setvideo] = useState('');
 
 
     if (!fetched) {
@@ -37,6 +38,7 @@ function Watch(props) {
         const bottom = document.documentElement.scrollHeight - window.screen.height - document.documentElement.scrollTop;
         if (bottom < 5) {
             console.log('set');
+            setnumber(number+1);
         }
     }
 
@@ -44,26 +46,70 @@ function Watch(props) {
     useEffect(() => {
         window.onscroll = function () { myFunction() };
     })
-    
 
+    function similarity(s1, s2) {
+        var longer = s1;
+        var shorter = s2;
+        if (s1.length < s2.length) {
+            longer = s2;
+            shorter = s1;
+        }
+        var longerLength = longer.length;
+        if (longerLength === 0) {
+            return 1.0;
+        }
+        return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+    }
+
+    function editDistance(s1, s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+
+        var costs = [];
+        for (var i = 0; i <= s1.length; i++) {
+            var lastValue = i;
+            for (var j = 0; j <= s2.length; j++) {
+                if (i === 0)
+                    costs[j] = j;
+                else {
+                    if (j > 0) {
+                        var newValue = costs[j - 1];
+                        if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+                            newValue = Math.min(Math.min(newValue, lastValue),
+                                costs[j]) + 1;
+                        costs[j - 1] = lastValue;
+                        lastValue = newValue;
+                    }
+                }
+            }
+            if (i > 0)
+                costs[s2.length] = lastValue;
+        }
+        return costs[s2.length];
+    }
+
+
+    const compareTwoPercet=(a, b)=>{
+        if(video!==''){
+            return (Math.round(similarity(b.title, video.title) * 10000) / 100) - (Math.round(similarity(a.title, video.title) * 10000) / 100) ;
+        }
+    }
+    
+    // console.log(video);
     return (
-        <div className={styles.watchclass} >
+        <div >
             <Header />
 
-            <WatchItem {...props}/>
+            <WatchItem {...props} setvideo={setvideo}/>
             
+            {
+                videos.filter(vdeo=>(vdeo.title!==video.titile && vdeo.description!==video.description)).sort((a, b) => compareTwoPercet(a,b)).map((video, i) => <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', margin: '10px', boxShadow: '0px 0px 10px gray'}} onClick={() => { history.push('/videos?watch=' + video.key); window.scrollTo(0, 0); }} key={i}>
+                    <b>{video.title}</b>
+                    <span>{video.description}</span>
+                    <i><AiFillEye />{video.views}</i>
+                </div>)
+            }
             
-            
-            <div className={styles.watchlist}>
-                <ul className="list-group">
-                {
-                        videos.map((video, i) => <li style={{ padding: '10px', borderRadius: '10px', border: '1px solid gray', marginBottom: '10px' }} onClick={() => { history.push('/videos?watch='+video.key)}} key={i}>
-                        <div className={styles.watchlistcontainerhead}>{video.title}</div>
-                        <div className={styles.watchlistcontainerbody}>{video.description}</div>
-                    </li>)
-                }
-                </ul>
-            </div>
         </div>
     );
 }

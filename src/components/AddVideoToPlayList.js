@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MDBProgress } from 'mdbreact';
 import firebase from '../util/Firebase';
 import { confirmAlert } from 'react-confirm-alert';
