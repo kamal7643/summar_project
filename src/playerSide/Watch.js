@@ -36,7 +36,7 @@ function Watch(props) {
 
     function myFunction() {
         const bottom = document.documentElement.scrollHeight - window.screen.height - document.documentElement.scrollTop;
-        if (bottom < 5) {
+        if (bottom < 15) {
             console.log('set');
             setnumber(number+1);
         }
