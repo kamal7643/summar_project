@@ -9,7 +9,7 @@ function Header(props) {
     
 
     return(
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" style={{ boxShadow:'0px 0px 10px gray' }} >
+        <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark" style={{ boxShadow:'0px 0px 10px gray' }} >
             {//<Navbar.Brand style={{ marginRight: '100px' }} onClick={() => { history.push('/') }}><img style={{ width: '40px', height: '40px', borderRadius:'50px'}} src={photo} alt="logo"/></Navbar.Brand>
             }<Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">

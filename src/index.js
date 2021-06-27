@@ -13,7 +13,7 @@ import Test from './Screens/TestForBackend';
 
 
 // player side
-import Watch from './playerSide/Watch';
+import VideoPlateform from './playerSide/videos/VideoPlateform';
 import Suggestion from './playerSide/Suggestion';
 import ProfileWall from './playerSide/ProfileWall';
 import Events from './playerSide/Events';
@@ -34,7 +34,7 @@ ReactDOM.render(
       <Route path="/" exact={true} component={LandingPage} />
       <Route path="/ranks" exact={true} component={Ranks} />
       <Route path="/events" exact={true} component={Events} />
-      <Route path="/videos" exact={true} component={Watch} />
+      <Route path="/videos" exact={true} component={VideoPlateform} />
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
       <Route path="/profile" exact={true} component={Profile}/>
