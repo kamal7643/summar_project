@@ -28,18 +28,17 @@ function ChatOneToOne(props) {
                     templist.push(snap.val());
                 })
                 setmessages(templist);
-            })
-            ref.on('value', value => {
-                // setmaxlimit(value.numChildren());
                 setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
-                }, 1000);
+                }, 100);
             })
             setonce(false);
         }
 
 
     }, [messages, once, props])
+
+    console.log(messages);
     return (
 
         <div

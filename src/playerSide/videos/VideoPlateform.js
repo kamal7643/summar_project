@@ -73,7 +73,7 @@ function VideoPlateform(props) {
 
 
     const compareTwoPercet = (a, b) => {
-        if (currentVideo !== '') {
+        if (currentVideo) {
             return (Math.round(similarity(b.title, currentVideo.title) * 10000) / 100) - (Math.round(similarity(a.title, currentVideo.title) * 10000) / 100);
         }
     }
@@ -89,18 +89,28 @@ function VideoPlateform(props) {
     })
 
     return(
-            <div style={{ width: '100%', textAlign: 'center' }}>
+            <div style={{ width: '100%' }}>
                 <Header />
             <div style={{ maxWidth: '1200px', textAlign: 'left'}}>
                     <WatchItem {...props} stop={stop} setstop={setstop} setcurrentvideo={setcurrentVideo}/>
                 {
-                    videos.filter(video => currentVideo && video.url !== currentVideo.url).sort((a, b) => compareTwoPercet(a, b)).map((video, i)=><div key={i} onClick={()=>{
+                    videos.filter(video => 
+                        {
+                            if(currentVideo){
+                                return video.url !== currentVideo.url
+                            }else{
+                                return true
+                            }
+                        }
+                        ).sort((a, b) => compareTwoPercet(a, b)).map((video, i)=><div key={i} onClick={()=>{
                         if(currentVideo && currentVideo.url!==video.url){
                             setstop(true); 
                             history.push('videos?watch=' + video.key);
+                        }else{
+                            history.push('videos?watch=' + video.key);
                         }
                     }}>
-                        <div style={{ display:'flex', flexDirection: 'column', margin: '20px', padding:'20px', boxShadow: '0px 0px 10px gray', minHeight:'150px'}}>
+                        <div style={{ display:'flex', flexDirection: 'column', margin: '20px', padding:'20px', boxShadow: '0px 0px 10px gray', minHeight:'150px', onSelectStart: 'false'}}>
                         <b>{video.title}</b>
                         <span>{video.description}</span>
                         <span><AiFillEye/>{video.views}</span>

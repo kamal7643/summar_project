@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { MDBProgress } from 'mdbreact';
 import style from '../css/landingpage.module.css';
-import firebase from '../util/Firebase';
+import firebase from '../util/Firebase'; 
 
 
 function LandingPage(props) {
@@ -14,6 +14,7 @@ function LandingPage(props) {
     const [count, setcount] = useState(0);
     const [once, setonce] = useState(true);
     window.onscroll = function () { myFunction() };
+    firebase.analytics().setUserProperties(firebase.analytics(), {name: 'kamal'});
 
     function _handleScroll(ev) {
         console.log("Scrolling!");

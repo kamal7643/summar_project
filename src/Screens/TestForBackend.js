@@ -1,35 +1,40 @@
 import React from 'react';
-import firebase from '../util/Firebase.js';
+// import firebase from '../util/Firebase.js';
+var unirest = require("unirest");
 
 
 function Test(props) {
 
     const get = async () => {
-        const todoref = firebase.database().ref('players');
-        todoref.on('value', (snapshot) => {
-            console.log(snapshot.val());
-        })
+        // var unirest = require("unirest");
+
+        var req = unirest("GET", "https://youtube-videos.p.rapidapi.com/mp4");
+        
+        req.query({
+            "videoId": "M0VWroX0gZA"
+        });
+        // console.log(req);
+        req.headers({
+            "x-rapidapi-key": "34b65eb905msh465c8fd435787bcp17b2c1jsn1aae2f2a8df4",
+            "x-rapidapi-host": "youtube-videos.p.rapidapi.com",
+            "useQueryString": true
+        });
+        console.log(req);
+
+        req.end(function (res) {
+            if (res.error) console.log(res.error);
+                
+
+            console.log(res.body);
+        });
     }
 
-    const main = async () =>{
-        const todoref = firebase.database().ref('users');
-        const todo = {
-            name: "test 01",
-            link: "https://www.youtube.com/embed/XumojP2HIkw",
-            desciption:"test 01"
-        }
-
-        todoref.push(todo);
-    }
 
 
     return(
         <div>
-        <div onClick={() =>{main()}}>
-            testing
-        </div>
         <div onClick={() =>{get()}}>
-            get
+            <button>get</button>
         </div>
         </div>
     );

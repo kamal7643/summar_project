@@ -37,7 +37,7 @@ function AddMessage(props){
             msghashref.child(props.from).child(props.to).child("messages").push(data);
             msghashref.child(props.to).child(props.from).child("messages").push(data1);
             setcontent('');
-            setDateToBeUpdated(true);
+            // setDateToBeUpdated(true);
         }
     }
 

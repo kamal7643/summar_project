@@ -7,6 +7,7 @@ import 'firebase/database';    // for realtime database
 import 'firebase/firestore';   // for cloud firestore
 import 'firebase/messaging';   // for cloud messaging
 import 'firebase/functions';   // for cloud functions
+import 'firebase/analytics';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBjjeLSnW0buyijmhn7QOLbsnExpuBBXcQ",
