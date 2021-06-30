@@ -25,7 +25,7 @@ function AddVideo(props) {
         if( !file || title=== '' || description === '' )return;
         setuploading(true);
         const date = new Date();
-        const key = ref.push({createdAt: date.toString()}).key;
+        const key = ref.push({createdAt: date}).key;
         const uploadTask = Storage.ref(`/videos/${props.uid}/${key}`).put(file);
         /*createdAt: 
         "Thu Jun 24 2021 19:06:11 GMT+0530"

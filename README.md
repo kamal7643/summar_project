@@ -6,3 +6,5 @@
 ## apply window.scroll to chat
 ## playlist
 ## edit video
+## disable input while uploading
+## add Cancel uploading 

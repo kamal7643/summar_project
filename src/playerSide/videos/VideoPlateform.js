@@ -4,7 +4,8 @@ import firebase from '../../util/Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory } from 'react-router-dom';
 import { AiFillEye } from 'react-icons/ai';
-import WatchItem from '../../components/WatchItem';
+// import WatchItem from '../../components/WatchItem';
+import VideoComponent from './VideoComponent';
 
 const getAllVideos = (videos, setvideos) => {
     const ref = firebase.database().ref('videos');
@@ -25,9 +26,10 @@ function VideoPlateform(props) {
     const history = useHistory();
     const [videos, setvideos] = useState(JSON.parse(localStorage.getItem('videos')) || []);
     const [once, setonce] = useState(true);
-    // const watch = new URLSearchParams(props.location.search).get('watch');
+    const watch = new URLSearchParams(props.location.search).get('watch');
     const [stop, setstop] = useState(false);
     const [currentVideo, setcurrentVideo] = useState();
+    const [search, setsearch] = useState('');
 
 
     function similarity(s1, s2) {
@@ -79,8 +81,18 @@ function VideoPlateform(props) {
     }
 
 
+    const compareTwoPercetSearch = (a, b)=>{
+        if ( search !== '' ) {
+            return (Math.round(similarity(b.title, search) * 10000) / 100) - (Math.round(similarity(a.title, search) * 10000) / 100);
+        }else{return true;}
+    }
+
+
     useEffect(() => {
         setTimeout(() => {
+            if(!watch){
+                setcurrentVideo(null);
+            }
             if(once){
                 getAllVideos(videos,setvideos);
                 setonce(false);
@@ -92,7 +104,7 @@ function VideoPlateform(props) {
             <div style={{ width: '100%' }}>
                 <Header />
             <div style={{ maxWidth: '1200px', textAlign: 'left'}}>
-                    <WatchItem {...props} stop={stop} setstop={setstop} setcurrentvideo={setcurrentVideo}/>
+                <VideoComponent {...props} setcurrentvideo={setcurrentVideo} stop={stop} setstop={setstop} search={search} setsearch={setsearch}/>
                 {
                     videos.filter(video => 
                         {
@@ -102,17 +114,13 @@ function VideoPlateform(props) {
                                 return true
                             }
                         }
-                        ).sort((a, b) => compareTwoPercet(a, b)).map((video, i)=><div key={i} onClick={()=>{
-                        if(currentVideo && currentVideo.url!==video.url){
-                            setstop(true); 
+                        ).sort((a, b) =>compareTwoPercetSearch(a,b)).sort((a, b) => compareTwoPercet(a, b)).map((video, i)=><div key={i} onClick={()=>{
+                            setstop(true);
                             history.push('videos?watch=' + video.key);
-                        }else{
-                            history.push('videos?watch=' + video.key);
-                        }
                     }}>
                         <div style={{ display:'flex', flexDirection: 'column', margin: '20px', padding:'20px', boxShadow: '0px 0px 10px gray', minHeight:'150px', onSelectStart: 'false'}}>
                         <b>{video.title}</b>
-                        <span>{video.description}</span>
+                        <span>{video.description}{video.playlistid && ' || '+video.playlistid}</span>
                         <span><AiFillEye/>{video.views}</span>
                     </div>
                     </div>)

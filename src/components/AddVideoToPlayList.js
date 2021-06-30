@@ -18,7 +18,7 @@ function  AddVideoToPlayList (props) {
         if (!file || title === '' || description === '') return;
         setuploading(true);
         const date = new Date();
-        const key = ref.push({ createdAt: date.toString() }).key;
+        const key = ref.push({ createdAt: date }).key;
         const uploadTask = Storage.ref(`/videos/${props.uid}/${key}`).put(file);
         uploadTask.on('state_changed',
             (snapShot) => {
@@ -37,17 +37,17 @@ function  AddVideoToPlayList (props) {
                 Storage.ref(`/videos/${props.uid}/${key}`).getDownloadURL()
                     .then(fireBaseUrl => {
                         // add to profile
-                        ref.child(key).set({ createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0, key: key })
+                        ref.child(key).set({ playlistid:props.playlistid, createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0, key: key })
 
                         // add to all Videos
                         const videosRef = firebase.database().ref('videos/' + key);
-                        videosRef.set({ createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0, key: key });
+                        videosRef.set({ playlistid: props.playlistid, createdAt: date.toString(), description: description, title: title, url: fireBaseUrl, owner: props.uid, likes: 0, views: 0, key: key });
                     })
                 setuploading(false);
                 setfile();
                 setdescription('');
                 settitle('');
-                props.toggle(false);
+                props.toglle(false);
             })
     }
 

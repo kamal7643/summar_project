@@ -28,6 +28,7 @@ function ChatOneToOne(props) {
                     templist.push(snap.val());
                 })
                 setmessages(templist);
+                console.log(templist);
                 setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
                 }, 100);
@@ -38,7 +39,6 @@ function ChatOneToOne(props) {
 
     }, [messages, once, props])
 
-    console.log(messages);
     return (
 
         <div
@@ -49,24 +49,34 @@ function ChatOneToOne(props) {
         >
             <div style={{textAlign: 'center'}}><span></span></div>
         {
+            messages.map((message, i)=>{
+                return (<div
+                    key={i}
+                    style={{ borderRadius: '10px', padding: '10px', textAlign: message.type === 'out' && 'right' }}
+                    >
+                        <label style={{border: '1px solid gray', borderRadius:'10px', maxWidth:'350px', padding:'5px', backgroundColor:(message.type === 'out' && 'royalBlue') || 'salmon'}}>{message.content.text}</label>
+                    </div>);
+            })
+        }
+        {
                 messages.map((message, i) => <div 
                 key={i}
-                style={{ borderRadius:'10px', padding:'10px', textAlign:message.type==='out'&&'right'}}
                 >
-                    <div>{message.content.photourl!=='' && <img src={message.content.photourl} alt="icon" />}</div>
-                    <div>
-                    {
-                        message.content.photourl==='' && message.content.fileurl!=='' && <div>file</div>
-                    }
-                    </div>
-                    <label
-                        style={{ border: '1px solid gray', borderRadius: '10px', maxWidth:'350px', padding: '5px', backgroundColor:(message.type==='out' && 'royalBlue')|| 'salmon', textAlign:'left'}}
-                    >{message.content.text}</label>
+                {console.log(message)}
+                    
                 </div>)
             }
-            <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
+        <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
         </div>
     );
 }
 
 export default ChatOneToOne;
+
+/*const
+
+<label
+                        style={{ border: '1px solid gray', borderRadius: '10px', maxWidth: '350px', padding: '5px', backgroundColor: (message.type === 'out' && 'royalBlue') || 'salmon', textAlign: 'left' }}
+                    >{message.content.text}</label>
+
+                    */
