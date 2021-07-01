@@ -19,7 +19,7 @@ export const signup = async (email, password, name, seterror) => {
         const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
             name: name,
-            email: NUser.email,
+            email: email,
             playname: "none",
             matches: 0,
             win: 0,
@@ -40,7 +40,7 @@ export const signup = async (email, password, name, seterror) => {
 }
 
 
-export const socialsignin = async (e) => {console.log(e);
+export const socialsignin = async (e) => {
     var user;
     var provider;
     if(e==='google'){

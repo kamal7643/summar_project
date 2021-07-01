@@ -1,10 +1,14 @@
 .landingpagegotocards{
-    border:1px solid #ccc;
     width:100%;
     max-width: 430px;
     margin:10px;
+    
 }
 
+.landingpagegotocards:hover{
+    border:1px solid #ccc;
+    box-shadow: 0px 0px 10px gray;
+}
 .instuctionbox{
     padding: 10px;
 }

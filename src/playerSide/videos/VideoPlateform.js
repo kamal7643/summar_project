@@ -81,11 +81,11 @@ function VideoPlateform(props) {
     }
 
 
-    const compareTwoPercetSearch = (a, b)=>{
-        if ( search !== '' ) {
-            return (Math.round(similarity(b.title, search) * 10000) / 100) - (Math.round(similarity(a.title, search) * 10000) / 100);
-        }else{return true;}
-    }
+    // const compareTwoPercetSearch = (a, b)=>{
+    //     if ( search !== '' ) {
+    //         return (a.title.toLowerCase().cantains(search.toLowerCase()) || a.description.toLowerCase().cantains(search.toLowerCase()) - (b.title.toLowerCase().cantains(search.toLowerCase()) || b.description.toLowerCase().cantains(search.toLowerCase());
+    //     }else{return true;}
+    // }
 
 
     useEffect(() => {
@@ -111,10 +111,13 @@ function VideoPlateform(props) {
                             if(currentVideo){
                                 return video.url !== currentVideo.url
                             }else{
-                                return true
+                                return true;
                             }
                         }
-                        ).sort((a, b) =>compareTwoPercetSearch(a,b)).sort((a, b) => compareTwoPercet(a, b)).map((video, i)=><div key={i} onClick={()=>{
+                    )
+                    .filter(video =>(video.title.toLowerCase().includes(search.toLowerCase()) || video.description.toLowerCase().includes(search.toLowerCase())))
+                    .sort((a, b) => compareTwoPercet(a, b))
+                    .map((video, i)=><div key={i} onClick={()=>{
                             setstop(true);
                             history.push('videos?watch=' + video.key);
                     }}>

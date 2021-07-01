@@ -38,7 +38,7 @@ function LandingPage(props) {
     }
 
     useEffect(() => {
-        
+        console.log(document.documentElement.scrollWidth);
         if(once){
             registerIP();
             setonce(false);

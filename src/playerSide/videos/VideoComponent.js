@@ -30,6 +30,8 @@ function VideoComponent(props) {
             setTimeVideoPlayed(timeVideoPlayed + VideoPlayer.current.currentTime - lastNotedTime);
             setLastNotedTime(VideoPlayer.current.currentTime);
 
+        }else{
+            setLastNotedTime(VideoPlayer.current.currentTime);
         }
         if(timeVideoPlayed>=30){
             if(!addedView){
@@ -61,7 +63,7 @@ function VideoComponent(props) {
 
     if (WATCH) {
         return (
-            <div>{timeVideoPlayed}
+            <div>
                 {video && <div style={{ display: 'flex', flexDirection: 'column', padding:'10px', margin: '10px', boxShadow: '0px 0px 10px gray'}}>
                     <video
                         ref={VideoPlayer}
@@ -79,8 +81,8 @@ function VideoComponent(props) {
         );
     }
     return (
-        <div style={{display: 'flex', flexDirection: 'column', padding:'20px', boxShadow: '0px 0px 10px gray'}} >
-            <input type="search" placeholder="Search..." value={props.search} onChange={(e)=>{props.setsearch(e.target.value)}} />
+        <div style={{display: 'flex', flexDirection: 'column', padding:'20px'}} >
+            <input type="search" placeholder="Search..." value={props.search} onChange={(e) => { props.setsearch(e.target.value) }} style={{ boxShadow: '0px 0px 10px gray' }} />
         </div>
     );
 }

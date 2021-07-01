@@ -87,10 +87,10 @@ function AddVideo(props) {
             </div>
             {show && <div style={{textAlign:'left'}}>
                 <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', margin: '5px', boxShadow: '0px 0px 10px gray' }}>
-                    <input placeholder="title" type="text" value={title} onChange={(e) => { settitle(e.target.value) }} />
-                    <textarea placeholder="description" value={description} onChange={(e) => { setdescription(e.target.value) }} />
-                    <input type="file" accept="video/*" onChange={(e) => { setfile(e.target.files[0]) }} />
-                    <button onClick={uploadVideo}>upload</button>
+                    <input placeholder="title" type="text" value={title} onChange={(e) => { if (!uploading) { settitle(e.target.value) } }} />
+                    <textarea placeholder="description" value={description} onChange={(e) => { if (!uploading) { setdescription(e.target.value) } }} />
+                    <input type="file" accept="video/*" onChange={(e) => { if (!uploading) { setfile(e.target.files[0]) } }} />
+                    <button onClick={uploadVideo} disabled={uploading}>upload</button>
                 </div>
                 <br />
                 {
