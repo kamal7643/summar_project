@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../util/Firebase';
 import AddMessage from './AddMessage';
+import PrintMessages from './PrintMessages';
 
 
 function ChatOneToOne(props) {
@@ -28,7 +29,6 @@ function ChatOneToOne(props) {
                     templist.push(snap.val());
                 })
                 setmessages(templist);
-                console.log(templist);
                 setTimeout(() => {
                     window.scrollTo(0, document.body.scrollHeight);
                 }, 100);
@@ -48,35 +48,10 @@ function ChatOneToOne(props) {
             }}
         >
             <div style={{textAlign: 'center'}}><span></span></div>
-        {
-            messages.map((message, i)=>{
-                return (<div
-                    key={i}
-                    style={{ borderRadius: '10px', padding: '10px', textAlign: message.type === 'out' && 'right' }}
-                    >
-                        <label style={{border: '1px solid gray', borderRadius:'10px', maxWidth:'350px', padding:'5px', backgroundColor:(message.type === 'out' && 'royalBlue') || 'salmon'}}>{message.content.text}</label>
-                    </div>);
-            })
-        }
-        {
-                messages.map((message, i) => <div 
-                key={i}
-                >
-                {console.log(message)}
-                    
-                </div>)
-            }
+            <PrintMessages messages={messages}/>
         <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
         </div>
     );
 }
 
 export default ChatOneToOne;
-
-/*const
-
-<label
-                        style={{ border: '1px solid gray', borderRadius: '10px', maxWidth: '350px', padding: '5px', backgroundColor: (message.type === 'out' && 'royalBlue') || 'salmon', textAlign: 'left' }}
-                    >{message.content.text}</label>
-
-                    */

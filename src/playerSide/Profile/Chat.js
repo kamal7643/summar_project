@@ -49,7 +49,7 @@ function Chat(props) {
         }
 
 
-    }, [ids, ppls, once, props.uid, userToChat])
+    }, [ids, ppls, once, props.uid, userToChat, setonce, setids, setppls])
 
 
     if (userToChat) {

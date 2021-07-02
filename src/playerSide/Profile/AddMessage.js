@@ -53,9 +53,7 @@ function AddMessage(props){
         style={{
             width:'100%',
             display: 'flex',
-            flexDirection: 'row',
-            position:'fixed',
-            bottom:'0px'
+            flexDirection: 'row'
         }}
         >
         <button onClick={() => { props.usertochat(); }}><BiArrowBack/></button>
