@@ -110,7 +110,7 @@ function Chat(props) {
                 />}
             {
                 ppls.map((ppl, i) => {
-                    return (<div key={i}>
+                    return (<div key={i}>{console.log(ppl)}
                         <div 
                         style={{
                                 margin: '10px',

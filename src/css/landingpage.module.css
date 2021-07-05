@@ -2,12 +2,15 @@
     width:100%;
     max-width: 430px;
     margin:10px;
-    
+    border: 1px solid #ccc;
+    border-radius:10px;
+    box-shadow: 0px 0px 10px gray;
 }
 
 .landingpagegotocards:hover{
     border:1px solid #ccc;
-    box-shadow: 0px 0px 10px gray;
+    font-weight:700;
+    max-width: 450px;
 }
 .instuctionbox{
     padding: 10px;
@@ -16,4 +19,6 @@
 .groupcards{
     display:flex;
     flex-wrap: wrap;
+    margin-top:100px;
+    margin-bottom: 100px;
 }

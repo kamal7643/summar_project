@@ -7,7 +7,7 @@ import Individualvideos from './Individualvideos';
 
 function Videos(props){
     return(
-        <div style={{maxWidth: '400px'}}>
+        <div>
         <b >Manage videos</b>
         {
             //add new playlist

@@ -52,11 +52,14 @@ function Playlist(props){
         }
     }, [once, ref, keys])
     return(
-        <div>
+        <div style={{margin:'10px',padding:'10px'}}>
             <div 
             style={{ 
                 display: 'flex', 
-                flexDirection: 'row' 
+                flexDirection: 'row' ,
+                margin:'10px', 
+                padding:'10px',
+                border:'1px solid gray'
             }}
             >
                 <span style={{width: '100%'}}>

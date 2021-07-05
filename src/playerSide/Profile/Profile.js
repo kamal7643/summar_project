@@ -8,12 +8,17 @@ import ProfileSTATE from './ProfileSTATE';
 import PeoplesSTATE from './PeoplesSTATE';
 import EventSTATE from './EventSTATE';
 import Chat from './Chat';
+import { CgProfile } from 'react-icons/cg';
+import { BsPeopleFill } from 'react-icons/bs';
+import { MdEvent } from 'react-icons/md';
+import { HiChatAlt2 } from 'react-icons/hi';
 
 
 function Profile(props) {
     const ID = new URLSearchParams(props.location.search).get('id');
     const JOIN = new URLSearchParams(props.location.search).get('join');
     const STATE = new URLSearchParams(props.location.search).get('state');
+    const CHATWITH = new URLSearchParams(props.location.search).get('chatwith');
     getcurruser().then((user) => {
         if (user) {
             localStorage.setItem('user',JSON.stringify(user));
@@ -61,49 +66,52 @@ function Profile(props) {
                     flexDirection: 'row',
                     textAlign: 'center',
                     width: '100%',
-                    marginTop: '10px',
-                    boxShadow: '0px 0px 4px gray'
+                    marginTop: '10px'
                 }}
             >
                 <span
                     style={{
-                        width: '100%',
+                        width: '90%',
                         color: (STATE === 'profile' && 'black') || 'gray',
-                        fontWeight: (STATE === 'profile' && 'bold')
+                        fontWeight: (STATE === 'profile' && 'bold'),
+                        boxShadow: '0px 0px 5px gray',marginLeft:'20px',marginRight:'20px',paddingTop:'10px',paddingBottom:'10px'
                     }}
                     onClick={() => { history.push("profile?id=" + ID + '&state=profile'); }}
                 >
-                    PROFILE
+                    <CgProfile/>
                 </span>
                 <span
                     style={{
                         width: '100%',
                         color: (STATE === 'peoples' && 'black') || 'gray',
-                        fontWeight: (STATE === 'peoples' && 'bold')
+                        fontWeight: (STATE === 'peoples' && 'bold'),
+                        boxShadow: '0px 0px 5px gray', marginLeft: '20px', marginRight: '20px', paddingTop: '10px', paddingBottom: '10px'
                     }}
                     onClick={() => { history.push("profile?id=" + ID + '&state=peoples'); }}
                 >
-                    PEOPLES
+                    <BsPeopleFill />
                 </span>
                 <span
                     style={{
                         width: '100%',
                         color: (STATE === 'events' && 'black') || 'gray',
-                        fontWeight: (STATE === 'events' && 'bold')
+                        fontWeight: (STATE === 'events' && 'bold'),
+                        boxShadow: '0px 0px 5px gray', marginLeft: '20px', marginRight: '20px', paddingTop: '10px', paddingBottom: '10px'
                     }}
                     onClick={() => { history.push("profile?id=" + ID + '&state=events'); }}
                 >
-                    EVENTS
+                    <MdEvent/>
                 </span>
                 <span
                     style={{
                         width: '100%',
                         color: (STATE === 'chat' && 'black') || 'gray',
-                        fontWeight: (STATE === 'chat' && 'bold')
+                        fontWeight: (STATE === 'chat' && 'bold'),
+                        boxShadow: '0px 0px 5px gray', marginLeft: '20px', marginRight: '20px', paddingTop: '10px', paddingBottom: '10px'
                     }}
                     onClick={() => { history.push("profile?id=" + ID + '&state=chat'); }}
                 >
-                    CHAT
+                    <HiChatAlt2/>
                 </span>
             </div>
             {

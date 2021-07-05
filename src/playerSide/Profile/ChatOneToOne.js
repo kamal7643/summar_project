@@ -49,7 +49,7 @@ function ChatOneToOne(props) {
         >
             <div style={{textAlign: 'center'}}><span></span></div>
             <PrintMessages messages={messages}/>
-        <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
+            <AddMessage usertochat={props.usertochat} from={props.firstperson} to={props.secondperson} />
         </div>
     );
 }

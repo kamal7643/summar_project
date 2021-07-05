@@ -38,7 +38,6 @@ function LandingPage(props) {
     }
 
     useEffect(() => {
-        console.log(document.documentElement.scrollWidth);
         if(once){
             registerIP();
             setonce(false);
@@ -76,48 +75,31 @@ function LandingPage(props) {
                     <div className="card-body">
                         <h5 className="card-title">Join events</h5>
                         <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/events') }} className="btn btn-primary">Click</span>
+                        <span onClick={() => { history.push('/events') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Make an account</h5>
                         <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/signup') }} className="btn btn-primary">Click</span>
+                        <span onClick={() => { history.push('/signup') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >
-                    <div className="card-body">
+                    <div className="card-body" >
                         <h5 className="card-title">Watch videos</h5>
                         <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/videos') }} className="btn btn-primary">Click</span>
+                        <span onClick={() => { history.push('/videos') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Give suggestion</h5>
                         <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/suggestion') }} className="btn btn-primary">Click</span>
+                        <span onClick={() => { history.push('/suggestion') }} style={{borderRadius:'10px'}} className="btn btn-primary">click </span>
                     </div>
                 </div>
             </div>
-            <div id="about" className={style.instuctionbox}>
-                About
-                <br />
-                Here you can join CODM matches with global. Make friends and chat with them. Account creation is must.<br />
-                Chat with firends.<br />
-                Upload videos.<br />
-                <br />
-            </div>
-            <div id="rules" className={style.instuctionbox}>Rules</div>
-            <ul>
-                <li>No Hats Allowed</li>
-                <li>No Fraternizing With The Enemy</li>
-                <li>Always On Time</li>
-                <li>Away From The Information Super Highway</li>
-                <li>Obey The Rules Or Else</li>
-                <li>One For All And All For One</li>
-            </ul>
         </div>
         <Footer />
     </div>

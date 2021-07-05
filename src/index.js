@@ -28,6 +28,11 @@ import Admin from './adminSide/Admin';
 import AdminSuggestion from './adminSide/Suggestion';
 
 
+
+//css
+import './css/global.css';
+
+
 ReactDOM.render(
   <Router>
     <Switch>
