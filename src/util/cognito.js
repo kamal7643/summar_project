@@ -15,6 +15,8 @@ export const signup = async (email, password, name, seterror) => {
             photoURL:staticUrls.profilephotourl
         });
         NUser.sendEmailVerification();
+        localStorage.setItem('currusr', JSON.stringify(NUser));
+        getfirebaseusr(NUser.uid);
         
         const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
@@ -55,6 +57,8 @@ export const socialsignin = async (e) => {
     try {
         const nuser = firebase.auth().signInWithPopup(provider);
         user = (await nuser).user;
+        localStorage.setItem('currusr', JSON.stringify(user));
+        getfirebaseusr(user.uid);
     } catch (e) { console.log(e) }
     return user;
     
@@ -65,11 +69,20 @@ export const signin = async (email, password, seterror) => {
     try {
         const nuser = firebase.auth().signInWithEmailAndPassword(email, password);
         user = (await nuser).user;
+        localStorage.setItem('currusr', JSON.stringify(user));
+        getfirebaseusr(user.uid);
     } catch (e) {
         console.log(e);
         seterror(e.message);
     }
     return user;
+}
+
+const getfirebaseusr = (uid) => {
+    const ref = firebase.database().ref('users/'+uid);
+    ref.child('profile').once('value', (value)=>{
+        localStorage.setItem('firebaseusr', JSON.stringify(value.val()));
+    })
 }
 
 export const getcurruser = async () => {
@@ -89,6 +102,8 @@ export const signout = async () => {
     var user;
     try {
         user = firebase.auth().signOut();
+        localStorage.removeItem('currusr');
+        localStorage.removeItem('firebaseusr');
         return user;
     } catch (e) { console.log(e.message); }
     return user;

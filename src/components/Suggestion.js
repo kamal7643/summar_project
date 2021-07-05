@@ -31,7 +31,6 @@ function SingleSuggest(props) {
         });
     }
 
-
     return <div className="hover-overlay hover-zoom hover-shadow ripple">
         <div className={styles.card}>
             <div className={styles.title}  >

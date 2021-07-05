@@ -52,8 +52,9 @@ function Login(props) {
     useEffect(() => {
         getcurruser()
             .then((response) => {
-                if (response) {
-                    history.push("/profile?id=" + response.uid + "&state=profile");
+                
+                if (JSON.parse(localStorage.getItem('firebaseusr'))) {
+                    history.push("/profile?id=" + JSON.parse(localStorage.getItem('firebaseusr')).uid+ "&state=profile");
                 }
             })
         if (err) {

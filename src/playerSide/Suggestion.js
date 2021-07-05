@@ -33,15 +33,15 @@ function Suggestion(props) {
     }
 
 
-    function addNewSuggestion(useruid) {
+    function addNewSuggestion() {
         if (head !== "") {
             if (body !== "") {
                 const todoref = firebase.database().ref('suggestion');
                 const todo = {
                     title: head,
                     content: body,
-                    uid: useruid,
-                    name: name
+                    uid: JSON.parse(localStorage.getItem('firebaseusr')).uid,
+                    name: JSON.parse(localStorage.getItem('firebaseusr')).playname
                 };
                 const key = todoref.push(todo).key;
                 todoref.child(key).child('id').set(key);
@@ -63,24 +63,7 @@ function Suggestion(props) {
         setwait(true);
         getcurruser().then((user) => {
             if (user) {
-                const ref = firebase.database().ref('users/' + user.uid + "/profile");
-                ref.on('value', (value) => {
-                    if (value) {
-                        setname(value.val().playname)
-                        addNewSuggestion(user.uid);
-                    } else {
-                        confirmAlert({
-                            title: 'Account releted problem',
-                            message: 'please login',
-                            buttons: [
-                                {
-                                    label: 'continue',
-                                    onClick: () => history.push("/login")
-                                }
-                            ]
-                        })
-                    }
-                })
+                addNewSuggestion();
             }
             else {
                 confirmAlert({
@@ -116,9 +99,8 @@ useEffect(() => {
             }
         })
         setloading(false);
-    }, 1000)
+    }, 10)
 })
-
 if (!wait) {
     return (
         <div >

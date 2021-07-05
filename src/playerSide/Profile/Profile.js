@@ -21,7 +21,7 @@ function Profile(props) {
     const CHATWITH = new URLSearchParams(props.location.search).get('chatwith');
     getcurruser().then((user) => {
         if (user) {
-            localStorage.setItem('user',JSON.stringify(user));
+            localStorage.setItem('currusr',JSON.stringify(user));
             if (user.uid !== ID) { history.push('/404'); }
         }
     })
