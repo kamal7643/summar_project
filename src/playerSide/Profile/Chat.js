@@ -9,7 +9,6 @@ import { RiAddCircleLine } from 'react-icons/ri';
 
 function Chat(props) {
     const [userToChat, setuserToChat] = useState();
-    const [ppls, setppls] = useState([]);
     const [once, setonce] = useState(true);
     const [ids, setids] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +16,17 @@ function Chat(props) {
         setIsOpen(!isOpen);
     }
 
+
+
     useEffect(() => {
         setTimeout(() => {
             if (once) {
                 const ref = firebase.database().ref('message-hash/' + props.uid);
                 var templist = [];
                 ref.on('value', (value) => {
-                    templist=[];
+                    templist = [];
                     value.forEach((snap) => {
-                        templist.push(snap.key);
+                        templist.push({ key: snap.key,uid:snap.key, time: snap.val().time,name:snap.val().info.info.name,photo: snap.val().info.info.photo})
                     })
                     setids(templist);
                 })
@@ -33,23 +34,9 @@ function Chat(props) {
             }
         }, 1000)
 
-        if (ids.length !==ppls.length) {
-            const ref = firebase.database().ref('users');
-            const templist = [];
-            ids.map((id) => {
-                ref.child(id).child('profile').on('value', (value) => {
-                    const temp = value.val();
-                    templist.push({ name: temp.name, uid: temp.uid, photo: temp.photo });
-                })
-                return (<div></div>);
-            })
-            if (templist !== ppls) {
-                setppls(templist);
-            }
-        }
 
 
-    }, [ids, ppls, once, props.uid, userToChat, setonce, setids, setppls])
+    }, [ids, once, props.uid, userToChat, setonce, setids])
 
 
     if (userToChat) {
@@ -88,17 +75,17 @@ function Chat(props) {
                 <button
                     onClick={togglePopup}
                     style={{
-                        border:'0px solid gray', 
-                        backgroundColor:'white',
-                        position:'fixed',
-                        bottom:'50px',
-                        borderRadius: '50px', 
+                        border: '0px solid gray',
+                        backgroundColor: 'white',
+                        position: 'fixed',
+                        bottom: '50px',
+                        borderRadius: '50px',
                         height: '50px',
-                        width:'50px',
-                        right:'2%',
+                        width: '50px',
+                        right: '2%',
                         boxShadow: '0px 0px 20px black'
                     }}
-                ><RiAddCircleLine style={{fontSize:'30px'}}/>
+                ><RiAddCircleLine style={{ fontSize: '30px' }} />
                 </button>
                 {isOpen && <Popup
                     content={<>
@@ -108,38 +95,33 @@ function Chat(props) {
                     </>}
                     handleClose={togglePopup}
                 />}
-            {
-                ppls.map((ppl, i) => {
-                    return (<div key={i}>{console.log(ppl)}
-                        <div 
-                        style={{
-                                margin: '10px',
-                                boxShadow: '0px 0px 50px solid gray'    
-                        }}
-                        >
-                            
-                        </div>
-                        <div
-                            style={{
-                                width: '100%',
-                                borderRadius: '10px',
-                                border: '1px solid gray', display: 'flex', flexDirection: 'row'
-                            }}
-                            onClick={() => {
-                                setuserToChat(ppl);
-                            }}
-                            
-                        >
-                            <img
-                                src={ppl.photo || staticUrls.profilephotourl}
-                                alt="icon"
-                                style={{ width: '30px', height: '30px', marginTop: '5px', borderRadius: '50px' }}
-                            />
-                            <label style={{marginLeft:'20px', marginTop:'5px '}}>{ppl.name}</label>
-                        </div>
-                    </div>);
-                })
-            }
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    {
+                        ids.sort((a, b) => parseInt(Date.parse(b.time.time)) - parseInt(Date.parse(a.time.time))).map((ppl, i) => {
+                            return (<div key={i}>
+                                <div
+                                    style={{ padding: '0px' }}
+                                >
+
+                                </div>
+                                <div
+                                    style={{ margin: '5px', boxShadow: '0px 0px 5px gray', padding: '10px' }}
+                                    onClick={() => {
+                                        setuserToChat(ppl);
+                                    }}
+
+                                >
+                                    <img
+                                        src={ppl.photo || staticUrls.profilephotourl}
+                                        alt="icon"
+                                        style={{ width: '30px', height: '30px', marginTop: '5px', borderRadius: '50px' }}
+                                    />
+                                    <label style={{ marginLeft: '20px', marginTop: '5px ' }}>{ppl.name}</label>
+                                </div>
+                            </div>);
+                        })
+                    }
+                </div>
             </div>
         );
     }

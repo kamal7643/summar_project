@@ -17,7 +17,6 @@ function Suggestion(props) {
     const [head, sethead] = useState("");
     const [body, setbody] = useState("");
     const [wait, setwait] = useState(false);
-    const [name, setname] = useState('');
     const history = useHistory();
 
     function showAlert(a, b) {

@@ -37,18 +37,21 @@ function Header (props) {
             getNotifications();
             setonce(false);
         }
-    })
+    },[once,setonce])
    
 
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">ByPass</NavbarBrand>
+                <NavbarBrand href="/">Project</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
                             <NavLink href="/">Home</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/ranks">Ranks</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink href="/Events">Events</NavLink>
@@ -69,7 +72,7 @@ function Header (props) {
                             <NavLink href="/admin">Admin</NavLink>
                         </NavItem>
                     </Nav>
-                    <NavbarText><IoMdNotifications/><label style={{color:'red'}}>{count!==0 && count}</label></NavbarText>
+                    <NavbarText style={{color:count>0&& 'red'}}><IoMdNotifications/><label style={{color:'red'}}>{count!==0 && count}</label></NavbarText>
                 </Collapse>
             </Navbar>
         </div>

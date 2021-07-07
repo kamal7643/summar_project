@@ -8,3 +8,4 @@
 ## edit video
 ## disable input while uploading
 ## add Cancel uploading 
+## update info

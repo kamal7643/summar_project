@@ -18,7 +18,7 @@ function Profile(props) {
     const ID = new URLSearchParams(props.location.search).get('id');
     const JOIN = new URLSearchParams(props.location.search).get('join');
     const STATE = new URLSearchParams(props.location.search).get('state');
-    const CHATWITH = new URLSearchParams(props.location.search).get('chatwith');
+    // const CHATWITH = new URLSearchParams(props.location.search).get('chatwith');
     getcurruser().then((user) => {
         if (user) {
             localStorage.setItem('currusr',JSON.stringify(user));

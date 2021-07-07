@@ -8,22 +8,19 @@ import img1 from '../images/slides01.jpg';
 import img2 from '../images/slides02.png';
 import img3 from '../images/slides03.jpg';
 // import img4 from '../images/slides04.jpg';
+import '../css/global.css';
 
 
 function Slides(props) {
 
-    
-    
-
 
     return(
-        <Carousel>
+        <div style={{width: '100%', textAlign: 'right', marginLeft:window.innerWidth-1300>0 && (window.innerWidth-1300)/2}}><Carousel style={{maxWidth:'1300px'}}>
             <Carousel.Item>
                 <img
                     style={{padding:'20px'}}
                     className="d-block w-100"
                     src={img2}
-                    height={window.innerHeight-200}
                     alt=""
                 />
                 <Carousel.Caption>
@@ -35,7 +32,6 @@ function Slides(props) {
                     style={{ padding: '20px' }}
                     className="d-block w-100"
                     src={img3}
-                    height={window.innerHeight - 200}
                     alt=""
                 />
                 <Carousel.Caption>
@@ -47,7 +43,6 @@ function Slides(props) {
                     style={{ padding: '20px' }}
                     className="d-block w-100"
                     src={img1}
-                    height={window.innerHeight - 200}
                     alt=""
                 />
                 <Carousel.Caption>
@@ -55,6 +50,7 @@ function Slides(props) {
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
+        </div>
     );
 }
 

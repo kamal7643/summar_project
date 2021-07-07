@@ -8,12 +8,33 @@ function AddMessage(props){
     const [once, setonce] = useState(true);
     const [dateToBeUpdated, setDateToBeUpdated] = useState(false);
 
+    const finalUpdateInfo = (info) =>{
+        const lastupdatetimeref1 = firebase.database().ref('message-hash/' + props.from + '/' + props.to+'/info' );
+        lastupdatetimeref1.set({ info: info })
+        const lastupdatetimeref2 = firebase.database().ref('message-hash/' + props.to + '/' + props.from+'/info' );
+        lastupdatetimeref2.set({ info : JSON.parse(localStorage.getItem('firebaseusr')) });
+    }
+
+    const updateInfo= () =>{
+        const ref = firebase.database().ref('users');
+        ref.child(props.to).child('profile').once('value',(value)=>{
+            finalUpdateInfo(value.val());
+        })
+    }
+
 
     function updateDate(){
         const lastupdatetimeref1 = firebase.database().ref('message-hash/' + props.from + '/' + props.to + '/time');
         lastupdatetimeref1.set({ time: Date() })
         const lastupdatetimeref2 = firebase.database().ref('message-hash/' + props.to + '/' + props.from + '/time');
         lastupdatetimeref2.set({ time: Date() })
+        const ref = firebase.database().ref('message-hash/' + props.from + '/'+props.to+'/info');
+        ref.once('value', (value)=>{
+            console.log(value.val())
+            if(!value.val()){
+                updateInfo()
+            }
+        })
     }
 
     if (dateToBeUpdated) {

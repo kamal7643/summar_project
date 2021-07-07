@@ -17,12 +17,11 @@ export const signup = async (email, password, name, seterror) => {
         NUser.sendEmailVerification();
         localStorage.setItem('currusr', JSON.stringify(NUser));
         getfirebaseusr(NUser.uid);
-        
         const todoref = firebase.database().ref('users/' + NUser.uid + "/profile");
         todoref.set({
             name: name,
             email: email,
-            playname: "none",
+            playname: name,
             matches: 0,
             win: 0,
             defeat: 0,
