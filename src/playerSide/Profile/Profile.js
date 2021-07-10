@@ -41,7 +41,7 @@ function Profile(props) {
         if (JOIN) {
             const dataref = firebase.database().ref('/events/' + JOIN.toString() + '/peoples/' + ID);
             const userref = firebase.database().ref('/users/' + ID + '/events/' + JOIN);
-            userref.set({ roomid: '12345', password: '12345', uid: JOIN });
+            userref.set({ uid: JOIN });
             dataref.set({ uid: ID });
             confirmAlert({
                 title: "event joined",

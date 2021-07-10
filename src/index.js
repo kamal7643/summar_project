@@ -10,6 +10,7 @@ import LandingPage from './Screens/LandingPage';
 import Ranks from './Screens/Ranks';
 import NotFound from './Screens/NotFound';
 import Test from './Screens/TestForBackend';
+import Notifications from './components/Notifications';
 
 
 // player side
@@ -43,6 +44,7 @@ ReactDOM.render(
       <Route path="/suggestion" exact={true} component={Suggestion} />
       <Route path="/profileWall" exact={true} component={ProfileWall}/>
       <Route path="/profile" exact={true} component={Profile}/>
+      <Route path="/notifications" exact={true} component={Notifications}/>
     
       <Route path="/testfirebase" exact={true} component={Test}/>
       <Route path="/login" exact={true} component={Login}/>

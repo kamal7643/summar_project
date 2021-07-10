@@ -1,26 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import { Button } from 'react-bootstrap';
 import styles from '../css/adminevent.module.css';
 import Loading from '../components/Loading';
-import OneEvent from '../components/Event';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import firebase from '../util/Firebase';
-import deleteicon from '../images/Delete-Button.png';
-import editicon from '../images/pen.png';
 import { useHistory } from 'react-router-dom';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 function AdminEvents(props) {
-    const options = [
+    const typeOptions = [
         {
             label: "TDM",
             value: "TDM",
+        },{
+            label: "Battlegrounds",
+            value: "Battlegrounds"
         }
     ];
 
+    const gameOptions=[
+        {
+            label: "BGMI",
+            value: "BGMI"
+        }, 
+        {
+            label: "COD",
+            value: "COD"
+        }, {
+            label: "GTA V",
+            value: "GTA V"
+        }
+
+    ]
+
+    const [game, setgame] = useState("");
     const [type, settype] = useState("");
     const [time, settime] = useState("");
     const [date, setdate] = useState("");
@@ -41,14 +57,14 @@ function AdminEvents(props) {
                 setevents(eet);
             }
             else {
-                console.log("event not found");
+                console.log("events not found");
             }
         })
     }
 
 
     function AddNew() {
-        if (type === "" || time === "" || date === "") {
+        if (game === "" || type === "" || time === "" || date === "") {
             confirmAlert({
                 title: "ERROR",
                 message: "please fill all fields",
@@ -64,15 +80,19 @@ function AdminEvents(props) {
             try {
                 const todoref = firebase.database().ref('events');
                 const todo={
+                    game:game,
                     type: type,
                     date: date,
                     time: time,
                     eventid:id,
-                    password: password
+                    password: password,
+                    open:true
                 };
-                todoref.push(todo);
+                const key = todoref.push(todo).key;
+                todoref.child(key).child('uid').set(key);
                 NotificationManager.success('Event created', 'Added');
                 getData();
+                setgame("");
                 settype("");
                 settime("");
                 setdate("");
@@ -87,8 +107,17 @@ function AdminEvents(props) {
         }
     }
 
-    function finalDeleteEvent(event) {
-        // const todoref = firebase.database().ref('events');
+    function finalDeleteEvent(uid) {
+        const todoref = firebase.database().ref('events/'+uid);
+        todoref.child('peoples').once('value', (value)=>{
+            value.forEach((usr)=>{
+                const tempref = firebase.database().ref('users/'+usr.key+'/events/'+uid);
+                tempref.set({})
+            })
+        })
+        todoref.set({});
+        setevents([]);
+        getData();
     }
 
     function deleteEvent(e) {
@@ -128,10 +157,17 @@ function AdminEvents(props) {
         <Header />
         <div><span onClick={() => { history.push('/admin') }}>admin{'>'}</span><span>suggestions</span></div>
         <div className={styles.heading}>Add New Event</div>
-        <div className={styles.enter}>
+        <div className={styles.enter} style={{padding:'20px', maxWidth: '400px'}}>
+            <select className={styles.item} value={game} onChange={(e)=>{setgame(e.target.value)}}>
+                <option value={""} >Select one</option>
+                {gameOptions.map((game)=>(
+                    <option value={game.value} key={game.value}>{game.label}</option>
+                ))
+                }
+            </select>
             <select className={styles.item} value={type} onChange={(e) => { settype(e.target.value) }}>
                 <option value={""}>Select one</option>
-                {options.map((option) => (
+                {typeOptions.map((option) => (
                     <option value={option.value} key={option.value}>{option.label}</option>
                 ))}
             </select>
@@ -139,7 +175,7 @@ function AdminEvents(props) {
             <input value={date} onChange={(e) => { setdate(e.target.value) }} className={styles.item} type="date" placeholder="date" />
             <input value={id} onChange={(e) => { setid(e.target.value) }} className={styles.item} type="text" placeholder="id" />
             <input value={password} onChange={(e) => { setpassword(e.target.value) }} className={styles.item} type="text" placeholder="password" />
-            <Button onClick={AddNew}>Add</Button>
+            <label style={{ backgroundColor:'gray', textAlign: 'center', margin:'10px'}} onClick={AddNew}>Add</label>
         </div>
         <div className={styles.heading}>
             Privious Events
@@ -150,18 +186,50 @@ function AdminEvents(props) {
                     () => {
                         if (gotlast) {
                             return events.reverse().map((event, i) => {
-                                return (<div key={i}>
-                                    <div className={styles.action}>
-                                        <Button style={{ marginRight: '10px', backgroundColor:'white', borderColor:'white' }} onClick={() => { deleteEvent(event) }}><img  className={styles.icon} src={deleteicon} alt=""/></Button>
-                                        <Button style={{ marginLeft: '10px', backgroundColor: 'white', borderColor: 'white' }} onClick={() => { editEvent(event) }}><img className={styles.icon} src={editicon} alt="" /></Button>
+                                return (<div key={i} style={{ boxShadow: '0px 0px 10px gray', margin: '10px', maxWidth: '400px', padding: '10px' }}>
+                                    <div>
+                                        <div style={{ width: '100%', textAlign: 'right' }}>
+                                            <MdEdit onClick={() => { editEvent(event.uid) }} style={{ margin: '10px' }}/>
+                                            <MdDelete onClick={() => { deleteEvent(event.uid) }} style={{ margin: '10px' }}/></div>
                                     </div>
-                                    <OneEvent
-                                    type={event.type}
-                                    time={event.time}
-                                    date={event.date}
-                                    eventid={event.eventid}
-                                    password={event.password}
-                                />
+                                    <div>
+                                        <table style={{width:'100%', margin:'10px'}}>
+                                            <thead></thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Game</td>
+                                                    <td>:</td>
+                                                    <td>{event.game}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type</td>
+                                                    <td>:</td>
+                                                    <td>{event.type}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Time</td>
+                                                    <td>:</td>
+                                                    <td>{event.time}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date</td>
+                                                    <td>:</td>
+                                                    <td>{event.date}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ID</td>
+                                                    <td>:</td>
+                                                    <td>{event.eventid}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>password</td>
+                                                    <td>:</td>
+                                                    <td>{event.password}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+        
                                     
                                 </div>);
                             })

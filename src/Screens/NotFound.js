@@ -8,7 +8,7 @@ function NotFound(props) {
     return(<div>
             <Header />
             NOT FOUND 
-            <span onClick={() => { history.push('/') }} style={{fontSize:'14px', color:'green', textDecoration:'underline', paddingLeft:'50px'}}> &#x2190;home</span>
+            <button onClick={() => { history.push('/') }} style={{fontSize:'14px'}}> &#x2190;home</button>
         </div>);
 }
 

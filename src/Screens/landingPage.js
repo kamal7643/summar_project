@@ -27,6 +27,7 @@ function LandingPage(props) {
         }
     }
 
+
     const registerIP = () => {
         fetch('https://api.ipify.org/?format=json')
         .then((res)=>{return res.json()})
@@ -40,6 +41,7 @@ function LandingPage(props) {
     useEffect(() => {
         if(once){
             registerIP();
+            
             setonce(false);
         }
         setTimeout(() => {
@@ -71,32 +73,32 @@ function LandingPage(props) {
         <div className="text-secondary">
             <div><Slides /></div>
             <div className={style.groupcards}>
-                <div className={style.landingpagegotocards}>
-                    <div className="card-body">
-                        <h5 className="card-title">Join events</h5>
-                        <p className="card-text">$cardContent</p>
-                        <span onClick={() => { history.push('/events') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
-                    </div>
-                </div>
                 <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Make an account</h5>
-                        <p className="card-text">$cardContent</p>
+                        <p className="card-text">new to this site make an account</p>
                         <span onClick={() => { history.push('/signup') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >
                     <div className="card-body" >
                         <h5 className="card-title">Watch videos</h5>
-                        <p className="card-text">$cardContent</p>
+                        <p className="card-text">video plateform is there check it out</p>
                         <span onClick={() => { history.push('/videos') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
                 <div className={style.landingpagegotocards} >
                     <div className="card-body">
                         <h5 className="card-title">Give suggestion</h5>
-                        <p className="card-text">$cardContent</p>
+                        <p className="card-text">give suggestions what you want to change or new thing here</p>
                         <span onClick={() => { history.push('/suggestion') }} style={{borderRadius:'10px'}} className="btn btn-primary">click </span>
+                    </div>
+                </div>
+                <div className={style.landingpagegotocards}>
+                    <div className="card-body">
+                        <h5 className="card-title">Join events</h5>
+                        <p className="card-text">join events for free here</p>
+                        <span onClick={() => { history.push('/events') }} style={{ borderRadius: '10px' }} className="btn btn-primary">click </span>
                     </div>
                 </div>
             </div>

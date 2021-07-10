@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from '../../util/Firebase';
 import { useState, useEffect } from 'react';
-import OneEvent from '../../components/Event';
 
 function EventSTATE(props) {
     const [events, setevents] = useState([]);
@@ -11,46 +10,68 @@ function EventSTATE(props) {
 
     useEffect(() => {
         if (!fetched) {
-            var temp = [];
             ref.on('value', (snapshot) => {
+                var temp=[];
                 snapshot.forEach((snap) => {
-                    const newref = firebase.database().ref('events/' + snap.val().uid);
+                    // console.log(snap.val())
+                    const newref = firebase.database().ref('events/' + snap.key);
                     newref.on('value', (nsnap) => {
-                        const event = nsnap.val();
-                        temp.push({
-                            type: event.type,
-                            time: event.time,
-                            date: event.date,
-                            eventid: event.eventid,
-                            password: event.password,
-                            uid: event.uid,
-                            open: event.open,
-                            game:event.game
-                        });
+                        temp.push(nsnap.val());
+                        setevents(temp);
                     })
                 })
-
+                
             })
-            setevents(temp);
+            // setevents(temp);
             setfetched(true);
         }
     }, [fetched, setfetched, ref])
 
     return (
-        <div>
+        <div style={{marginTop:'50px'}}>
             {
                 events.sort((a, b) => b.id - a.id).map((event, i) =>
-                    <OneEvent
-                        type={event.type}
-                        time={event.time}
-                        date={event.date}
-                        eventid={event.eventid}
-                        password={event.password}
-                        key={i}
-                        uid={event.uid}
-                        open={event.open}
-                        game={event.game}
-                    />
+                    <div key={i} style={{ boxShadow: '0px 0px 10px gray', margin: '10px', maxWidth: '400px', padding:'10px' }}>
+                        <div>
+                            <table style={{ width: '100%', margin: '10px' }}>
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Game</td>
+                                        <td>:</td>
+                                        <td>{event.game}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Type</td>
+                                        <td>:</td>
+                                        <td>{event.type}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Time</td>
+                                        <td>:</td>
+                                        <td>{event.time}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>:</td>
+                                        <td>{event.date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>:</td>
+                                        <td>{event.eventid}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>password</td>
+                                        <td>:</td>
+                                        <td>{event.password}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
                 )
             }
             {

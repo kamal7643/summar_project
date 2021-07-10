@@ -22,15 +22,27 @@ function AddMessage(props){
         })
     }
 
+    const addNotification = () =>{
+        const notificationsRef = firebase.database().ref('users/' + props.to + '/notifications');
+        const newdate = new Date();
+        const date = newdate.toString();
+        const notificationmsg = JSON.parse(localStorage.getItem('firebaseusr')).name+" sent you a message on "+date;
+        notificationsRef.child(date).set(notificationmsg);
+    }
+
 
     function updateDate(){
         const lastupdatetimeref1 = firebase.database().ref('message-hash/' + props.from + '/' + props.to + '/time');
         lastupdatetimeref1.set({ time: Date() })
+
         const lastupdatetimeref2 = firebase.database().ref('message-hash/' + props.to + '/' + props.from + '/time');
         lastupdatetimeref2.set({ time: Date() })
+
+        addNotification();
+        
         const ref = firebase.database().ref('message-hash/' + props.from + '/'+props.to+'/info');
+
         ref.once('value', (value)=>{
-            console.log(value.val())
             if(!value.val()){
                 updateInfo()
             }
