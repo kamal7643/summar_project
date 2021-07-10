@@ -1,0 +1,98 @@
+Date : 2021-07-10 19:20:02
+Directory : c:\Users\kamal swami\Documents\summer2021\summer_project\src
+Total : 64 files,  3414 codes, 525 comments, 531 blanks, all 4470 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         55 |      3,218 |        525 |        502 |      4,245 |
+| CSS        |          9 |        196 |          0 |         29 |        225 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |         64 |      3,414 |        525 |        531 |      4,470 |
+| Screens                                                                                             |          5 |        242 |          8 |         49 |        299 |
+| adminSide                                                                                           |          4 |        336 |          0 |         36 |        372 |
+| components                                                                                          |         21 |      1,008 |        101 |        165 |      1,274 |
+| config                                                                                              |          2 |         25 |          1 |          2 |         28 |
+| css                                                                                                 |          9 |        196 |          0 |         29 |        225 |
+| playerSide                                                                                          |         16 |      1,369 |        374 |        191 |      1,934 |
+| playerSide\Profile                                                                                  |          9 |        617 |        348 |         83 |      1,048 |
+| playerSide\videos                                                                                   |          2 |        188 |          6 |         33 |        227 |
+| util                                                                                                |          5 |        181 |         36 |         41 |        258 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                            | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\Screens\Global.js                      | JavaScript |          9 |          0 |          6 |         15 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\Screens\LandingPage.js                 | JavaScript |         92 |          5 |         15 |        112 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\Screens\NotFound.js                    | JavaScript |         12 |          0 |          3 |         15 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\Screens\Ranks.js                       | JavaScript |        101 |          0 |         12 |        113 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\Screens\TestForBackend.js              | JavaScript |         28 |          3 |         13 |         44 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\adminSide\Admin.js                     | JavaScript |         34 |          0 |          6 |         40 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\adminSide\Event.js                     | JavaScript |        229 |          0 |         18 |        247 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\adminSide\ManagePlayers.js             | JavaScript |          7 |          0 |          3 |         10 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\adminSide\Suggestion.js                | JavaScript |         66 |          0 |          9 |         75 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\AddPlaylist.js              | JavaScript |         63 |          2 |         11 |         76 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\AddVideo.js                 | JavaScript |         63 |         32 |         11 |        106 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\AddVideoToPlayList.js       | JavaScript |         50 |         14 |          6 |         70 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Event.js                    | JavaScript |         63 |          0 |         10 |         73 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Footer.js                   | JavaScript |          9 |          0 |          4 |         13 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Friend.js                   | JavaScript |         58 |          0 |          5 |         63 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Friends.js                  | JavaScript |         37 |          0 |          7 |         44 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Header.js                   | JavaScript |         79 |          0 |         10 |         89 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Individualvideos.js         | JavaScript |         29 |          0 |          9 |         38 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\LikesSuggestion.js          | JavaScript |         66 |          0 |          9 |         75 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Loading.js                  | JavaScript |          7 |          0 |          3 |         10 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Notifications.js            | JavaScript |         48 |          0 |          9 |         57 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\OneVideo.js                 | JavaScript |         43 |          1 |          8 |         52 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Peoples.js                  | JavaScript |         40 |          0 |          7 |         47 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Playlist.js                 | JavaScript |         87 |          0 |          9 |         96 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Playlists.js                | JavaScript |         33 |          4 |          5 |         42 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Popup.js                    | JavaScript |         13 |          0 |          2 |         15 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Slides.js                   | JavaScript |         49 |          2 |          6 |         57 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Suggestion.js               | JavaScript |         56 |          0 |          7 |         63 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\Videos.js                   | JavaScript |         22 |          4 |          5 |         31 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\components\WatchItem.js                | JavaScript |         93 |         42 |         22 |        157 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\config\texts.js                        | JavaScript |          7 |          0 |          1 |          8 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\config\urls.js                         | JavaScript |         18 |          1 |          1 |         20 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\adminSuggestion.module.css         | CSS        |          3 |          0 |          0 |          3 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\adminevent.module.css              | CSS        |         30 |          0 |          4 |         34 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\global.css                         | CSS        |         29 |          0 |          7 |         36 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\landingpage.module.css             | CSS        |         22 |          0 |          3 |         25 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\pop.css                            | CSS        |         37 |          0 |          3 |         40 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\profileWall.module.css             | CSS        |          3 |          0 |          0 |          3 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\ranks.module.css                   | CSS        |         26 |          0 |          5 |         31 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\singleevent.module.css             | CSS        |         21 |          0 |          3 |         24 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\css\singlesuggestion.module.css        | CSS        |         25 |          0 |          4 |         29 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\index.js                               | JavaScript |         45 |          5 |         16 |         66 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Events.js                   | JavaScript |         74 |          0 |          6 |         80 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\ProfileWall.js              | JavaScript |        129 |          0 |          7 |        136 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\AddMessage.js       | JavaScript |         91 |          0 |         18 |        109 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\Chat.js             | JavaScript |        115 |          1 |         18 |        134 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\ChatOneToOne.js     | JavaScript |         37 |          9 |         11 |         57 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\EventSTATE.js       | JavaScript |         88 |          2 |          8 |         98 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\PeoplesSTATE.js     | JavaScript |         20 |          0 |          3 |         23 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\PrintMessages.js    | JavaScript |         18 |          0 |          4 |         22 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\Profile.js          | JavaScript |        132 |          1 |         10 |        143 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\ProfileSTATE.js     | JavaScript |         58 |        335 |          5 |        398 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Profile\SetStartingState.js | JavaScript |         58 |          0 |          6 |         64 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Signup.js                   | JavaScript |        119 |          3 |         24 |        146 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\Suggestion.js               | JavaScript |        147 |          0 |         15 |        162 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\login.js                    | JavaScript |         95 |         17 |         23 |        135 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\videos\VideoComponent.js    | JavaScript |         75 |          0 |         15 |         90 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\playerSide\videos\VideoPlateform.js    | JavaScript |        113 |          6 |         18 |        137 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\reportWebVitals.js                     | JavaScript |         12 |          0 |          2 |         14 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\util\Firebase.js                       | JavaScript |         20 |          2 |          2 |         24 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\util\Functions.js                      | JavaScript |         20 |         26 |          8 |         54 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\util\cognito.js                        | JavaScript |         98 |          2 |         14 |        114 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\util\ip.js                             | JavaScript |          4 |          0 |          1 |          5 |
+| c:\Users\kamal swami\Documents\summer2021\summer_project\src\util\testBackEndMongoose.js            | JavaScript |         39 |          6 |         16 |         61 |
+| Total                                                                                               |            |      3,414 |        525 |        531 |      4,470 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
