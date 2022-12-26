@@ -86,6 +86,26 @@ function VideoPlateform(props) {
     //         return (a.title.toLowerCase().cantains(search.toLowerCase()) || a.description.toLowerCase().cantains(search.toLowerCase()) - (b.title.toLowerCase().cantains(search.toLowerCase()) || b.description.toLowerCase().cantains(search.toLowerCase());
     //     }else{return true;}
     // }
+    const youtubeResutls = ()=>{
+        const base = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&key=AIzaSyCjMibLBYPrOpBr0jd_jTg8R7P4ifyHXfY&q="
+        fetch(base+search)
+        .then(res => res.json())
+        .then(result=>{
+            var new_videos=[];
+            result.items.forEach((v, id)=>{
+                if(v.id.kind==="youtube#video"){
+                    const vid = {
+                        title:v.snippet.title,
+                        description:v.snippet.description,
+                        youtubeid:v.id.videoId,
+                        thumbnail:v.snippet.thumbnails.high
+                    }
+                    new_videos.push(vid);
+                }
+            })
+            setvideos(new_videos);
+        })
+    }
 
 
     useEffect(() => {
@@ -104,7 +124,8 @@ function VideoPlateform(props) {
             <div style={{ width: '100%' }}>
                 <Header />
             <div style={{ maxWidth: '1200px', textAlign: 'left'}}>
-                <VideoComponent {...props} setcurrentvideo={setcurrentVideo} stop={stop} setstop={setstop} search={search} setsearch={setsearch}/>
+                <VideoComponent {...props} setcurrentvideo={setcurrentVideo} stop={stop} setstop={setstop} search={search} setsearch={setsearch} youtubeResutls={youtubeResutls}/>
+                {console.log(videos)}
                 {
                     videos.filter(video => 
                         {
@@ -119,9 +140,11 @@ function VideoPlateform(props) {
                     .sort((a, b) => compareTwoPercet(a, b))
                     .map((video, i)=><div key={i} onClick={()=>{
                             setstop(true);
-                            history.push('videos?watch=' + video.key);
+                            if(video.key)history.push('videos?watch=' + video.key);
+                            if(video.youtubeid)history.push('videos?watchatyoutube='+video.youtubeid)
                     }}>
                         <div style={{ display:'flex', flexDirection: 'column', margin: '20px', padding:'20px', boxShadow: '0px 0px 10px gray', minHeight:'150px', onSelectStart: 'false'}}>
+                        {video.thumbnail && <img src={video.thumbnail.url} width={video.thumbnail.width} height={video.thumbnail.height} />}
                         <b>{video.title}</b>
                         <span>{video.description}{video.playlistid && ' || '+video.playlistid}</span>
                         <span><AiFillEye/>{video.views}</span>

@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 
 // screens 
-import LandingPage from './Screens/LandingPage';
+import LandingPage from './Screens/landingPage';
 import Ranks from './Screens/Ranks';
 import NotFound from './Screens/NotFound';
 import Test from './Screens/TestForBackend';
