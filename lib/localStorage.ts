@@ -11,3 +11,5 @@ export const getLocalStorageItem = (key:string, defaultValue:any) => {
       localStorage.setItem(key, JSON.stringify(value));
     }
   };
+
+  // find a better way to do this
