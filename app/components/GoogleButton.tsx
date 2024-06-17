@@ -5,50 +5,50 @@ import Image from "next/image";
 import Script from "next/script";
 
 export default function GoogleButton() {
-  // useEffect(() => {
-  //   function handleCredentialResponse(response: any) {
-  //     location.href = `/api/google/callback?token=${response.credential}${location.href.split("?token=").length > 1 ? "&link=" + location.href.split("?token=")[1].split("&")[0] : ""}`;
-  //   }
+  useEffect(() => {
+    function handleCredentialResponse(response: any) {
+      location.href = `/api/google/callback?token=${response.credential}${location.href.split("?token=").length > 1 ? "&link=" + location.href.split("?token=")[1].split("&")[0] : ""}`;
+    }
 
-  //   const initializeGoogleSignIn = () => {
-  //     (window as any)?.google?.accounts.id.initialize({
-  //       client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-  //       callback: (response: any) => {
-  //         location.href = `/api/google/callback?token=${response.credential}${location.href.split("?token=").length > 1 ? "&link=" + location.href.split("?token=")[1].split("&")[0] : ""}`;
-  //       },
-  //       login_uri: process.env.DOMAIN,
-  //     });
+    const initializeGoogleSignIn = () => {
+      (window as any)?.google?.accounts.id.initialize({
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        callback: (response: any) => {
+          location.href = `/api/google/callback?token=${response.credential}${location.href.split("?token=").length > 1 ? "&link=" + location.href.split("?token=")[1].split("&")[0] : ""}`;
+        },
+        login_uri: process.env.DOMAIN,
+      });
 
-  //     (window as any)?.google?.accounts.id.disableAutoSelect();
+      (window as any)?.google?.accounts.id.disableAutoSelect();
 
-  //     // if (typeof window !== "undefined" ) {
-  //     //   (window as any)?.google?.accounts.id.renderButton(
-  //     //     document.getElementById("buttonDiv"),
-  //     //     {
-  //     //       type: "stander",
-  //     //       theme: "filled_white",
-  //     //       size: "large",
-  //     //       shape: "rectangular",
-  //     //       width: "300px",
-  //     //       height: "50px",
-  //     //       logo_alignment: "center",
-  //     //       font_family: "Arial, sans-serif",
-  //     //       font_size: "18px",
-  //     //       padding: "0px",
-  //     //       position: "relative",
-  //     //     },
-  //     //   );
-  //     // }
-  //   };
+      if (typeof window !== "undefined") {
+        (window as any)?.google?.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          {
+            type: "stander",
+            theme: "filled_white",
+            size: "large",
+            shape: "rectangular",
+            width: "300px",
+            height: "50px",
+            logo_alignment: "center",
+            font_family: "Arial, sans-serif",
+            font_size: "18px",
+            padding: "0px",
+            position: "relative",
+          },
+        );
+      }
+    };
 
-  //   if (typeof window !== "undefined" && (window as any)?.google) {
-  //     initializeGoogleSignIn();
-  //   }
-  // }, []);
+    if (typeof window !== "undefined" && (window as any)?.google) {
+      initializeGoogleSignIn();
+    }
+  }, []);
 
   return (
     <div>
-      {/* <Script
+      <Script
         src="https://accounts.google.com/gsi/client"
         strategy="afterInteractive"
         onLoad={() => {
@@ -64,25 +64,25 @@ export default function GoogleButton() {
             // todo
             // not working with next build
             // not working properly
-            // (window as any)?.google?.accounts.id.renderButton(
-            //   document.getElementById("buttonDiv"),
-            //   {
-            //     type: "stander",
-            //     theme: "filled_white",
-            //     size: "large",
-            //     shape: "rectangular",
-            //     width: "300px",
-            //     height: "50px",
-            //     logo_alignment: "center",
-            //     font_family: "Arial, sans-serif",
-            //     font_size: "18px",
-            //     padding: "0px",
-            //     position: "relative",
-            //   },
-            // );
+            (window as any)?.google?.accounts.id.renderButton(
+              document.getElementById("buttonDiv"),
+              {
+                type: "stander",
+                theme: "filled_white",
+                size: "large",
+                shape: "rectangular",
+                width: "300px",
+                height: "50px",
+                logo_alignment: "center",
+                font_family: "Arial, sans-serif",
+                font_size: "18px",
+                padding: "0px",
+                position: "relative",
+              },
+            );
           }
         }}
-      /> */}
+      />
 
       <div
         id="buttonDiv"
