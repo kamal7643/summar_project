@@ -1,6 +1,7 @@
 "use client";
 import { useLoadingContext } from "./context/Loading";
-// import Carousel from "./components/Carousel";
+import dynamic from "next/dynamic";
+const Carousel = dynamic(() => import("./components/Carousel"), { ssr: false });
 export default function Home() {
   const { loading, startLoading, stopLoading } = useLoadingContext();
   const handleClick = () => {
@@ -11,7 +12,7 @@ export default function Home() {
   };
   return (
     <div>
-      {/* <Carousel/> */}
+      <Carousel />
       we are live!{" "}
       <button
         className="border p-2 w-[60px] ml-4 shadow bg-blue-400 rounded-xl"
