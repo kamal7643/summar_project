@@ -11,17 +11,26 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@google-cloud/text-to-speech": "^5.3.0",
+    "@google/generative-ai": "^0.12.0",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
+    "dompurify": "^3.1.5",
     "firebase": "^10.12.0",
+    "fs": "^0.0.1-security",
     "jose": "^5.3.0",
     "mongoose": "^8.3.5",
+    "net": "^1.0.2",
     "next": "14.2.3",
     "next-svg": "^1.0.7",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^5.2.1"
+    "react-icons": "^5.2.1",
+    "react-markdown": "^9.0.1",
+    "three": "^0.164.1",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

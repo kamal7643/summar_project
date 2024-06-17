@@ -36,7 +36,7 @@ async function verifyGoogleIdToken(idToken:string | null) {
     if(!user){
         user = await new User({email, google_sub:sub}).save();
     }
-    const user_token = await new SignJWT({_id: user._id}).setProtectedHeader({alg:"HS256"}).sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    const user_token = await new SignJWT({_id: user._id}).setProtectedHeader({alg:"HS256"}).setExpirationTime('24h').sign(new TextEncoder().encode(process.env.JWT_SECRET));
 
 
     return NextResponse.redirect(process.env.NEXT_PUBLIC_DOMAIN+"/signin?token="+user_token);

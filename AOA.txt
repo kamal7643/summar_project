@@ -1,0 +1,36 @@
+Deterministic paging 115 lemma 6
+Amortize analysis for paging
+Sussane Albers. Competitive online algorithms. BRICS, 1996.
+21st march
+Yao’s minimax principle
+
+On-Line and First Fit Colorings of Graphs :::
+Online coloring for complements of bipartite graphs
+Online coloring for complements of chordal graphs
+
+k-cut : tree
+multiway cut: (imp)
+k center: (imp)
+k-server: 58(slides)
+notes:
+
+1.5 Vertex cover from matching : Ratio factor two . . .
+1.4 Vertex cover using DFS tree : Ratio factor two . . .
+1.3 Minimum maximal matchings . .
+
+3 Thecardinality(unweighted)setcoverproblem
+4
+6
+7.1 .2
+8
+9.1 9.2 9.4
+10.2
+11
+12(nnn)
+15
+16
+19
+20
+21
+
+9:00 AM

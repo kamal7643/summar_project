@@ -27,6 +27,7 @@ export async function POST(req: NextRequest): Promise<any> {
             data : {
                 token: await new SignJWT({ _id: existing_user._id })
                   .setProtectedHeader({ alg: "HS256" })
+                  .setExpirationTime('24h')
                   .sign(new TextEncoder().encode(process.env.JWT_SECRET)),
               },
         });

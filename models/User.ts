@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import friendRequestSchema from "./subSchema/friendRequest";
 
 const userSchema = new mongoose.Schema({
     email:{
@@ -21,7 +22,11 @@ const userSchema = new mongoose.Schema({
     phone_number:{
         type: String,
     },
-    
+    friends:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
+    friend_requests:[friendRequestSchema],
 },{
     timestamps: true,
 });

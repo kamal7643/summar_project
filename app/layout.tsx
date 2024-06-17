@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ParentProvider from "./ParentWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,14 +20,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/"></link>
             <head>
+                
             <script src="https://accounts.google.com/gsi/client" async></script>
             </head>
             <body className={inter.className}>
                 <ParentProvider>
-                    <div className="min-h-screen bg-gray-300">
+                    <div className="min-h-screen bg-gray-200">
                         <Header />
                         {children}
+                        {/* <Footer /> */}
                     </div>
                 </ParentProvider>
 

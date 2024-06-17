@@ -9,13 +9,16 @@ import { getLocalStorageItem } from "@/lib/localStorage";
 // page to watch videos 
 
 function Watch() {
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     const id = searchParams.get('id') || '';
+    
 
 
     const [query, setQuery] = useState<string>('');
     const [videos, setVideos] = useState([]);
+    const [video, setVideo] = useState<any>();
     const [update, setUpdate] = useState<boolean>(true);
+
 
     const handleSearch = async () => {
 
@@ -33,6 +36,7 @@ function Watch() {
             }).then(response => response.json())
                 .then(data => {
                     setVideos(data.data);
+                    setVideo(data.data.find((video:any) => video._id === id));
 
                 })
             setUpdate(false);
@@ -40,19 +44,26 @@ function Watch() {
     })
 
 
-    return <div>
-        <div className="w-full flex justify-center mt-4 p-4 ">
+    return <div className="bg-white">
+        <div className="w-full flex justify-center p-4 ">
             <input type="text"
-                className="w-full p-2 text-gray-500 rounded"
+                className="w-full p-2 text-gray-500 rounded border"
                 placeholder="Search here"
                 value={query}
                 onChange={(event: any) => setQuery(event.target.value)}
             />
             <button className="flex items-center relative left-[-25px] hover:shadow-xl"> <FaSearch /></button>
         </div>
-        <div>
-            {id}
-        </div>
+        {id && videos.length>0 && <div className="p-4">
+            <video className="w-full h-full" controls>
+                <source src={video?.url} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                <div>{video.title}</div>
+                <div>{video.description}</div>
+                </div>
+        </div>}
         <div className="flex flex-wrap">
             {
                 videos.map((video:any, index) => <div key={index} className="w-full p-2 " onClick={()=>{
