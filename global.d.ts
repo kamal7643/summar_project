@@ -6,4 +6,6 @@ declare module globalThis {
   var GeminiModel: any;
   var Chat: any;
   var document: any;
+  var socketServer: any;
+  var socketClients: any;
 }
