@@ -51,6 +51,11 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li className="nav-item">
+            <a href="/article" className="nav-link link-dark px-2">
+              Atricles
+            </a>
+          </li>
+          <li className="nav-item">
             <a href="/about" className="nav-link link-dark px-2">
               About
             </a>

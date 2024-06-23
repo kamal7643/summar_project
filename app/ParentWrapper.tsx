@@ -23,6 +23,7 @@ function ChildWithSessionExpired({ children }: { children: React.ReactNode }) {
     process.env.NEXT_PUBLIC_DOMAIN + "/signin", // login
     process.env.NEXT_PUBLIC_DOMAIN + "/signup", // signup
     process.env.NEXT_PUBLIC_DOMAIN + "/", // home page
+    process.env.NEXT_PUBLIC_DOMAIN + "/codes",
   ];
   return (
     <div>

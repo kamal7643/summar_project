@@ -117,6 +117,19 @@ const Page: React.FC = () => {
           <SearchIcon />
         </IconButton>
       </form>
+      <video
+        className="jw-video jw-reset bg-white"
+        tabIndex={-1}
+        disableRemotePlayback={true}
+        webkit-playsinline=""
+        playsInline={true}
+        src="https://feeds.intoday.in/livetv/ver-3-0/?id=livetv-at&aud_togle=1&autostart=1&utm_medium=web&utm_source=livetvpage&v=1.5&debug=false&dimlight=1%20&noads=0"
+      ></video>
+      <video
+        controls
+        width="600"
+        src="https://feeds.intoday.in/livetv/ver-3-0/?id=livetv-at&aud_togle=1&autostart=1&utm_medium=web&utm_source=livetvpage&v=1.5&debug=false&dimlight=1&noads=0"
+      ></video>
       <Container>
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={12} md={8}>

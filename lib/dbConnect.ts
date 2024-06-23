@@ -3,11 +3,13 @@ const MONGODB_URI = process.env.MONGODB_URI;
 import User from "@/models/User";
 import Video from "@/models/Video";
 import Blog from "@/models/Blog";
-const {
+import Call from "@/models/Call";
+import Article from "@/models/Article";
+import {
   GoogleGenerativeAI,
   HarmBlockThreshold,
   HarmCategory,
-} = require("@google/generative-ai");
+} from "@google/generative-ai";
 
 const safetySettings = [
   {
@@ -38,6 +40,8 @@ async function dbConnect() {
   User;
   Video;
   Blog;
+  Call;
+  Article;
   if (cached.conn) {
     return cached.conn;
   }
@@ -51,7 +55,7 @@ async function dbConnect() {
   cached.conn = await cached.promise;
 
   console.log("Connected to MongoDB");
-  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
   const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
     safetySettings,

@@ -3,11 +3,8 @@ import { jwtVerify } from "jose";
 
 export async function middleware(req: NextRequest, res: NextResponse) {
   try {
-    const is_protected =
-      req.nextUrl.pathname.includes("/api/user") ||
-      req.nextUrl.basePath.includes("/api/my-ai");
     let requestHeaders = new Headers(req.headers);
-    if (is_protected) {
+    if (req.nextUrl.pathname.includes("/api/user")) {
       const token =
         req.headers.get("authorization") &&
         req.headers.get("authorization")!.split("Bearer ")[1];
@@ -18,7 +15,25 @@ export async function middleware(req: NextRequest, res: NextResponse) {
         new TextEncoder().encode(process.env.JWT_SECRET),
       );
       requestHeaders.set("_id", _id as string);
+    } else {
+      const token =
+        req.headers.get("authorization") &&
+        req.headers.get("authorization")!.split("Bearer ")[1];
+      if (token) {
+        try {
+          const {
+            payload: { _id },
+          } = await jwtVerify(
+            token!,
+            new TextEncoder().encode(process.env.JWT_SECRET),
+          );
+          requestHeaders.set("_id", _id as string);
+        } catch (e) {
+          //
+        }
+      }
     }
+
     const response = NextResponse.next({
       request: {
         headers: requestHeaders,
